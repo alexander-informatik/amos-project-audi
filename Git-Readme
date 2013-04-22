@@ -1,0 +1,5 @@
+Bisher wurden meine Commits unter linaro@linaro-ubuntu-desktop gepostet,
+damit bei euren Commits von Anfang an die richtigen Daten übermittelt werden, müsst ihr folgende beide Befehle in eurer Shell ausführen:
+
+git config --global user.name "Your Name"
+git config --global user.email you@example.com
