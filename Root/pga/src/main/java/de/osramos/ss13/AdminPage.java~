@@ -1,0 +1,13 @@
+package de.osramos.ss13;
+
+import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.WebPage;
+
+public class AdminPage extends WebPage {
+	private static final long serialVersionUID = 1L;
+
+    public AdminPage(final PageParameters parameters) {
+        // TODO Add your page's components here
+    }
+}

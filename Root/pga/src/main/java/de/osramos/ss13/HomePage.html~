@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>AMOS</title>
+		<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold' rel='stylesheet' type='text/css' />
+		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
+	</head>
+
+	<body>
+		<div id="hd">
+			<div id="logo">
+				<img src="logo.jpg" width="50px" height="50px" alt="PGA Logo" />
+				<h1>AMOS</h1>
+			</div>
+		</div>
+		<div id="bd">
+		
+		
+			<h2>Audi Productive Game!</h2>
+			<p>
+				Meet and Greet at Audi!
+			</p>
+
+			<h3>Get started</h3>
+			<p>
+				You can have the following roles:
+			</p>
+			<ul>
+				<li>Admin: <a wicket:id = "AdminPage" href="#" title="Go to Admin Panel">here</a></li>
+				<li>Senior: <a wicket:id = "SeniorPage" href="#" title="Go to Senior Panel">here</a></li>
+				<li>Trainee: <a wicket:id = "TraineePage" href="#" title="Go to Trainee Panel">here</a></li>	
+			</ul>
+
+			<h3>Reporting a bug</h3>
+			<p>
+				Help us help you:
+			</p>
+		</div>
+		<div id="ft">
+		<p>Register <a wicket:id = "GPSAddPage" href="#" title="Go to Registration Page">here</a></p>
+		</div>
+	</body>
+</html>
