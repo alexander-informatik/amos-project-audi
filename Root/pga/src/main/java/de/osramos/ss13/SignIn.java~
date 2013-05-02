@@ -26,6 +26,10 @@
 
 package de.osramos.ss13;
 
+
+import org.apache.wicket.markup.html.form.PasswordTextField;
+import org.apache.wicket.util.value.ValueMap;
+
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.WebPage;
@@ -59,22 +63,83 @@ import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.SharedResourceReference;
 import org.apache.wicket.util.file.Files;
 import org.apache.wicket.util.time.Duration;
-import org.apache.wicket.util.time.Duration;
 
-public class AdminPage extends WebPage implements AuthenticatedWebPage {
-	private static final long serialVersionUID = 1L;
 
-    public AdminPage(final PageParameters parameters) {
-        // TODO Add your page's components here
-        
-        add(new Link<TraineePage>("RegistrationPage")
-		{
-			@Override
-			public void onClick()
-			{
-				setResponsePage(RegistrationPage.class);
-			}
-		});
-		
+/**
+ * Simple example of a sign in page. Even simpler, as shown in the authentication-2 example, is
+ * using the SignInPanel from the auth-role package. Beside that this simple example does not
+ * support "rememberMe".
+ * 
+ * @author Jonathan Locke
+ */
+public final class SignIn extends WebPage
+{
+
+    public SignIn(final PageParameters parameters) 
+    {
+        add(new FeedbackPanel("feedback"));
+
+        add(new SignInForm("signInForm"));
+    }
+
+
+    public final class SignInForm extends Form<Void>
+    {
+        private static final String USERNAME = "username";
+        private static final String PASSWORD = "password";
+
+        private final ValueMap properties = new ValueMap();
+
+
+        public SignInForm(final String id)
+        {
+            super(id);
+
+            add(new TextField<String>(USERNAME, new PropertyModel<String>(properties, USERNAME)));
+            add(new PasswordTextField(PASSWORD, new PropertyModel<String>(properties, PASSWORD)));
+        }
+
+
+        @Override
+        public final void onSubmit()
+        {
+            // Get session info
+            SignInSession session = getMySession();
+
+            // Sign the user in
+            if (session.signIn(getUsername(), getPassword()))
+            {
+                if (!continueToOriginalDestination())
+                {
+                    setResponsePage(getApplication().getHomePage());
+                }
+            }
+            else
+            {
+                // Get the error message from the properties file associated with the Component
+                String errmsg = getString("loginError", null, "Unable to sign you in");
+
+                // Register the error message with the feedback panel
+                error(errmsg);
+            }
+        }
+
+
+        private String getPassword()
+        {
+            return properties.getString(PASSWORD);
+        }
+
+
+        private String getUsername()
+        {
+            return properties.getString(USERNAME);
+        }
+
+
+        private SignInSession getMySession()
+        {
+            return (SignInSession)getSession();
+        }
     }
 }

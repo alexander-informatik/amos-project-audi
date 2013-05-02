@@ -79,7 +79,8 @@ public class WicketApplication extends WebApplication
 	{
 		super.init();
 		getDebugSettings().setDevelopmentUtilitiesEnabled(true);
-
+		
+		mountPage("/gpsadd",GPSAdd.class);
 
 		// add your configuration here
 		// Register the authorization strategy

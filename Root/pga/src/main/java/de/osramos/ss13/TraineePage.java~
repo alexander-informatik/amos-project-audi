@@ -30,7 +30,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.WebPage;
 
-public class TraineePage extends WebPage  implements AuthenticatedWebPage{
+public class TraineePage extends WebPage {
 	private static final long serialVersionUID = 1L;
 
     public TraineePage(final PageParameters parameters) {

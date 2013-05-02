@@ -60,20 +60,13 @@ import org.apache.wicket.request.resource.SharedResourceReference;
 import org.apache.wicket.util.file.Files;
 import org.apache.wicket.util.time.Duration;
 
-public class SeniorPage extends WebPage {
+public class SeniorPage extends WebPage  implements AuthenticatedWebPage {
 	private static final long serialVersionUID = 1L;
 
     public SeniorPage(final PageParameters parameters) {
         // TODO Add your page's components here
         
-        		add(new Link<Void>("GPSAddPage")
-			{
-			@Override
-			public void onClick()
-			{
-				setResponsePage(GPSAdd.class);
-			}
-		});
+
 		
     }
 }

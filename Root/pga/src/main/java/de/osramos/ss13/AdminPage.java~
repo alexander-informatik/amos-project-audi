@@ -59,7 +59,6 @@ import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.SharedResourceReference;
 import org.apache.wicket.util.file.Files;
 import org.apache.wicket.util.time.Duration;
-import org.apache.wicket.util.time.Duration;
 
 public class AdminPage extends WebPage implements AuthenticatedWebPage {
 	private static final long serialVersionUID = 1L;

@@ -38,13 +38,13 @@
             <tr>
               <td align = "right">Username:</td>
               <td>
-                <input wicket:id = "username" type = "text"  size = "30"/>
+                <input wicket:id = "username" type = "text" value = "foo@goo.moo" size = "30"/>
               </td>
             </tr>
             <tr>
               <td align = "right">Password:</td>
               <td>
-                <input wicket:id = "password" type = "password" size="30"/>
+                <input wicket:id = "password" type = "password" value = "password" size="30"/>
               </td>
             </tr>
             <tr>

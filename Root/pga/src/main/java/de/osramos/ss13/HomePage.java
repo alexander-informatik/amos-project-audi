@@ -96,14 +96,7 @@ public class HomePage extends WebPage
 			}
 		});
 		
-		add(new Link<TraineePage>("RegistrationPage")
-		{
-			@Override
-			public void onClick()
-			{
-				setResponsePage(RegistrationPage.class);
-			}
-		});
+		
 		
 	}
 }

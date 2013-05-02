@@ -63,7 +63,7 @@
 			</p>
 		</div>
 		<div id="ft">
-		
+		<p>Register <a wicket:id = "RegistrationPage" href="#" title="Go to Registration Page">here</a></p>
 		</div>
 	</body>
 </html>
