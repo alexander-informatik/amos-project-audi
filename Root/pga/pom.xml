@@ -22,6 +22,7 @@
 	<properties>
 		<wicket.version>1.5-SNAPSHOT</wicket.version>
 		<jetty.version>7.5.0.v20110901</jetty.version>
+		<postgresql.version>9.1-901.jdbc4</postgresql.version>
 	</properties>
 	<dependencies>
 		<!--  WICKET DEPENDENCIES -->
@@ -37,13 +38,76 @@
 		    <version>6.7.0</version>
 		</dependency>
 
+	<!--  POSTGRESQL DEPENDENCIES  -->
+		<dependency>
+      	  	<groupId>postgresql</groupId>
+        		<artifactId>postgresql</artifactId>
+      	  	<version>${postgresql.version}</version>
+   	 </dependency>
+
+
+
+
+<dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>ejb3-persistence</artifactId>
+      <version>1.0.1.GA</version>
+    </dependency>
+    
+
 
 		<!--  HIBERNATE DEPENDENCIES  -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>3.5.1-Final</version>
+			<version>3.3.2.GA</version>
 		</dependency>
+		
+    <!-- Hibernate annotation -->
+<dependency>
+       <groupId>org.hibernate</groupId>
+       <artifactId>hibernate-annotations</artifactId>
+       <version>3.4.0.GA</version>
+    </dependency>
+	
+	<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.12.1.GA</version>
+		</dependency>
+
+
+
+
+
+
+
+		<!-- Hibernate library dependecy start -->
+	<dependency>
+		<groupId>dom4j</groupId>
+		<artifactId>dom4j</artifactId>
+		<version>1.6.1</version>
+	</dependency>
+ 
+	<dependency>
+		<groupId>commons-logging</groupId>
+		<artifactId>commons-logging</artifactId>
+		<version>1.1.1</version>
+	</dependency>
+ 
+	<dependency>
+		<groupId>commons-collections</groupId>
+		<artifactId>commons-collections</artifactId>
+		<version>3.2.1</version>
+	</dependency>
+ 
+	<dependency>
+		<groupId>cglib</groupId>
+		<artifactId>cglib</artifactId>
+		<version>2.2</version>
+	</dependency>
+	<!-- Hibernate library dependecy end -->
+	
 		<!-- OPTIONAL DEPENDENCY
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
@@ -51,6 +115,17 @@
 			<version>${wicket.version}</version>
 		</dependency>
 		-->
+		
+		
+
+
+
+
+
+
+
+
+
 
 		<!-- LOGGING DEPENDENCIES - LOG4J -->
 		<dependency>
@@ -168,6 +243,15 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
+		
+<repository>  
+        <id>prime-repo</id>  
+        <name>PrimeFaces Maven Repository</name>  
+        <url>http://repository.primefaces.org</url>  
+        <layout>default</layout>  
+    </repository>
+
+
 	</repositories>
 
 	</project>
