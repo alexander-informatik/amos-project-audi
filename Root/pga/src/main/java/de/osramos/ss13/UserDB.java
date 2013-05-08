@@ -47,7 +47,7 @@ import javax.persistence.SequenceGenerator;
 
 import java.io.Serializable;
 
-@Table(name="userdb")
+@Table(name = "userdb")
 @Entity
 public class UserDB implements Serializable {
 	private static final long serialVersionUID = 7628430776579817658L;
@@ -57,7 +57,7 @@ public class UserDB implements Serializable {
 	String lastname;
 	String username;
 	String password;
-    String role;
+	String role;
 
 	public UserDB() {
 	}
@@ -105,5 +105,11 @@ public class UserDB implements Serializable {
 		this.password = password;
 	}
 
-    public void setRole(String role) { this.role = role; }
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getRole(String role) {
+		return role;
+	}
 }

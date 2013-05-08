@@ -156,8 +156,9 @@ public final class RegistrationPage extends WebPage
                 user.setLastname(getLastname());
                 user.setUsername(getUsername());
                 user.setPassword(getPassword());
-                user.setRole(selected);
+                user.setRole("test");
                 HibernateTools.save(user);
+                
                 message = "success!";
             }
                 
