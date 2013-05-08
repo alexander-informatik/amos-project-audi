@@ -1,7 +1,7 @@
 <!--
 - Copyright (c) 2013 by Dirk Riehle, http://dirkriehle.com
 -
-- This file is part of the Amos SS13 Project - Productive Games Development (PGA) rating application.
+- This file is part of the Amos SS13 Project - Productive Games Development (PGA) application.
 -
 - This program is free software: you can redistribute it and/or modify
 - it under the terms of the GNU Affero General Public License as
@@ -23,47 +23,56 @@
 - Sascha Stroebel
 -->
 
-<!DOCTYPE html>
+l<!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 	<head>
 		<meta charset="utf-8" />
-		<title>AMOS</title>
+		<title>Roadrunners' Help/Senior/GPS</title>
 		<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold' rel='stylesheet' type='text/css' />
 		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
 	</head>
-
 	<body>
 		<div id="hd">
 			<div id="logo">
-				<img src="logo.jpg" width="50px" height="50px" alt="PGA Logo" />
-				<h1>AMOS</h1>
+				<img src="logo.jpg" width="50px" height="50px" alt="Wicket Logo" />
+				<h1>Roadrunners' Help</h1>
 			</div>
 		</div>
 		<div id="bd">
 		
-		
-			<h2>Audi Productive Game!</h2>
+			<h2>Where to hunt your trainee:</h2>
 			<p>
-				Meet and Greet at Audi!
+				Please input new task name
 			</p>
+			
+			
+			<form wicket:id="form">
+			<p>Enter</p>
+			<p>Taskname: </p>
+				<input type="text" wicket:id="taskname" value="" size="50" />
+				<p><select wicket:id="trainee"></select></p>
+				<input type="submit" value="add" />
+			</form>
+    		
+    		<table cellspacing="0" class="dataview">
+	<tr>
+		<th>Actions</th>
+		<th>ID</th>
+		<th>Taskname</th>
+		<th>Description</th>
+	</tr>
+	<tr wicket:id="taskentry">
+		<td><span wicket:id="actions">[actions]</span></td>
+		<td><span wicket:id="taskid">[taskid]</span> </td>
+		<td><span wicket:id="taskname">[taskname]</span></td>
+		<td><span wicket:id="description">[description]</span></td>
+	</tr>
+		</table>
 
-			<h3>Get started</h3>
-			<p>
-				You can have the following roles:
-			</p>
-			<ul>
-				<li>Admin: <a wicket:id = "AdminPage" href="#" title="Go to Admin Panel">here</a></li>
-				<li>Senior: <a wicket:id = "SeniorPage" href="#" title="Go to Senior Panel">here</a></li>
-				<li>Trainee: <a wicket:id = "TraineePage" href="#" title="Go to Trainee Panel">here</a></li>	
-			</ul>
 
-			<h3>Reporting a bug</h3>
-			<p>
-				Help us help you:
-			</p>
+
 		</div>
 		<div id="ft">
-		<p>Register <a wicket:id = "RegistrationPage" href="#" title="Go to Registration Page">here</a></p>
 		</div>
 	</body>
 </html>

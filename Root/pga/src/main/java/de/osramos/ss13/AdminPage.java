@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013 by Dirk Riehle, http://dirkriehle.com
  *
- * This file is part of the Amos SS13 Project - Productive Games Development (PGA) rating application.
+ * This file is part of the Amos SS13 Project - Productive Games Development (PGA) application.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -23,13 +23,11 @@
  * Sascha Stroebel
  */
 
-
 package de.osramos.ss13;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.WebPage;
-
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -64,17 +62,15 @@ import org.apache.wicket.util.time.Duration;
 public class AdminPage extends WebPage implements AuthenticatedWebPage {
 	private static final long serialVersionUID = 1L;
 
-    public AdminPage(final PageParameters parameters) {
-        // TODO Add your page's components here
-        
-        add(new Link<TraineePage>("RegistrationPage")
-		{
+	public AdminPage(final PageParameters parameters) {
+		// TODO Add your page's components here
+
+		add(new Link<TraineePage>("RegistrationPage") {
 			@Override
-			public void onClick()
-			{
+			public void onClick() {
 				setResponsePage(RegistrationPage.class);
 			}
 		});
-		
-    }
+
+	}
 }

@@ -1,7 +1,7 @@
 <!--
 - Copyright (c) 2013 by Dirk Riehle, http://dirkriehle.com
 -
-- This file is part of the Amos SS13 Project - Productive Games Development (PGA) rating application.
+- This file is part of the Amos SS13 Project - Productive Games Development (PGA) application.
 -
 - This program is free software: you can redistribute it and/or modify
 - it under the terms of the GNU Affero General Public License as
@@ -23,7 +23,7 @@
 - Sascha Stroebel
 -->
 
-l<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 	<head>
 		<meta charset="utf-8" />
@@ -31,6 +31,7 @@ l<!DOCTYPE html>
 		<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold' rel='stylesheet' type='text/css' />
 		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
 	</head>
+
 	<body>
 		<div id="hd">
 			<div id="logo">
@@ -39,13 +40,11 @@ l<!DOCTYPE html>
 			</div>
 		</div>
 		<div id="bd">
-		
-		
 			<h2>Audi Productive Game!</h2>
 			<p>
 				Please input your name, username and password.
 			</p>
-			
+			<span wicket:id = "feedback"/>
 			<form wicket:id="form">
 				<p>Firstname:</p>
         		<input type="text" wicket:id="firstname" value="" size="50" />
@@ -57,17 +56,13 @@ l<!DOCTYPE html>
         		<input type="password" wicket:id="password"  size="50" />
         		<p>Password (again):</p>
         		<input type="password" wicket:id="password2" size="50" />
-        		
-        		
-        		
+        		<p>Role:
+					<select wicket:id="roles"></select>
+				</p>
         		<input type="submit" value="register" />
     		</form>
 
 			<span wicket:id="message" id="msg"></span>
-
-
-
-
 		</div>
 		<div id="ft">
 		</div>

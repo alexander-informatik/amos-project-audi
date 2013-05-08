@@ -1,7 +1,7 @@
 <!--
 - Copyright (c) 2013 by Dirk Riehle, http://dirkriehle.com
 -
-- This file is part of the Amos SS13 Project - Productive Games Development (PGA) rating application.
+- This file is part of the Amos SS13 Project - Productive Games Development (PGA) application.
 -
 - This program is free software: you can redistribute it and/or modify
 - it under the terms of the GNU Affero General Public License as
@@ -23,31 +23,42 @@
 - Sascha Stroebel
 -->
 
-l<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
 	<head>
 		<meta charset="utf-8" />
-		<title>AMOS</title>
+		<title>Roadrunners' Help/Senior/GPS</title>
 		<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:regular,bold' rel='stylesheet' type='text/css' />
 		<link rel="stylesheet" href="style.css" type="text/css" media="screen" title="Stylesheet" />
 	</head>
+	
 	<body>
 		<div id="hd">
 			<div id="logo">
-				<img src="logo.png" width="50px" height="50px" alt="Wicket Logo" />
-				<h1>AMOS</h1>
+				<img src="logo.jpg" width="50px" height="50px" alt="Wicket Logo" />
+				<h1>Roadrunners' Help</h1>
 			</div>
 		</div>
 		<div id="bd">
 		
-		
-			<h2>Audi Productive Game!</h2>
+			<h2>Where to send your trainee:</h2>
 			<p>
-				Your Admin Page works!
+				Please input new task name
 			</p>
-			<h3>Get started</h3>
+			
+			<h3>
+			<span wicket:id="feedback"></span>
+			</h3>
+			
+			<form wicket:id="form">
+			   <p>Taskname:<input type="text" wicket:id="taskname" value="" size="50" /></p>
+				<p>Trainee:<select wicket:id="trainee"></select></p>
+				<input type="submit" value="add" />
+			</form>
+    		
+    		
 
-<p>Register <a wicket:id = "RegistrationPage" href="#" title="Go to Registration Page">here</a></p>
+
 
 		</div>
 		<div id="ft">

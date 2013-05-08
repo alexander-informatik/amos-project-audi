@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013 by Dirk Riehle, http://dirkriehle.com
  *
- * This file is part of the Amos SS13 Project - Productive Games Development (PGA) rating application.
+ * This file is part of the Amos SS13 Project - Productive Games Development (PGA) application.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -23,59 +23,76 @@
  * Sascha Stroebel
  */
 
-
 package de.osramos.ss13;
 
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
 
+/**
+ * Session class for signin example. Holds and authenticates users.
+ * 
+ * @author Jonathan Locke
+ */
+public final class SignInSession extends AuthenticatedWebSession {
+	/** Trivial user representation */
+	private String user;
 
-public final class SignInSession extends AuthenticatedWebSession
-{
-    private String user;
+	/**
+	 * Constructor
+	 * 
+	 * @param request
+	 */
+	protected SignInSession(Request request) {
+		super(request);
+	}
 
+	/**
+	 * Checks the given username and password, returning a User object if if the
+	 * username and password identify a valid user.
+	 * 
+	 * @param username
+	 *            The username
+	 * @param password
+	 *            The password
+	 * @return True if the user was authenticated
+	 */
+	@Override
+	public final boolean authenticate(final String username,
+			final String password) {
+        final String ROADRUNNER = "roadrunner";
 
-    protected SignInSession(Request request)
-    {
-        super(request);
-    }
-
-
-    @Override
-    public final boolean authenticate(final String username, final String password)
-    {
-        final String WICKET = "audi";
-
-        if (user == null)
-        {
-            // Trivial password "db"
-            if (WICKET.equalsIgnoreCase(username) && WICKET.equalsIgnoreCase(password))
+		if (user == null) {
+			// Trivial password "db"
+            if (ROADRUNNER.equalsIgnoreCase(username) && ROADRUNNER.equalsIgnoreCase(password))
             {
                 user = username;
             }
         }
 
-        return user != null;
-    }
+		return user != null;
+	}
 
+	/**
+	 * @return User
+	 */
+	public String getUser() {
+		return user;
+	}
 
-    public String getUser()
-    {
-        return user;
-    }
+	/**
+	 * @param user
+	 *            New user
+	 */
+	public void setUser(final String user) {
+		this.user = user;
+	}
 
-
-    public void setUser(final String user)
-    {
-        this.user = user;
-    }
-
-
-    @Override
-    public Roles getRoles()
-    {
-        return null;
-    }
+	/**
+	 * @see org.apache.wicket.authentication.AuthenticatedWebSession#getRoles()
+	 */
+	@Override
+	public Roles getRoles() {
+		return null;
+	}
 }
-

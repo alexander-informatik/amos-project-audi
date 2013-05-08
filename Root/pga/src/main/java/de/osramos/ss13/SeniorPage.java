@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013 by Dirk Riehle, http://dirkriehle.com
  *
- * This file is part of the Amos SS13 Project - Productive Games Development (PGA) rating application.
+ * This file is part of the Amos SS13 Project - Productive Games Development (PGA) application.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -65,8 +65,13 @@ public class SeniorPage extends WebPage  implements AuthenticatedWebPage {
 
     public SeniorPage(final PageParameters parameters) {
         // TODO Add your page's components here
-        
-
+        		
+		add(new Link<TraineePage>("SeniorTaskPage") {
+			@Override
+			public void onClick() {
+				setResponsePage(SeniorTaskPage.class);
+			}
+		});
 		
     }
 }

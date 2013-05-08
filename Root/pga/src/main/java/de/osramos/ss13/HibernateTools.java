@@ -23,18 +23,17 @@
  * Sascha Stroebel
  */
 
-
 package de.osramos.ss13;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.WebPage;
 
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.basic.Label;
@@ -60,55 +59,67 @@ import org.apache.wicket.request.resource.SharedResourceReference;
 import org.apache.wicket.util.file.Files;
 import org.apache.wicket.util.time.Duration;
 
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
+public class HibernateTools {
+	private static final SessionFactory sessionFactory;
 
-public class HibernateTools 
-{
-	    private static final SessionFactory sessionFactory;
+	static {
+		try {
+			final AnnotationConfiguration cfg = new AnnotationConfiguration();
+			cfg.configure("/hibernate.cfg.xml");
+			sessionFactory = cfg.buildSessionFactory();
+		} catch (Throwable e) {
+			System.err.println("Error in creating SessionFactory object."
+					+ e.getMessage());
+			throw new ExceptionInInitializerError(e);
+		}
+	}
 
-    static {
-        try {
-            final AnnotationConfiguration cfg = new  AnnotationConfiguration();
-      		cfg.configure("/hibernate.cfg.xml");
-      		sessionFactory = cfg.buildSessionFactory();
-        } catch (Throwable e) {
-            System.err.println("Error in creating SessionFactory object."
-                    + e.getMessage());
-            throw new ExceptionInInitializerError(e);
-        }
-    }
+	/**
+	 * A static method for other application to get SessionFactory object
+	 * initialized in this helper class.
+	 */
+	public static SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
 
-    /**
-     * A static method for other application to get SessionFactory object
-     * initialized in this helper class.
-     */
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
+	public static void save(Object... o) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		for (Object e : o)
+			session.save(e);
+		tx.commit();
+	}
 
-
- 
- 
-	public static void save(Object ...o) 
-	{
-      Session session = sessionFactory.openSession();
-      Transaction tx = session.beginTransaction();
-     	for(Object e: o)
-      session.save(e);
-      tx.commit();
+	public static void delete(Object... o) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		for (Object e : o)
+			session.delete(e);
+		tx.commit();
 	}
 	
-	public static void delete(Object ...o) 
+	@SuppressWarnings("unchecked")
+	public static <T> T load(long id, Class<?> c)
 	{
-      Session session = sessionFactory.openSession();
-      Transaction tx = session.beginTransaction();
-      for(Object e: o)
-      session.delete(e);
-      tx.commit();
+		Session session = sessionFactory.openSession();
+		return (T) session.load(c, id);
 	}
+	
+	public static List<String> GetStringList(String sqlquery) {
+		Session session = sessionFactory.openSession();
+	      Transaction tx = session.beginTransaction();
+	      Query q = session.createSQLQuery(sqlquery);
+	      List<String> result = q.list();
+	      tx.commit();
+	      
+	      return result;
+	   }
 }

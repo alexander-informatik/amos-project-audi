@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013 by Dirk Riehle, http://dirkriehle.com
  *
- * This file is part of the Amos SS13 Project - Productive Games Development (PGA) rating application.
+ * This file is part of the Amos SS13 Project - Productive Games Development (PGA) application.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -23,16 +23,13 @@
  * Sascha Stroebel
  */
 
-
 package de.osramos.ss13;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
-
 import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.WebPage;
-
 
 import org.apache.wicket.Component;
 import org.apache.wicket.Page;
@@ -45,78 +42,74 @@ import org.apache.wicket.request.Response;
 import org.apache.wicket.request.component.IRequestableComponent;
 
 /**
- * Application object for your web application. If you want to run this application without deploying, run the Start class.
+ * Application object for your web application. If you want to run this
+ * application without deploying, run the Start class.
  * 
  * @see de.osramos.ss13.Start#main(String[])
  */
-public class WicketApplication extends WebApplication
-{    	
+public class WicketApplication extends WebApplication {
 	/**
 	 * @see org.apache.wicket.Application#getHomePage()
 	 */
 	@Override
-	public Class<? extends WebPage> getHomePage()
-	{
+	public Class<? extends WebPage> getHomePage() {
 		return HomePage.class;
 	}
-	
 
-
-    /**
-     * @see org.apache.wicket.protocol.http.WebApplication#newSession(Request, Response)
-     */
-    @Override
-    public Session newSession(Request request, Response response)
-    {
-        return new SignInSession(request);
-    }
+	/**
+	 * @see org.apache.wicket.protocol.http.WebApplication#newSession(Request,
+	 *      Response)
+	 */
+	@Override
+	public Session newSession(Request request, Response response) {
+		return new SignInSession(request);
+	}
 
 	/**
 	 * @see org.apache.wicket.Application#init()
 	 */
 	@Override
-	public void init()
-	{
+	public void init() {
 		super.init();
 		getDebugSettings().setDevelopmentUtilitiesEnabled(true);
 
 
 		// add your configuration here
 		// Register the authorization strategy
-        getSecuritySettings().setAuthorizationStrategy(new IAuthorizationStrategy()
-        {
-            public boolean isActionAuthorized(Component component, Action action)
-            {
-                // authorize everything
-                return true;
-            }
+		getSecuritySettings().setAuthorizationStrategy(
+				new IAuthorizationStrategy() {
+					public boolean isActionAuthorized(Component component,
+							Action action) {
+						// authorize everything
+						return true;
+					}
 
-            public <T extends IRequestableComponent> boolean isInstantiationAuthorized(
-                Class<T> componentClass)
-            {
-                // Check if the new Page requires authentication (implements the marker interface)
-                if (AuthenticatedWebPage.class.isAssignableFrom(componentClass))
-                {
-                    // Is user signed in?
-                    if (((SignInSession)Session.get()).isSignedIn())
-                    {
-                        // okay to proceed
-                        return true;
-                    }
+					public <T extends IRequestableComponent> boolean isInstantiationAuthorized(
+							Class<T> componentClass) {
+						// Check if the new Page requires authentication
+						// (implements the marker interface)
+						if (AuthenticatedWebPage.class
+								.isAssignableFrom(componentClass)) {
+							// Is user signed in?
+							if (((SignInSession) Session.get()).isSignedIn()) {
+								// okay to proceed
+								return true;
+							}
 
-                    // Intercept the request, but remember the target for later.
-                    // Invoke Component.continueToOriginalDestination() after successful logon to
-                    // continue with the target remembered.
+							// Intercept the request, but remember the target
+							// for later.
+							// Invoke Component.continueToOriginalDestination()
+							// after successful logon to
+							// continue with the target remembered.
 
-                    throw new RestartResponseAtInterceptPageException(SignIn.class);
-                }
+							throw new RestartResponseAtInterceptPageException(
+									SignIn.class);
+						}
 
-                // okay to proceed
-                return true;
-            }
-        });
-        
-        
-        
+						// okay to proceed
+						return true;
+					}
+				});
+
 	}
 }

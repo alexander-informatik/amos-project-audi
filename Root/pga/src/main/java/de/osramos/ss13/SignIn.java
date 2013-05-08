@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2013 by Dirk Riehle, http://dirkriehle.com
  *
- * This file is part of the Amos SS13 Project - Productive Games Development (PGA) rating application.
+ * This file is part of the Amos SS13 Project - Productive Games Development (PGA) application.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -23,9 +23,7 @@
  * Sascha Stroebel
  */
 
-
 package de.osramos.ss13;
-
 
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.util.value.ValueMap;
@@ -33,7 +31,6 @@ import org.apache.wicket.util.value.ValueMap;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.WebPage;
-
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -64,82 +61,94 @@ import org.apache.wicket.request.resource.SharedResourceReference;
 import org.apache.wicket.util.file.Files;
 import org.apache.wicket.util.time.Duration;
 
-
 /**
- * Simple example of a sign in page. Even simpler, as shown in the authentication-2 example, is
- * using the SignInPanel from the auth-role package. Beside that this simple example does not
- * support "rememberMe".
+ * Simple example of a sign in page. Even simpler, as shown in the
+ * authentication-2 example, is using the SignInPanel from the auth-role
+ * package. Beside that this simple example does not support "rememberMe".
  * 
  * @author Jonathan Locke
  */
-public final class SignIn extends WebPage
-{
+public final class SignIn extends WebPage {
+	/**
+	 * Constructor
+	 */
+	public SignIn(final PageParameters parameters) {
+		// Create feedback panel and add to page
+		add(new FeedbackPanel("feedback"));
 
-    public SignIn(final PageParameters parameters) 
-    {
-        add(new FeedbackPanel("feedback"));
+		// Add sign-in form to page
+		add(new SignInForm("signInForm"));
+	}
 
-        add(new SignInForm("signInForm"));
-    }
+	/**
+	 * Sign in form
+	 */
+	public final class SignInForm extends Form<Void> {
+		private static final String USERNAME = "username";
+		private static final String PASSWORD = "password";
 
+		// El-cheapo model for form
+		private final ValueMap properties = new ValueMap();
 
-    public final class SignInForm extends Form<Void>
-    {
-        private static final String USERNAME = "username";
-        private static final String PASSWORD = "password";
+		/**
+		 * Constructor
+		 * 
+		 * @param id
+		 *            id of the form component
+		 */
+		public SignInForm(final String id) {
+			super(id);
 
-        private final ValueMap properties = new ValueMap();
+			// Attach textfield components that edit properties map model
+			add(new TextField<String>(USERNAME, new PropertyModel<String>(
+					properties, USERNAME)));
+			add(new PasswordTextField(PASSWORD, new PropertyModel<String>(
+					properties, PASSWORD)));
+		}
 
+		/**
+		 * @see org.apache.wicket.markup.html.form.Form#onSubmit()
+		 */
+		@Override
+		public final void onSubmit() {
+			// Get session info
+			SignInSession session = getMySession();
 
-        public SignInForm(final String id)
-        {
-            super(id);
+			// Sign the user in
+			if (session.signIn(getUsername(), getPassword())) {
+				if (!continueToOriginalDestination()) {
+					setResponsePage(getApplication().getHomePage());
+				}
+			} else {
+				// Get the error message from the properties file associated
+				// with the Component
+				String errmsg = getString("loginError", null,
+						"Unable to sign you in");
 
-            add(new TextField<String>(USERNAME, new PropertyModel<String>(properties, USERNAME)));
-            add(new PasswordTextField(PASSWORD, new PropertyModel<String>(properties, PASSWORD)));
-        }
+				// Register the error message with the feedback panel
+				error(errmsg);
+			}
+		}
 
+		/**
+		 * @return
+		 */
+		private String getPassword() {
+			return properties.getString(PASSWORD);
+		}
 
-        @Override
-        public final void onSubmit()
-        {
-            // Get session info
-            SignInSession session = getMySession();
+		/**
+		 * @return
+		 */
+		private String getUsername() {
+			return properties.getString(USERNAME);
+		}
 
-            // Sign the user in
-            if (session.signIn(getUsername(), getPassword()))
-            {
-                if (!continueToOriginalDestination())
-                {
-                    setResponsePage(getApplication().getHomePage());
-                }
-            }
-            else
-            {
-                // Get the error message from the properties file associated with the Component
-                String errmsg = getString("loginError", null, "Unable to sign you in. Please check username and password.");
-
-                // Register the error message with the feedback panel
-                error(errmsg);
-            }
-        }
-
-
-        private String getPassword()
-        {
-            return properties.getString(PASSWORD);
-        }
-
-
-        private String getUsername()
-        {
-            return properties.getString(USERNAME);
-        }
-
-
-        private SignInSession getMySession()
-        {
-            return (SignInSession)getSession();
-        }
-    }
+		/**
+		 * @return
+		 */
+		private SignInSession getMySession() {
+			return (SignInSession) getSession();
+		}
+	}
 }

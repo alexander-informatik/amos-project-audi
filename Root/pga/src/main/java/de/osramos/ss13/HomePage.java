@@ -23,13 +23,11 @@
  * Sascha Stroebel
  */
 
-
 package de.osramos.ss13;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.WebPage;
-
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -60,43 +58,40 @@ import org.apache.wicket.request.resource.SharedResourceReference;
 import org.apache.wicket.util.file.Files;
 import org.apache.wicket.util.time.Duration;
 
-public class HomePage extends WebPage 
-{
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.cfg.Configuration;
+
+public class HomePage extends WebPage {
 	private static final long serialVersionUID = 1L;
 
+ 
 	public HomePage(final PageParameters parameters) 
 	{
-		//add(new Label("version", getApplication().getFrameworkSettings().getVersion()));
 		// TODO Add your page's components here
-		add(new Link<Void>("AdminPage")
-			{
+		add(new Link<Void>("AdminPage") {
 			@Override
-			public void onClick()
-			{
+			public void onClick() {
 				setResponsePage(AdminPage.class);
 			}
 		});
-	
 
-		add(new Link<SeniorPage>("SeniorPage")
-		{
+		add(new Link<Void>("SeniorPage") {
 			@Override
-			public void onClick()
-			{
+			public void onClick() {
 				setResponsePage(SeniorPage.class);
 			}
 		});
-		
-		add(new Link<TraineePage>("TraineePage")
-		{
+
+		add(new Link<Void>("TraineePage") {
 			@Override
-			public void onClick()
-			{
+			public void onClick() {
 				setResponsePage(TraineePage.class);
 			}
 		});
-		
-		
+
 		
 	}
 }
