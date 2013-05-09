@@ -46,7 +46,8 @@ public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior{
 	
 	public TaskPage(final PageParameters parameters) {
 		
-		add(new Label("feedback", new PropertyModel<String>(properties, "feedback")));
+		add(new Label("feedbacksuccess", new PropertyModel<String>(properties, "feedbacksuccess")));
+		add(new Label("feedbackerror", new PropertyModel<String>(properties, "feedbackerror")));
 		add(new SeniorTaskPageForm("form"));
 		
 	}
@@ -62,7 +63,7 @@ public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior{
 			List<String> trainees = HibernateTools.GetStringList("select firstname || ' ' || lastname AS fullname from userdb");
 			add(new TextField<String>("taskname", new PropertyModel<String>(properties, "taskname")));
 			add(new DropDownChoice<String>("trainee", new PropertyModel<String>(properties, "trainee"), trainees));
-			
+			add(new TextField<String>("gpscoordinate", new PropertyModel<String>(properties, "gpscoordinate")));
 			
 		}
 
@@ -70,26 +71,39 @@ public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior{
 	    public final void onSubmit()
 	    {
 			String errors = "";
+			properties.remove("feedbacksuccess");
+			properties.remove("feedbackerror");
 			
-	        
+			if(null == properties.getString("trainee"))
+	        	errors += " Please select a Trainee";
 	        if(null == properties.getString("taskname"))
-	        	errors += " Please enter taskname";
-	        if(null == properties.getString("trainee"))
-	        	errors += " Please select a trainee";
+	        	errors += " Please enter Taskname";
+	        if(null == properties.getString("gpscoordinate"))
+	        	errors += " Please enter a GPS/Coordinate";
+	        else if (false == properties.getString("gpscoordinate").matches("(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+"))
+	        {
+	        	errors += " Please enter VALID GPS/Coordinate";
+	        }
+	        
 	        
 	        if(errors.length() > 0)
 	        {
-	        	properties.put("feedback",errors);
+	        	properties.put("feedbackerror",errors);
 	        	return;
 	        }
 	        
 	        TaskDB t = new TaskDB();
 	        t.setTaskname(properties.getString("taskname"));
 	        t.setTrainee(properties.getString("trainee"));
+	        t.setGpscoordinate(properties.getString("gpscoordinate"));
 	        t.setDescription("");
 	        HibernateTools.save(t);
 			
-	        properties.put("feedback","Success!");
+	        properties.put("feedbacksuccess","Success!");
+	        properties.remove("taskname");
+	        properties.remove("trainee");
+	        properties.remove("gpscoordinate");
+	        
 	    }
     }
 

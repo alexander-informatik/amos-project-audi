@@ -53,6 +53,7 @@ public class TaskDB implements Serializable {
 	Long id;
 	String taskname;
 	String description;
+	String gpscoordinate;
 	String trainee;
 
 	public TaskDB() {
@@ -85,6 +86,14 @@ public class TaskDB implements Serializable {
 		this.description = description;
 	}
 
+	public String getGpscoordinate() {
+		return gpscoordinate;
+	}
+
+	public void setGpscoordinate(String gpscoordinate) {
+		this.gpscoordinate = gpscoordinate;
+	}
+	
 	public String getTrainee() {
 		return trainee;
 	}

@@ -46,13 +46,17 @@
 				Please input new task name
 			</p>
 			
-			<h3>
-			<span wicket:id="feedback"></span>
-			</h3>
+			<div id="feedbacksuccess" wicket:id="feedbacksuccess" />
+			<div id="feedbackerror" wicket:id="feedbackerror" />
 			
-			<form wicket:id="form">
-			   <p>Taskname:<input type="text" wicket:id="taskname" value="" size="50" /></p>
+			<form wicket:id="form">			   
 				<p>Trainee:<select wicket:id="trainee"></select></p>
+				
+				<p>Taskname:<input type="text" wicket:id="taskname" value="" size="50" /></p>
+				
+				<p>Enter Coordinates:
+				<input type="text" wicket:id="gpscoordinate" value="" size="50" /></p>
+				
 				<input type="submit" value="add" />
 			</form>
     		
