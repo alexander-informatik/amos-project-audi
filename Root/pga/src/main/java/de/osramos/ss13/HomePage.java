@@ -64,6 +64,10 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.cfg.Configuration;
 
+import de.osramos.ss13.Admin.AdminPage;
+import de.osramos.ss13.Senior.SeniorPage;
+import de.osramos.ss13.Trainee.TraineePage;
+
 public class HomePage extends WebPage {
 	private static final long serialVersionUID = 1L;
 

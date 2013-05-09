@@ -23,13 +23,14 @@
  * Sascha Stroebel
  */
 
-package de.osramos.ss13;
+package de.osramos.ss13.Trainee;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.WebPage;
 
-public class TraineePage extends WebPage implements AuthenticatedWebPage {
+
+public class TraineePage extends WebPage implements de.osramos.ss13.Right.Trainee {
 	private static final long serialVersionUID = 1L;
 
 	public TraineePage(final PageParameters parameters) {

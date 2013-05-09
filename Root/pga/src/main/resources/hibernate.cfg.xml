@@ -45,7 +45,7 @@
  <property name="show_sql">true</property>
  
  <!-- Enable Hibernate's automatic session context management -->
-<mapping class="de.osramos.ss13.UserDB"/>
-<mapping class="de.osramos.ss13.TaskDB"/>
+<mapping class="de.osramos.ss13.Model.UserDB"/>
+<mapping class="de.osramos.ss13.Model.TaskDB"/>
  </session-factory>
  </hibernate-configuration>

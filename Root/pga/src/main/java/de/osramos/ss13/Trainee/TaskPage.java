@@ -23,7 +23,7 @@
  * Sascha Stroebel
  */
 
-package de.osramos.ss13;
+package de.osramos.ss13.Trainee;
 
 //import org.apache.wicket.markup.html.form.Form;
 //import org.apache.wicket.markup.html.form.TextField;
@@ -66,14 +66,16 @@ import org.apache.wicket.request.resource.SharedResourceReference;
 import org.apache.wicket.util.file.Files;
 import org.apache.wicket.util.time.Duration;
 
-import de.osramos.ss13.RegistrationPage.RegisterForm;
+import de.osramos.ss13.HibernateTools;
+import de.osramos.ss13.Admin.RegistrationPage.RegisterForm;
+import de.osramos.ss13.Model.TaskDB;
 
-public class TraineeTaskPage extends WebPage {
+public class TaskPage extends WebPage implements de.osramos.ss13.Right.Trainee{
 	private static final long serialVersionUID = 1L;
 
 	//private String taskname;
 
-	public TraineeTaskPage(final PageParameters parameters) {
+	public TaskPage(final PageParameters parameters) {
 		// TODO Add your page's components here
 
 		//PropertyModel<String> tasknameModel = new PropertyModel<String>(this,"taskname");

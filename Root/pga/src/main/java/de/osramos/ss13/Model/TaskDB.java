@@ -24,18 +24,16 @@
  */
 
 /*
- CREATE TABLE userdb
+ CREATE TABLE taskdb
  (
  id bigint NOT NULL,
- firstname character varying,
- lastname character varying,
- username character varying,
- password character varying,
- CONSTRAINT userdb_pk_id PRIMARY KEY (id)
- ) 
+ taskname character varying,
+ description character varying,
+ CONSTRAINT taskdb_pk_id PRIMARY KEY (id)
+ )
  */
 
-package de.osramos.ss13;
+package de.osramos.ss13.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -47,24 +45,22 @@ import javax.persistence.SequenceGenerator;
 
 import java.io.Serializable;
 
-@Table(name = "userdb")
+@Table(name = "taskdb")
 @Entity
-public class UserDB implements Serializable {
-	private static final long serialVersionUID = 7628430776579817658L;
+public class TaskDB implements Serializable {
+	private static final long serialVersionUID = 7628430776579817123L;
 
 	Long id;
-	String firstname;
-	String lastname;
-	String username;
-	String password;
-	String role;
+	String taskname;
+	String description;
+	String trainee;
 
-	public UserDB() {
+	public TaskDB() {
 	}
 
 	@Id
-	@SequenceGenerator(name = "userdb_sequence", sequenceName = "userdb_id_sequence", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userdb_sequence")
+	@SequenceGenerator(name = "taskdb_sequence", sequenceName = "taskdb_id_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "taskdb_sequence")
 	public Long getId() {
 		return id;
 	}
@@ -73,43 +69,27 @@ public class UserDB implements Serializable {
 		this.id = id;
 	}
 
-	public String getFirstname() {
-		return firstname;
+	public String getTaskname() {
+		return taskname;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setTaskname(String taskname) {
+		this.taskname = taskname;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getTrainee() {
+		return trainee;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public String getRole(String role) {
-		return role;
+	public void setTrainee(String trainee) {
+		this.trainee = trainee;
 	}
 }

@@ -24,7 +24,7 @@
  */
 
 
-package de.osramos.ss13;
+package de.osramos.ss13.Admin;
 import java.util.Arrays;
 import java.util.List;
 import org.apache.wicket.markup.html.form.Form;
@@ -62,9 +62,12 @@ import org.apache.wicket.util.time.Duration;
 
 import org.apache.wicket.markup.html.form.DropDownChoice;
 
+import de.osramos.ss13.HibernateTools;
+import de.osramos.ss13.Model.UserDB;
 
 
-public final class RegistrationPage extends WebPage
+
+public final class RegistrationPage extends WebPage implements de.osramos.ss13.Right.Admin
 {
     private static final List<String> ROLES = Arrays.asList(new String[] {"Admin", "Senior", "Trainee" });
  

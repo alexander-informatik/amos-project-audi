@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import de.osramos.ss13.Model.UserDB;
+
 /**
  * Tests for {@link TestUserDB}.
  *

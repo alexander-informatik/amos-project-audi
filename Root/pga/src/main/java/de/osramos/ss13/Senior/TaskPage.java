@@ -23,7 +23,7 @@
  * Sascha Stroebel
  */
 
-package de.osramos.ss13;
+package de.osramos.ss13.Senior;
 
 import java.util.List;
 
@@ -36,12 +36,15 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.value.ValueMap;
 
-public class SeniorTaskPage extends WebPage {
+import de.osramos.ss13.HibernateTools;
+import de.osramos.ss13.Model.TaskDB;
+
+public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior{
 	private static final long serialVersionUID = 1L;
 
 	private final ValueMap properties = new ValueMap();
 	
-	public SeniorTaskPage(final PageParameters parameters) {
+	public TaskPage(final PageParameters parameters) {
 		
 		add(new Label("feedback", new PropertyModel<String>(properties, "feedback")));
 		add(new SeniorTaskPageForm("form"));

@@ -23,11 +23,13 @@
  * Sascha Stroebel
  */
 
-package de.osramos.ss13;
+
+package de.osramos.ss13.Senior;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.WebPage;
+
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -57,20 +59,21 @@ import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.SharedResourceReference;
 import org.apache.wicket.util.file.Files;
 import org.apache.wicket.util.time.Duration;
-import org.apache.wicket.util.time.Duration;
 
-public class AdminPage extends WebPage implements AuthenticatedWebPage {
+import de.osramos.ss13.Trainee.TraineePage;
+
+public class SeniorPage extends WebPage  implements de.osramos.ss13.Right.Senior {
 	private static final long serialVersionUID = 1L;
 
-	public AdminPage(final PageParameters parameters) {
-		// TODO Add your page's components here
-
-		add(new Link<TraineePage>("RegistrationPage") {
+    public SeniorPage(final PageParameters parameters) {
+        // TODO Add your page's components here
+        		
+		add(new Link<TraineePage>("TaskPage") {
 			@Override
 			public void onClick() {
-				setResponsePage(RegistrationPage.class);
+				setResponsePage(TaskPage.class);
 			}
 		});
-
-	}
+		
+    }
 }
