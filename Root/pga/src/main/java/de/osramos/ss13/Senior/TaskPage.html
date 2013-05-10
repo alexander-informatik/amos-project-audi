@@ -49,30 +49,29 @@
 			<div id="feedbacksuccess" wicket:id="feedbacksuccess" />
 			<div id="feedbackerror" wicket:id="feedbackerror" />
 			
-			<form wicket:id="form">			   
+			<form wicket:id="form">	
+			<div id="feedbackerror" wicket:id="feedbackerrorajax">
+			<p wicked:id="feedbackerrorajax1" />
+			</div>		   
 				<p>Trainee:<select wicket:id="trainee"></select></p>
 				
 				<p>Taskname:<input type="text" wicket:id="taskname" value="" size="50" /></p>
 				
 				<p>Enter Coordinates:
-				<input type="text" wicket:id="gpscoordinate" value="" size="50" /></p>
-				
-			
 				    <div wicket:id="showItems">
 				        <div class="item" wicket:id="item">
 				            <div class="itemCheck"><input type="checkbox" wicket:id="check" /></div>
-				            <div class="itemText"><span wicket:id="text">item text</span></div>
+				            <div class="itemText"><span wicket:id="gpscoordinate">item text</span></div>
 				        </div>
 				    </div>
 				
 				    <div class="item">
 				        <div class="itemCheck">&#160;</div>
 				        <div class="itemText" wicket:id="addItems">
-				            <a href="#" wicket:id="link">New item</a>&#160;&#160;&#160;&#160;<a href="#" wicket:id="remove">Remove completed</a>
+				           <a href="#" wicket:id="remove">Remove checked Entries</a>
 				            <form wicket:id="form">
-				                <input type="text" wicket:id="text" /> 
-				                <input type="button" wicket:id="add" value="Add item" /> or 
-				                <input type="button" wicket:id="cancel" value="Cancel" />
+				                <input type="text" wicket:id="gpscoordinate" /> 
+				                <input type="button" wicket:id="add" value="Add item" />
 				            </form>
 				        </div>
 				    </div>

@@ -54,6 +54,7 @@ public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior {
 
 	private final ValueMap properties = new ValueMap();
 	private WebMarkupContainer showItems = null;
+	private feedbackerrorajax feedbackerrorajax = null;
 	final List<GpsEntry> items = new ArrayList<GpsEntry>();
 
 	public TaskPage(final PageParameters parameters) {
@@ -77,13 +78,14 @@ public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior {
 					properties, "taskname")));
 			add(new DropDownChoice<String>("trainee",
 					new PropertyModel<String>(properties, "trainee"), trainees));
-			add(new TextField<String>("gpscoordinate",
-					new PropertyModel<String>(properties, "gpscoordinate")));
 
 			showItems = new GpsEntryContainer("showItems");
 			add(showItems);
 			// add the add container for the todo items.
 			add(new AddGpsEntryContainer("addItems"));
+			
+			feedbackerrorajax = new feedbackerrorajax("feedbackerrorajax");
+			add(feedbackerrorajax);
 
 		}
 
@@ -97,12 +99,7 @@ public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior {
 				errors += " Please select a Trainee";
 			if (null == properties.getString("taskname"))
 				errors += " Please enter Taskname";
-			if (null == properties.getString("gpscoordinate"))
-				errors += " Please enter a GPS/Coordinate";
-			else if (false == properties.getString("gpscoordinate").matches(
-					"(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+")) {
-				errors += " Please enter VALID GPS/Coordinate";
-			}
+			
 
 			if (errors.length() > 0) {
 				properties.put("feedbackerror", errors);
@@ -112,14 +109,13 @@ public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior {
 			TaskDB t = new TaskDB();
 			t.setTaskname(properties.getString("taskname"));
 			t.setTrainee(properties.getString("trainee"));
-			t.setGpscoordinate(properties.getString("gpscoordinate"));
+			//t.setGpscoordinate(properties.getString("gpscoordinate"));
 			t.setDescription("");
 			HibernateTools.save(t);
 
 			properties.put("feedbacksuccess", "Success!");
 			properties.remove("taskname");
 			properties.remove("trainee");
-			properties.remove("gpscoordinate");
 
 		}
 	}
@@ -185,52 +181,47 @@ public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior {
 						protected void onUpdate(AjaxRequestTarget target) {
 						}
 					});
-					item.add(new Label("text", new PropertyModel<String>(item
-							.getDefaultModel(), "text")));
+					item.add(new Label("gpscoordinate", new PropertyModel<String>(item
+							.getDefaultModel(), "gpscoordinate")));
 				}
 			});
 		}
 	}
 
+	public class feedbackerrorajax extends WebMarkupContainer {
+		private static final long serialVersionUID = 3784645685480448585L;
+
+		public final ValueMap properties = new ValueMap();
+		
+		public feedbackerrorajax(String id) {
+			super(id);
+			// let wicket generate a markup-id so the contents can be
+			// updated through an AJAX call.
+			setOutputMarkupId(true);
+			//add(new Label("feedbackerrorajax1", new PropertyModel<String>(properties,"feedbackerrorajax1")));
+		}
+		
+		public void setFeedback(String errors)
+		{
+			properties.put("feedbackerrorajax1", errors);
+		}
+	}
+		
 	public class AddGpsEntryContainer extends WebMarkupContainer {
 		private static final long serialVersionUID = 3784645685890448585L;
-		private boolean linkVisible = true;
 
 		public AddGpsEntryContainer(String id) {
 			super(id);
 			// let wicket generate a markup-id so the contents can be
 			// updated through an AJAX call.
 			setOutputMarkupId(true);
-			add(new AddLink("link"));
 			add(new RemoveLink("remove"));
 			add(new AddGpsForm("form"));
 		}
 
-		private abstract class GpsActionLink extends AjaxFallbackLink {
-			private GpsActionLink(String id) {
-				super(id);
-			}
+		
 
-			public boolean isVisible() {
-				return linkVisible;
-			}
-		}
-
-		private final class AddLink extends GpsActionLink {
-			private AddLink(String id) {
-				super(id);
-			}
-
-			@Override
-			public void onClick(AjaxRequestTarget target) {
-				linkVisible = false;
-
-				target.add(this);
-			}
-
-		}
-
-		private final class RemoveLink extends GpsActionLink {
+		private final class RemoveLink extends AjaxFallbackLink {
 
 			public RemoveLink(String id) {
 				super(id);
@@ -248,33 +239,57 @@ public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior {
 
 				target.add(this);
 				target.add(showItems);
+				target.add(feedbackerrorajax);
 			}
 		}
 
 		private final class AddGpsForm extends Form<GpsEntry> {
 
 			private static final long serialVersionUID = -1577889255146527825L;
-
+			
 			public AddGpsForm(String id) {
 				super(id, new CompoundPropertyModel<GpsEntry>(new GpsEntry()));
 				setOutputMarkupId(true);
-				add(new TextField<String>("text"));
+				
+				add(new TextField<String>("gpscoordinate"));
 				add(new AjaxButton("add", this) {
 					@Override
 					protected void onSubmit(AjaxRequestTarget target,
 							Form<?> form) {
-						GpsEntry item = (GpsEntry) getParent()
-								.getDefaultModelObject();
-
-						items.add(new GpsEntry(item));
-
-						// reset the model
-						item.setChecked(false);
-						item.setGpsCoordinate("");
-						linkVisible = true;
-
-						target.add(this);
-						target.add(showItems);
+						
+						properties.remove("feedbacksuccess");
+						properties.remove("feedbackerror");
+						
+						if(items.size() < 12)
+						{
+							GpsEntry item = (GpsEntry) getParent()
+									.getDefaultModelObject();
+							
+							String errors = "";
+							if (null == item.getGpsCoordinate())
+								errors += " Please enter a GPS-Coordinate";
+							else if (false == item.getGpsCoordinate().matches(
+									"(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+")) {
+								errors += " Please enter VALID GPS-Coordinate";
+							}
+							if (errors.length() > 0) {
+								properties.put("feedbackerror", errors);
+								feedbackerrorajax.setFeedback(errors);
+								return;
+							}
+							
+							
+							items.add(new GpsEntry(item));
+	
+							// reset the model
+							item.setChecked(false);
+							item.setGpsCoordinate("");
+	
+							target.add(this);
+							target.add(showItems);
+							target.add(feedbackerrorajax);
+							
+						}
 					}
 
 					@Override
@@ -283,24 +298,9 @@ public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior {
 					}
 				});
 
-				add(new AjaxButton("cancel", this) {
-					@Override
-					public void onSubmit(AjaxRequestTarget target, Form<?> form) {
-						linkVisible = true;
-						target.add(this);
-					}
-
-					@Override
-					protected void onError(AjaxRequestTarget target,
-							Form<?> form) {
-					}
-				});
+				
 			}
 
-			@Override
-			public boolean isVisible() {
-				return !linkVisible;
-			}
 		}
 
 	}
