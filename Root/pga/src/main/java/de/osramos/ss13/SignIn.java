@@ -60,6 +60,7 @@ import org.apache.wicket.request.resource.PackageResourceReference;
 import org.apache.wicket.request.resource.SharedResourceReference;
 import org.apache.wicket.util.file.Files;
 import org.apache.wicket.util.time.Duration;
+import org.apache.wicket.markup.html.form.CheckBox;
 
 import de.osramos.ss13.HibernateTools;
 import de.osramos.ss13.Model.UserDB;
@@ -76,6 +77,7 @@ import java.util.List;
  * @author Jonathan Locke
  */
 public final class SignIn extends WebPage {
+	
 	/**
 	 * Constructor
 	 */
@@ -93,6 +95,7 @@ public final class SignIn extends WebPage {
 	public final class SignInForm extends Form<Void> {
 		private static final String USERNAME = "username";
 		private static final String PASSWORD = "password";
+		private static final String AGREEMENT = "agreement";
 
 		// El-cheapo model for form
 		private final ValueMap properties = new ValueMap();
@@ -111,6 +114,8 @@ public final class SignIn extends WebPage {
 					properties, USERNAME)));
 			add(new PasswordTextField(PASSWORD, new PropertyModel<String>(
 					properties, PASSWORD)));
+			add(new CheckBox(AGREEMENT,new PropertyModel<Boolean>(
+					properties, AGREEMENT)));
 		}
 
 		/**
@@ -118,6 +123,11 @@ public final class SignIn extends WebPage {
 		 */
 		@Override
 		public final void onSubmit() {
+			if(getAgreement() == false){
+				String errmsg = getString("loginError", null, "You have to agree in order to proceed.");
+				error(errmsg);
+				return;
+			}
 			
 			// Get session info
 			SignInSession session = getMySession();
@@ -150,6 +160,13 @@ public final class SignIn extends WebPage {
 		 */
 		private String getUsername() {
 			return properties.getString(USERNAME);
+		}
+
+		/**
+		 * @return
+		 */
+		private Boolean getAgreement() {
+			return properties.getBoolean(AGREEMENT);
 		}
 
 		/**
