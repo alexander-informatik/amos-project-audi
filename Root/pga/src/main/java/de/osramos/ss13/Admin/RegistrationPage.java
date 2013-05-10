@@ -67,6 +67,8 @@ import de.osramos.ss13.Model.UserDB;
 
 
 
+
+
 public final class RegistrationPage extends WebPage implements de.osramos.ss13.Right.Admin
 {
     private static final List<String> ROLES = Arrays.asList(new String[] {"Admin", "Senior", "Trainee" });
@@ -134,6 +136,8 @@ public final class RegistrationPage extends WebPage implements de.osramos.ss13.R
         @Override
         public final void onSubmit()
         {
+            List<String> userdata = HibernateTools.GetStringList("select * from userdb where username = '" + getUsername() + "'");
+
             message = "";
             if(getFirstname()==null){
                 message = "firstname is missing <br />";
@@ -143,6 +147,9 @@ public final class RegistrationPage extends WebPage implements de.osramos.ss13.R
             }
             if(getUsername()==null){
                 message = message + "username is missing <br />";
+            }
+            if(userdata.size()>0){
+                message = message + "username is already taken <br />";
             }
             if(getPassword()==null){
                 message = message + "password is missing <br />";

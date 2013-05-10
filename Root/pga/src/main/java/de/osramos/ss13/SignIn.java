@@ -61,6 +61,13 @@ import org.apache.wicket.request.resource.SharedResourceReference;
 import org.apache.wicket.util.file.Files;
 import org.apache.wicket.util.time.Duration;
 
+import de.osramos.ss13.HibernateTools;
+import de.osramos.ss13.Model.UserDB;
+import java.util.ArrayList;
+import java.util.List;
+
+
+
 /**
  * Simple example of a sign in page. Even simpler, as shown in the
  * authentication-2 example, is using the SignInPanel from the auth-role
@@ -111,6 +118,7 @@ public final class SignIn extends WebPage {
 		 */
 		@Override
 		public final void onSubmit() {
+			
 			// Get session info
 			SignInSession session = getMySession();
 

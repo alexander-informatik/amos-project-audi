@@ -29,6 +29,23 @@ import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.request.Request;
 
+import de.osramos.ss13.HibernateTools;
+import de.osramos.ss13.Model.UserDB;
+import java.util.ArrayList;
+import java.util.List;
+
+import java.util.*; 
+ 
+import org.hibernate.HibernateException; 
+import org.hibernate.Session; 
+import org.hibernate.Transaction;
+import org.hibernate.SessionFactory;
+import org.hibernate.SQLQuery;
+import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
+import org.hibernate.cfg.Configuration;
+
+
 /**
  * Session class for signin example. Holds and authenticates users.
  * 
@@ -58,17 +75,18 @@ public final class SignInSession extends AuthenticatedWebSession {
 	 * @return True if the user was authenticated
 	 */
 	@Override
-	public final boolean authenticate(final String username,
-			final String password) {
-        final String ROADRUNNER = "roadrunner";
+	public final boolean authenticate(final String username, final String password) {
 
-		if (user == null) {
-			// Trivial password "db"
-            if (ROADRUNNER.equalsIgnoreCase(username) && ROADRUNNER.equalsIgnoreCase(password))
-            {
-                user = username;
-            }
-        }
+        List<String> pass = HibernateTools.GetStringList("select password from userdb where username = '" + username + "'");
+
+		Iterator iterator = pass.iterator();
+
+		while (iterator.hasNext()) {
+			String row = (String)iterator.next();
+				if(row.equals(password)){
+					user = username;	
+				}
+		}
 
 		return user != null;
 	}
