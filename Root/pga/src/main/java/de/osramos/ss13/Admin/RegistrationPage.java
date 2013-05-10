@@ -159,7 +159,7 @@ public final class RegistrationPage extends WebPage implements de.osramos.ss13.R
                 user.setLastname(getLastname());
                 user.setUsername(getUsername());
                 user.setPassword(getPassword());
-                user.setRole("test");
+                user.setRole(selected);
                 HibernateTools.save(user);
                 
                 message = "success!";

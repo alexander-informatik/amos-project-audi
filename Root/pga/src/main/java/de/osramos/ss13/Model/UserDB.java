@@ -109,7 +109,7 @@ public class UserDB implements Serializable {
 		this.role = role;
 	}
 
-	public String getRole(String role) {
+	public String getRole() {
 		return role;
 	}
 }
