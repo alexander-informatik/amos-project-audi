@@ -47,5 +47,6 @@
  <!-- Enable Hibernate's automatic session context management -->
 <mapping class="de.osramos.ss13.Model.UserDB"/>
 <mapping class="de.osramos.ss13.Model.TaskDB"/>
+<mapping class="de.osramos.ss13.Model.Taskdb__GpsEntry"/>
  </session-factory>
  </hibernate-configuration>

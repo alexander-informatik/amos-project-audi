@@ -24,16 +24,14 @@
  */
 
 /*
-CREATE TABLE userdb
-(
-  id bigint NOT NULL,
-  firstname character varying,
-  lastname character varying,
-  username character varying,
-  password character varying,
-  role character varying,
-  CONSTRAINT userdb_pk_id PRIMARY KEY (id)
-)
+ CREATE TABLE taskdbgpsentry
+ (
+ id bigint NOT NULL,
+ fid_taskdb bigint NOT NULL,
+ position bigint NOT NULL,
+ gpscoordinate character varying,
+ CONSTRAINT taskdb__gpsentry_pk_id PRIMARY KEY (id)
+ )
  */
 
 package de.osramos.ss13.Model;
@@ -48,24 +46,22 @@ import javax.persistence.SequenceGenerator;
 
 import java.io.Serializable;
 
-@Table(name = "userdb")
+@Table(name = "taskdbgpsentry")
 @Entity
-public class UserDB implements Serializable {
-	private static final long serialVersionUID = 7628430776579817658L;
+public class Taskdb__GpsEntry implements Serializable {
+	private static final long serialVersionUID = 7633330776549817123L;
 
 	Long id;
-	String firstname;
-	String lastname;
-	String username;
-	String password;
-	String role;
+	Long fid_taskdb;
+	String position;
+	String gpscoordinate;
 
-	public UserDB() {
+	public Taskdb__GpsEntry() {
 	}
 
 	@Id
-	@SequenceGenerator(name = "userdb_sequence", sequenceName = "userdb_id_sequence", allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userdb_sequence")
+	@SequenceGenerator(name = "taskdbgpsentry_sequence", sequenceName = "taskdbgpsentry_id_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "taskdbgpsentry_sequence")
 	public Long getId() {
 		return id;
 	}
@@ -74,43 +70,28 @@ public class UserDB implements Serializable {
 		this.id = id;
 	}
 
-	public String getFirstname() {
-		return firstname;
+	public Long getFid_TaskDB() {
+		return fid_taskdb;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFid_TaskDB(Long fid_TaskDB) {
+		this.fid_taskdb = fid_TaskDB;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public String getPosition() {
+		return position;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setPosition(String position) {
+		this.position = position;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getGpscoordinate() {
+		return gpscoordinate;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setGpscoordinate(String gpscoordinate) {
+		this.gpscoordinate = gpscoordinate;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public String getRole() {
-		return role;
-	}
 }

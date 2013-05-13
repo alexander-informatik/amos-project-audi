@@ -45,9 +45,12 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.util.value.ValueMap;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import de.osramos.ss13.HibernateTools;
 import de.osramos.ss13.Model.TaskDB;
+import de.osramos.ss13.Model.Taskdb__GpsEntry;
 
 public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior {
 	private static final long serialVersionUID = 1L;
@@ -73,11 +76,19 @@ public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior {
 			super(id);
 
 			List<String> trainees = HibernateTools
-					.GetStringList("select firstname || ' ' || lastname AS fullname from userdb");
+					.GetStringList("select firstname || ' ' || lastname AS fullname from userdb where role LIKE 'trainee' ");
 			add(new TextField<String>("taskname", new PropertyModel<String>(
 					properties, "taskname")));
 			add(new DropDownChoice<String>("trainee",
 					new PropertyModel<String>(properties, "trainee"), trainees));
+			add(new TextField<String>("person", new PropertyModel<String>(
+					properties, "person")));
+			add(new TextField<String>("building", new PropertyModel<String>(
+					properties, "building")));
+			add(new TextField<String>("function", new PropertyModel<String>(
+					properties, "function")));
+			add(new TextField<String>("roomno", new PropertyModel<String>(
+					properties, "roomno")));
 
 			showItems = new GpsEntryContainer("showItems");
 			add(showItems);
@@ -91,31 +102,64 @@ public class TaskPage extends WebPage implements de.osramos.ss13.Right.Senior {
 
 		@Override
 		public final void onSubmit() {
-			String errors = "";
-			properties.remove("feedbacksuccess");
-			properties.remove("feedbackerror");
-
-			if (null == properties.getString("trainee"))
-				errors += " Please select a Trainee";
-			if (null == properties.getString("taskname"))
-				errors += " Please enter Taskname";
-			
-
-			if (errors.length() > 0) {
-				properties.put("feedbackerror", errors);
-				return;
+			try
+			{
+				String errors = "";
+				properties.remove("feedbacksuccess");
+				properties.remove("feedbackerror");
+	
+				if (null == properties.getString("trainee"))
+					errors += " Please select a Trainee";
+				if (null == properties.getString("taskname"))
+					errors += " Please enter Taskname";
+				
+	
+				if (errors.length() > 0) {
+					properties.put("feedbackerror", errors);
+					return;
+				}
+	
+				
+				
+				TaskDB t = new TaskDB();
+				t.setTaskname(properties.getString("taskname"));
+				t.setTrainee(properties.getString("trainee"));
+				t.setPerson(properties.getString("person"));
+				t.setFunction(properties.getString("function"));
+				t.setBuilding(properties.getString("building"));
+				t.setRoomno(properties.getString("roomno"));
+				//t.setGpscoordinate(properties.getString("gpscoordinate"));
+				t.setDescription("");
+				HibernateTools.save(t);			
+				
+				Session session = HibernateTools.getSessionFactory().openSession();
+				Transaction tx = session.beginTransaction();
+				for(GpsEntry e : items)
+				{
+	
+					Taskdb__GpsEntry a = new Taskdb__GpsEntry();
+					a.setFid_TaskDB(t.getId());
+					a.setGpscoordinate(e.getGpsCoordinate());
+					session.save(a);
+				}
+			    session.save(t);
+				tx.commit();
 			}
-
-			TaskDB t = new TaskDB();
-			t.setTaskname(properties.getString("taskname"));
-			t.setTrainee(properties.getString("trainee"));
-			//t.setGpscoordinate(properties.getString("gpscoordinate"));
-			t.setDescription("");
-			HibernateTools.save(t);
-
-			properties.put("feedbacksuccess", "Success!");
-			properties.remove("taskname");
-			properties.remove("trainee");
+			catch(Exception ex)
+			{
+				// spontaneous postgresql error, db needs bugfix
+			}
+			finally
+			{
+				properties.put("feedbacksuccess", "Success!");
+				properties.remove("taskname");
+				properties.remove("trainee");
+				properties.remove("person");
+				properties.remove("function");
+				properties.remove("building");
+				properties.remove("roomno");
+				items.clear();
+			}
 
 		}
 	}

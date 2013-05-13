@@ -25,12 +25,18 @@
 
 /*
  CREATE TABLE taskdb
- (
- id bigint NOT NULL,
- taskname character varying,
- description character varying,
- CONSTRAINT taskdb_pk_id PRIMARY KEY (id)
- )
+(
+  id bigint NOT NULL,
+  taskname character varying,
+  description character varying,
+  person character varying,
+  building character varying,
+  function character varying,
+  roomno character varying,
+  trainee character varying,
+  gpscoordinate character varying,
+  CONSTRAINT taskdb_pk_id PRIMARY KEY (id)
+)
  */
 
 package de.osramos.ss13.Model;
@@ -53,8 +59,11 @@ public class TaskDB implements Serializable {
 	Long id;
 	String taskname;
 	String description;
-	String gpscoordinate;
 	String trainee;
+	String person;
+	String function;
+	String building;
+	String roomno;
 
 	public TaskDB() {
 	}
@@ -86,13 +95,6 @@ public class TaskDB implements Serializable {
 		this.description = description;
 	}
 
-	public String getGpscoordinate() {
-		return gpscoordinate;
-	}
-
-	public void setGpscoordinate(String gpscoordinate) {
-		this.gpscoordinate = gpscoordinate;
-	}
 	
 	public String getTrainee() {
 		return trainee;
@@ -101,4 +103,37 @@ public class TaskDB implements Serializable {
 	public void setTrainee(String trainee) {
 		this.trainee = trainee;
 	}
+	
+	public String getPerson() {
+		return person;
+	}
+
+	public void setPerson(String person) {
+		this.person = person;
+	}
+
+	public String getFunction() {
+		return function;
+	}
+
+	public void setFunction(String function) {
+		this.function = function;
+	}
+
+	public String getBuilding() {
+		return building;
+	}
+
+	public void setBuilding(String building) {
+		this.building = building;
+	}
+
+	public String getRoomno() {
+		return roomno;
+	}
+
+	public void setRoomno(String roomno) {
+		this.roomno = roomno;
+	}
+
 }
