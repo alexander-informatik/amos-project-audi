@@ -122,4 +122,14 @@ public class HibernateTools {
 	      
 	      return result;
 	   }
+
+	public static List GetList(String sqlquery) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		Query q = session.createSQLQuery(sqlquery);
+		List result = q.list();
+		tx.commit();
+
+		return result;
+	}
 }

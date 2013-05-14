@@ -54,6 +54,7 @@ import org.hibernate.cfg.Configuration;
 public final class SignInSession extends AuthenticatedWebSession {
 	/** Trivial user representation */
 	private String user;
+	private String role;
 
 	/**
 	 * Constructor
@@ -76,16 +77,27 @@ public final class SignInSession extends AuthenticatedWebSession {
 	 */
 	@Override
 	public final boolean authenticate(final String username, final String password) {
+		// hardcoded for testing purposes
+		if(username.equals("roadrunner") && password.equals("roadrunner")){
+			user = username;
+			role = "Admin";
+			return user != null;
+		}
 
-        List<String> pass = HibernateTools.GetStringList("select password from userdb where username = '" + username + "'");
+		
+        List users = HibernateTools.GetList("select * from userdb where username = '" + username + "'");
 
-		Iterator iterator = pass.iterator();
+		Iterator iterator = users.iterator();
+
+		
 
 		while (iterator.hasNext()) {
-			String row = (String)iterator.next();
-				if(row.equals(password)){
-					user = username;	
-				}
+			Object[] row = (Object[])iterator.next();
+			//String row = (String)iterator.next();
+			if(row[4].equals(password)){
+				user = (String)row[3];
+				role = (String)row[5];
+			}
 		}
 
 		return user != null;
@@ -104,6 +116,21 @@ public final class SignInSession extends AuthenticatedWebSession {
 	 */
 	public void setUser(final String user) {
 		this.user = user;
+	}
+
+	/**
+	 * @return Role
+	 */
+	public String getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role
+	 *            New role
+	 */
+	public void setRole(final String role) {
+		this.role = role;
 	}
 
 	/**

@@ -67,6 +67,10 @@ import de.osramos.ss13.Model.UserDB;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.osramos.ss13.Admin.AdminPage;
+import de.osramos.ss13.Senior.SeniorPage;
+import de.osramos.ss13.Trainee.TraineePage;
+
 
 
 /**
@@ -134,9 +138,24 @@ public final class SignIn extends WebPage {
 
 			// Sign the user in
 			if (session.signIn(getUsername(), getPassword())) {
-				if (!continueToOriginalDestination()) {
+				// if (!continueToOriginalDestination()) {
+				// 	setResponsePage(getApplication().getHomePage());
+				// }
+				if(session.getRole().equals("Admin")){
+					setResponsePage(AdminPage.class);
+				} else if(session.getRole().equals("Senior")){
+					setResponsePage(SeniorPage.class);
+				} else if(session.getRole().equals("Trainee")){
+					setResponsePage(TraineePage.class);
+				} else {
 					setResponsePage(getApplication().getHomePage());
 				}
+
+				// String errmsg = getString("loginError", null,
+				// 		"role: " + session.getRole());
+
+				// // Register the error message with the feedback panel
+				// error(errmsg);
 			} else {
 				// Get the error message from the properties file associated
 				// with the Component
