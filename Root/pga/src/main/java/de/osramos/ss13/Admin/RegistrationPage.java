@@ -71,10 +71,10 @@ import de.osramos.ss13.Model.UserDB;
 
 public final class RegistrationPage extends WebPage implements de.osramos.ss13.Right.Admin
 {
-    private static final List<String> ROLES = Arrays.asList(new String[] {"Admin", "Senior", "Trainee" });
+    private static final List<String> ROLES = Arrays.asList(new String[] {"admin", "senior", "trainee" });
  
     //make Google selected by default
-    private String selected = "Trainee";
+    private String selected = "trainee";
  
     //make Trainee selected by default
 

@@ -141,11 +141,11 @@ public final class SignIn extends WebPage {
 				// if (!continueToOriginalDestination()) {
 				// 	setResponsePage(getApplication().getHomePage());
 				// }
-				if(session.getRole().equals("Admin")){
+				if(session.getRole().equals("admin")){
 					setResponsePage(AdminPage.class);
-				} else if(session.getRole().equals("Senior")){
+				} else if(session.getRole().equals("senior")){
 					setResponsePage(SeniorPage.class);
-				} else if(session.getRole().equals("Trainee")){
+				} else if(session.getRole().equals("trainee")){
 					setResponsePage(TraineePage.class);
 				} else {
 					setResponsePage(getApplication().getHomePage());
