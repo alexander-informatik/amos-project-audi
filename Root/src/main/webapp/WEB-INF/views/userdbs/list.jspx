@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_de_osramos_ss13_proj1_model_Userdb" items="${userdbs}" z="X3ihnB8N++aVXu1LSCesPEaicvQ=">
+        <table:table data="${userdbs}" id="l_de_osramos_ss13_proj1_model_Userdb" path="/userdbs" z="/N5CSJVc04FENPqmSeWlTW8ofQU=">
+            <table:column id="c_de_osramos_ss13_proj1_model_Userdb_firstname" property="firstname" z="AEAbIgelpQSOT89UZ+z+EPHX+8M="/>
+            <table:column id="c_de_osramos_ss13_proj1_model_Userdb_lastname" property="lastname" z="mX7gKWbPYfelzNHR4yInH8lG4nc="/>
+            <table:column id="c_de_osramos_ss13_proj1_model_Userdb_userrole" property="userrole" z="SMgY64dhSsC+tnhzXPjTZRJvp1w="/>
+            <table:column id="c_de_osramos_ss13_proj1_model_Userdb_username" property="username" z="NGQk1jarbJ2obrVcc0OFtDG2zBo="/>
+            <table:column id="c_de_osramos_ss13_proj1_model_Userdb_password" property="password" z="iwP4Ij/lyWTESsz9UU2P57lNvOc="/>
+        </table:table>
+    </page:list>
+</div>

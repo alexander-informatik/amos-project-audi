@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_de_osramos_ss13_proj1_model_Taskdb" object="${taskdb}" path="/taskdbs" z="08K2TQtNYOoJ4yANQyZekFLPyOc=">
+        <field:display field="taskname" id="s_de_osramos_ss13_proj1_model_Taskdb_taskname" object="${taskdb}" z="8R41klI0/Pzxs3b1jeeWQtBjgng="/>
+        <field:display field="person" id="s_de_osramos_ss13_proj1_model_Taskdb_person" object="${taskdb}" z="hWS9C7iA/kza2NtRN0Fo5J0JkH0="/>
+        <field:display field="personfunction" id="s_de_osramos_ss13_proj1_model_Taskdb_personfunction" object="${taskdb}" z="dtmdD5KFbnGpNa5u+FW0Zm3FDU4="/>
+        <field:display field="building" id="s_de_osramos_ss13_proj1_model_Taskdb_building" object="${taskdb}" z="YcIs9VyO6QQSqp90va1/4dYw2p0="/>
+        <field:display field="roomno" id="s_de_osramos_ss13_proj1_model_Taskdb_roomno" object="${taskdb}" z="0xjwMfjkd2BDhanqPuYrFbfXMIs="/>
+        <field:display field="trainee" id="s_de_osramos_ss13_proj1_model_Taskdb_trainee" object="${taskdb}" z="FuTO0RYiviZjZsX8aKVQ+YEciHA="/>
+        <field:display field="taskdbgps" id="s_de_osramos_ss13_proj1_model_Taskdb_taskdbgps" object="${taskdb}" z="H8j78HYihy/pRBtuwpgC+XWmVDI="/>
+    </page:show>
+</div>
