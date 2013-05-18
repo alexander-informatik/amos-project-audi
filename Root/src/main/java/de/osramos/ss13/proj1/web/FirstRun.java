@@ -26,6 +26,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent>{
 		trainee.setPassword("traineepw");
 		trainee.setUsername("trainee");
 		trainee.setUserrole("trainee");
+		trainee.persist();
 		
 		Userdb admin = new Userdb();
 		admin.setFirstname("adminfirst");
@@ -33,6 +34,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent>{
 		admin.setPassword("adminpw");
 		admin.setUsername("admin");
 		admin.setUserrole("admin");
+		admin.persist();
 		
 		Userdb senior = new Userdb();
 		senior.setFirstname("seniorfirst");
@@ -40,6 +42,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent>{
 		senior.setPassword("seniorpw");
 		senior.setUsername("senior");
 		senior.setUserrole("senior");
+		senior.persist();
 		
 		Taskdbgps gps = null;
 		
@@ -64,7 +67,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent>{
 			t1gps.add(gps);
 			
 			t1.setTaskdbgps(t1gps);
-		
+		t1.persist();
 		
 		Taskdb t2 = new Taskdb();
 		t2.setPerson("Mr. Powers");
@@ -87,6 +90,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent>{
 			t1gps.add(gps);
 			
 			t1.setTaskdbgps(t2gps);
+		t2.persist();
 		
 		
 	}
