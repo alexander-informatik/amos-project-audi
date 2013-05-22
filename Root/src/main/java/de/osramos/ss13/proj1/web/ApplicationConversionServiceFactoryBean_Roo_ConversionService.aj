@@ -4,7 +4,6 @@
 package de.osramos.ss13.proj1.web;
 
 import de.osramos.ss13.proj1.model.Taskdb;
-import de.osramos.ss13.proj1.model.Taskdbgps;
 import de.osramos.ss13.proj1.model.Userdb;
 import de.osramos.ss13.proj1.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -39,29 +38,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<Taskdbgps, String> ApplicationConversionServiceFactoryBean.getTaskdbgpsToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<de.osramos.ss13.proj1.model.Taskdbgps, java.lang.String>() {
-            public String convert(Taskdbgps taskdbgps) {
-                return new StringBuilder().append(taskdbgps.getGpscoordinate()).append(' ').append(taskdbgps.getPos()).toString();
-            }
-        };
-    }
-    
-    public Converter<Long, Taskdbgps> ApplicationConversionServiceFactoryBean.getIdToTaskdbgpsConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, de.osramos.ss13.proj1.model.Taskdbgps>() {
-            public de.osramos.ss13.proj1.model.Taskdbgps convert(java.lang.Long id) {
-                return Taskdbgps.findTaskdbgps(id);
-            }
-        };
-    }
-    
-    public Converter<String, Taskdbgps> ApplicationConversionServiceFactoryBean.getStringToTaskdbgpsConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, de.osramos.ss13.proj1.model.Taskdbgps>() {
-            public de.osramos.ss13.proj1.model.Taskdbgps convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), Taskdbgps.class);
-            }
-        };
-    }
     
     public Converter<Userdb, String> ApplicationConversionServiceFactoryBean.getUserdbToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<de.osramos.ss13.proj1.model.Userdb, java.lang.String>() {
@@ -91,9 +67,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getTaskdbToStringConverter());
         registry.addConverter(getIdToTaskdbConverter());
         registry.addConverter(getStringToTaskdbConverter());
-        registry.addConverter(getTaskdbgpsToStringConverter());
-        registry.addConverter(getIdToTaskdbgpsConverter());
-        registry.addConverter(getStringToTaskdbgpsConverter());
         registry.addConverter(getUserdbToStringConverter());
         registry.addConverter(getIdToUserdbConverter());
         registry.addConverter(getStringToUserdbConverter());

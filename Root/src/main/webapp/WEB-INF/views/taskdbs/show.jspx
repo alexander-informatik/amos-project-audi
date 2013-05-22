@@ -9,6 +9,19 @@
         <field:display field="building" id="s_de_osramos_ss13_proj1_model_Taskdb_building" object="${taskdb}" z="YcIs9VyO6QQSqp90va1/4dYw2p0="/>
         <field:display field="roomno" id="s_de_osramos_ss13_proj1_model_Taskdb_roomno" object="${taskdb}" z="0xjwMfjkd2BDhanqPuYrFbfXMIs="/>
         <field:display field="trainee" id="s_de_osramos_ss13_proj1_model_Taskdb_trainee" object="${taskdb}" z="FuTO0RYiviZjZsX8aKVQ+YEciHA="/>
-        <field:display field="taskdbgps" id="s_de_osramos_ss13_proj1_model_Taskdb_taskdbgps" object="${taskdb}" z="H8j78HYihy/pRBtuwpgC+XWmVDI="/>
+        <field:display field="gps_Start" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_Start" object="${taskdb}" z="XRxaZSmH54P0sdoaisuDOEGHIn4="/>
+        <field:display field="gps_1" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_1" object="${taskdb}" z="kST/9fhua0w0Qd1N4P+fAnNehbQ="/>
+        <field:display field="gps_2" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_2" object="${taskdb}" z="7W11tlrXGrYRVNYOhf/m9XJ5xfs="/>
+        <field:display field="gps_3" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_3" object="${taskdb}" z="aAHy5RIVZN7MRdmn1Mtj3fqfcps="/>
+        <field:display field="gps_4" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_4" object="${taskdb}" z="FB+ZUXaUudrgie6FpeL9YfPxf4w="/>
+        <field:display field="gps_End" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_End" object="${taskdb}" z="ZxJd9XGXTRI0ZRDjxG+8PkHj7o8="/>
+        <field:display field="gps_5" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_5" object="${taskdb}" z="Ig0mqM2PVTbC37FVakobASHu5A0="/>
+        <field:display field="gps_6" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_6" object="${taskdb}" z="VJLT3NfNvR0KYllVFvIzzM09B1U="/>
+        <field:display field="gps_7" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_7" object="${taskdb}" z="/MOk5snz7Fa54j1iWd0JbYha60U="/>
+        <field:display field="gps_8" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_8" object="${taskdb}" z="WGjtL5ev8YtBstu6rwws9jDNeLM="/>
+        <field:display field="gps_9" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_9" object="${taskdb}" z="Ibjk/8P+MHgIM1psFJvleGg4YBk="/>
+        <field:display field="gps_10" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_10" object="${taskdb}" z="ULnmQ0RfT78M2n1SF0pM5Or6URE="/>
+        <field:display field="gps_11" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_11" object="${taskdb}" z="Ma44q84lwpN8PyO6Ct4DvGbj1WE="/>
+        <field:display field="gps_12" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_12" object="${taskdb}" z="Z08uTFh2Yaj24w+lUiqk0e6p5lg="/>
     </page:show>
 </div>

@@ -5,6 +5,5 @@
     <form:update id="fu_de_osramos_ss13_proj1_model_Taskdbgps" modelAttribute="taskdbgps" path="/taskdbgpses" versionField="Version" z="ZRu2OCwok40bZpvh2BoqNGT2pqQ=">
         <field:input field="gpscoordinate" id="c_de_osramos_ss13_proj1_model_Taskdbgps_gpscoordinate" required="true" z="fBZ+wswGmKaXAvZ5B5bUB5pSXs8="/>
         <field:input field="pos" id="c_de_osramos_ss13_proj1_model_Taskdbgps_pos" validationMessageCode="field_invalid_integer" z="pvipGL07odO5b7fbQPmLCw+Cdss="/>
-        <field:select field="task" id="c_de_osramos_ss13_proj1_model_Taskdbgps_task" itemValue="id" items="${taskdbs}" path="/taskdbs" z="3IXtNEqS2RkrBKax1FQBYykwhGg="/>
     </form:update>
 </div>

@@ -9,6 +9,14 @@
     </h3>
     <p>
       <spring:message code="welcome_text" />
+	<p>
+	<spring:url value="/login" var="login"/>
+	<span>
+   	 <a href="${login}">
+    	  <spring:message code="button_login"/>
+   	 </a>
+ 	 </span>
+	</p>
     </p>
   </util:panel>
 </div>

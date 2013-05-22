@@ -6,7 +6,6 @@
         <table:table data="${taskdbgpses}" id="l_de_osramos_ss13_proj1_model_Taskdbgps" path="/taskdbgpses" z="muJwEVGbBai7sGTYo1s8lhzfA2Q=">
             <table:column id="c_de_osramos_ss13_proj1_model_Taskdbgps_gpscoordinate" property="gpscoordinate" z="rX7bkWKo49oVr4AL0r1LHBwRKgs="/>
             <table:column id="c_de_osramos_ss13_proj1_model_Taskdbgps_pos" property="pos" z="vpqgXc5cwD6SegmTgn4rUdQiYwQ="/>
-            <table:column id="c_de_osramos_ss13_proj1_model_Taskdbgps_task" property="task" z="VEPbyTlzwrWwpwKJaay4oM8ERsU="/>
         </table:table>
     </page:list>
 </div>

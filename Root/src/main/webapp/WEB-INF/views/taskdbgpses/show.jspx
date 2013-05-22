@@ -5,6 +5,5 @@
     <page:show id="ps_de_osramos_ss13_proj1_model_Taskdbgps" object="${taskdbgps}" path="/taskdbgpses" z="num0Xh7xBRFu6kclT0xR0qEqI0k=">
         <field:display field="gpscoordinate" id="s_de_osramos_ss13_proj1_model_Taskdbgps_gpscoordinate" object="${taskdbgps}" z="OnffUqGeyoA4sMH6LB/0zodgDx8="/>
         <field:display field="pos" id="s_de_osramos_ss13_proj1_model_Taskdbgps_pos" object="${taskdbgps}" z="qvfP8AsBJeJtm4x3k3Vmqa08t0U="/>
-        <field:display field="task" id="s_de_osramos_ss13_proj1_model_Taskdbgps_task" object="${taskdbgps}" z="HTR2loFFQiWJjQ6ec099pzgmPig="/>
     </page:show>
 </div>
