@@ -4,8 +4,6 @@
 package de.osramos.ss13.proj1.web;
 
 import de.osramos.ss13.proj1.model.Taskdb;
-import de.osramos.ss13.proj1.model.Taskdbgps;
-import de.osramos.ss13.proj1.model.Userdb;
 import de.osramos.ss13.proj1.web.TaskdbController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -84,12 +82,6 @@ privileged aspect TaskdbController_Roo_Controller {
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/taskdbs";
-    }
-    
-    void TaskdbController.populateEditForm(Model uiModel, Taskdb taskdb) {
-        uiModel.addAttribute("taskdb", taskdb);
-        uiModel.addAttribute("taskdbgpses", Taskdbgps.findAllTaskdbgpses());
-        uiModel.addAttribute("userdbs", Userdb.findAllUserdbs());
     }
     
     String TaskdbController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
