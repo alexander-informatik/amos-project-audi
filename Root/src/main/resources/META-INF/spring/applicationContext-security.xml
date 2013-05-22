@@ -11,7 +11,7 @@
         <!-- Configure these elements to secure URIs in your application -->
         <intercept-url pattern="/choices/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/member/**" access="isAuthenticated()" />
-	<intercept-url pattern="/userdbs/**" access="hasRole('ROLE_ADMIN')" />
+	<intercept-url pattern="/userdbs/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_SENIOR')" />
 	<intercept-url pattern="/taskdbs/**" access="hasRole('ROLE_SENIOR')" />
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/**" access="permitAll" />

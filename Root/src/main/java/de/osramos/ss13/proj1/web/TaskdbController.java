@@ -18,6 +18,6 @@ public class TaskdbController {
 
 	void populateEditForm(Model uiModel, Taskdb taskdb) {
         uiModel.addAttribute("taskdb", taskdb);
-        uiModel.addAttribute("userdbs", Userdb.findUserdbsByUserroleEquals("trainne").getResultList());
+        uiModel.addAttribute("userdbs", Userdb.findUserdbsByUserroleEquals("trainee").getResultList());
     }
 }
