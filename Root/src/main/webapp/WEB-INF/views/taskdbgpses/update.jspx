@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
-    <form:update id="fu_de_osramos_ss13_proj1_model_Taskdbgps" modelAttribute="taskdbgps" path="/taskdbgpses" versionField="Version" z="ZRu2OCwok40bZpvh2BoqNGT2pqQ=">
-        <field:input field="gpscoordinate" id="c_de_osramos_ss13_proj1_model_Taskdbgps_gpscoordinate" required="true" z="fBZ+wswGmKaXAvZ5B5bUB5pSXs8="/>
-        <field:input field="pos" id="c_de_osramos_ss13_proj1_model_Taskdbgps_pos" validationMessageCode="field_invalid_integer" z="pvipGL07odO5b7fbQPmLCw+Cdss="/>
-    </form:update>
-</div>
