@@ -10,6 +10,14 @@ import javax.persistence.TypedQuery;
 
 privileged aspect Taskdb_Roo_Finder {
     
+    public static TypedQuery<Taskdb> Taskdb.findTaskdbsById(Long id) {
+        if (id == null) throw new IllegalArgumentException("The id argument is required");
+        EntityManager em = Taskdb.entityManager();
+        TypedQuery<Taskdb> q = em.createQuery("SELECT o FROM Taskdb AS o WHERE o.id = :id", Taskdb.class);
+        q.setParameter("id", id);
+        return q;
+    }
+    
     public static TypedQuery<Taskdb> Taskdb.findTaskdbsByTrainee(Userdb trainee) {
         if (trainee == null) throw new IllegalArgumentException("The trainee argument is required");
         EntityManager em = Taskdb.entityManager();
