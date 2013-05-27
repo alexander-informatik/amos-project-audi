@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <jsp:output omit-xml-declaration="yes"/>
+  <spring:message code="label_trainee_taskdb_showmap_index" htmlEscape="false" var="title"/>
+  <util:panel id="title" title="${title}">
+    <spring:message code="application_name" htmlEscape="false" var="app_name"/>
+    <h3>
+      <spring:message arguments="${app_name}" code="welcome_titlepane"/>
+    </h3>
+  </util:panel>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+
+<link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+    <script id="jqueryui" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+<script src="//www.google.com/jsapi?key=AIzaSyCZfHRnq7tigC-COeQRmoa9Cxr0vbrK6xw"></script>
+
+
+
+
+<script type="text/javascript">
+  var directionDisplay;
+  var directionsService = new google.maps.DirectionsService();
+  var map;
+
+
+
+  function initialize() {
+
+
+
+
+
+ var long1 = 51.53694;
+ var lat1 = 9.932613;
+
+   var long= 49.788247;
+   var lat = 9.95204;
+    var latlng = new google.maps.LatLng(long1, lat1);
+
+
+directionsDisplay = new google.maps.DirectionsRenderer();
+
+
+    var myOptions = {
+      zoom: 8,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+mapTypeControlOptions: {
+        mapTypeIds: [google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE],
+        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
+      }
+    };
+
+directionDisplay = new google.maps.DirectionsRenderer();
+
+map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    directionsDisplay.setMap(map);
+    directionsDisplay.setPanel(document.getElementById("directionsPanel"));
+
+
+
+calcRoute();
+
+
+}
+
+
+
+
+
+
+
+function calcRoute() {
+
+    var start = "51.549751,9.948535";
+    var ende = "51.533042,9.934716";
+    var reglang = "en";
+
+    var start1 = document.getElementById("address1").value;
+    var ende1 = document.getElementById("address2").value;
+    var reglang1 = document.getElementById("lang").value;
+
+    var request = {
+        origin:start, 
+        destination:ende,
+        travelMode: google.maps.DirectionsTravelMode.WALKING,
+	region:reglang
+    };
+
+
+    directionsService.route(request, function(response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+
+        directionsDisplay.setDirections(response);
+      }
+    });
+
+  }  
+
+
+
+
+
+
+
+</script>
+
+
+</head>
+
+
+
+
+
+
+<body onload="initialize()">
+
+<div style="overflow:auto;higth:600px;width:380px;float:right;"><div id="directionsPanel"  style="float:right;width:380px;"></div></div>
+    
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+function OnSend() {
+
+    
+return true;
+}
+</script>
+
+
+	<div style="overflow:auto;higth:600px;width:380px;float:right;"><div id="directionsPanel"  style="float:right;width:380px;"></div></div>
+    
+	<div id=text style="margin-right:390px;">
+
+ 
+
+    <input type="submit" value="Update">
+    <div id="error"></div>
+  </form>
+
+
+<input id="address1" type="textbox" value="Startpunkt">
+<input id="address2" type="textbox" value="Endpunkt">
+    <select name="lang" id="lang">
+<option value="ar" >Arabic</>
+<option value="cs" >Czech</>
+<option value="da" >Danish</>
+<option value="de" >German</>
+<option value="el" >Greek</>
+<option value="en" >English</>
+<option value="es" >Spanish</>
+<option value="fr" >French</>
+<option value="it" >Italian</>
+<option value="nl" >Dutch</>
+<option value="no" >Norwegian</>
+<option value="sv" >Swedish</>
+<option value="tr" >Turkish</>
+<option value="zh-CN" >Chinese</>
+</select>
+    	<input type="button" value="Route berechnen" onClick="calcRoute();">
+
+	</div>
+    <div id="directionsPanel"  style="float:right;width:320px;"></div>
+    <div id="map_canvas" style="margin-top:10px; margin-right:10px;margin-bottom:2px;"></div>
+		
+</body>
+
+
+
+
+
+
+
+
+
+
+
+</div>
