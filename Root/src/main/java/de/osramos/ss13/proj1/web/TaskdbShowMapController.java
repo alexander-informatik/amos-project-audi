@@ -26,8 +26,24 @@ public class TaskdbShowMapController {
 	    	{
 	    		
 	    		model.addAttribute("taskname", o.getTaskname());
-	    		model.addAttribute("gpsstart", o.getGps_Start());
-	    		model.addAttribute("gpsend", o.getGps_End());
+	    		String start = o.getGps_Start();
+	    		String end = o.getGps_End();
+	    		
+	    		//String[] s = start.split(",");
+	    		//String s1 = s[0];
+	    		//String s2 = s[1];
+	    		
+	    		//String[] e = start.split(",");
+	    		//String e1 = e[0];
+	    		//String e2 = e[1];
+	    		
+	    		model.addAttribute("gpsstart", start);
+	    		model.addAttribute("gpsend", end);
+	    		
+	    		//model.addAttribute("gpsstartlatitude", s1);
+	    		//model.addAttribute("gpsstartlongitude", s2);
+	    		//model.addAttribute("gpsendlatitude", e1);
+	    		//model.addAttribute("gpsendlongitude", e2);
 	    	}
 	    	else
 	    	{
