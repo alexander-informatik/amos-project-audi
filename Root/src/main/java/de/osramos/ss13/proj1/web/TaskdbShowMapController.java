@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import de.osramos.ss13.proj1.model.Taskdb;
 
-@RequestMapping("/trainee/taskdb/showmap")
+@RequestMapping("/trainee/task/showmap")
 @Controller
 public class TaskdbShowMapController {
 
@@ -47,21 +47,21 @@ public class TaskdbShowMapController {
 	    	}
 	    	else
 	    	{
-	    		model.addAttribute("taskid", "taskid not found");
+	    		model.addAttribute("taskname", "taskid not found");
 	    	}
     	}
     	catch(Exception e)
     	{}
     	
-		return "trainee/taskdb/showmap/index";
+		return "trainee/task/showmap/index";
  
 	}
  
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String getDefaultPage(ModelMap model) {
  
-		model.addAttribute("taskid", "no task selected");
-		return "trainee/taskdb/showmap/index";
+		model.addAttribute("taskname", "no task selected");
+		return "trainee/task/showmap/index";
  
 	}
 }
