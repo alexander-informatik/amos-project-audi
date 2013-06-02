@@ -24,7 +24,7 @@ privileged aspect UserdbIntegrationTest_Roo_IntegrationTest {
     declare @type: UserdbIntegrationTest: @Transactional;
     
     @Autowired
-    private UserdbDataOnDemand UserdbIntegrationTest.dod;
+    UserdbDataOnDemand UserdbIntegrationTest.dod;
     
     @Test
     public void UserdbIntegrationTest.testCountUserdbs() {
