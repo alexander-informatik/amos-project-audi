@@ -28,6 +28,7 @@
                 <menu:item id="i_controller__senior_recordrouteindex_id" messageCode="global_generic" url="/senior/recordroute/index" z="jDJfq0vBNLZNpjV72HPoVB2Gr+s="/>
                 <menu:item id="i_controller__senior_traineeprogressindex_id" messageCode="global_generic" url="/senior/traineeprogress/index" z="zdFPUv5SEr+sXQNmyiqGBECpR9w="/>
                 <menu:item id="i_controller__trainee_traineeprogressindex_id" messageCode="global_generic" url="/trainee/traineeprogress/index" z="ZxBOlf2P51tr0lJAayC/eP0KSN4="/>
+                <menu:item id="i_controller__senior_gamepathindex_id" messageCode="global_generic" url="/senior/gamepath/index" z="8qgEl6cLt7pz/T94H5QN772lKSY="/>
             </menu:category>
         </sec:authorize>
     </menu:menu>
