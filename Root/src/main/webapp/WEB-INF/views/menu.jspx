@@ -22,6 +22,7 @@
             <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
                 <menu:item id="i_controller__trainee_taskdbindex_id" messageCode="global_generic" url="/trainee/taskdb/index" z="snYRf2XA9k/UYhuUAII30CEzfRc="/>
                 <menu:item id="i_controller__trainee_tasklistindex_id" messageCode="global_generic" url="/trainee/tasklist/index" z="wwHEY5ejfmxGKFaXa5b2oc2TyBA="/>
+                <menu:item id="i_controller__senior_tasklistindex_id" messageCode="global_generic" url="/senior/tasklist/index" z="vXyYxDkxpemuc84O4YDOMhpVyms="/>
             </menu:category>
         </sec:authorize>
     </menu:menu>
