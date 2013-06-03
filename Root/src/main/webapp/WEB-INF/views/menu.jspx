@@ -3,6 +3,10 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+		<menu:category id="c_password" z="user-managed">
+            <menu:item id="i_controller__user_lostpasswordindex_id" messageCode="global_generic" url="/user/lostpassword/index" z="jM81kvAPpGLapAC2y7HgR79GH2c="/>
+            <menu:item id="i_controller__user_changepasswordindex_id" messageCode="global_generic" url="/user/changepassword/index" z="IBJAn2DuFJ0zhzP0YzmQxJlSJSc="/>
+        </menu:category>
         <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
             <menu:category id="c_userdb" z="/JxyQlzTFZUGGNvRobSpnlbUoNk=">
                 <menu:item id="i_userdb_new" messageCode="global_menu_new" url="/userdbs?form" z="t44HLa7uNtjmAVGwOmgEbkYiL9s="/>
@@ -34,10 +38,5 @@
                 <menu:item id="i_controller__trainee_taskfeedbackindex_id" messageCode="global_generic" url="/trainee/taskfeedback/index" z="oszbfNjwQA34ZgocRDsgOSGpcvM="/>
             </menu:category>
         </sec:authorize>
-
-<menu:category id="c_password" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
-                <menu:item id="i_controller__user_lostpasswordindex_id" messageCode="global_generic" url="/user/lostpassword/index" z="jM81kvAPpGLapAC2y7HgR79GH2c="/>
-                <menu:item id="i_controller__user_changepasswordindex_id" messageCode="global_generic" url="/user/changepassword/index" z="IBJAn2DuFJ0zhzP0YzmQxJlSJSc="/>
-</menu:category>
     </menu:menu>
 </div>
