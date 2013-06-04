@@ -1,3 +1,8 @@
 *~
+*.bak
 Root/target/
 Root/log.roo
+Root/.classpath
+Root/.project
+Root/.settings/
+
