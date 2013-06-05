@@ -5,8 +5,11 @@
   <spring:message code="label_senior_tasklist_trainee_index" htmlEscape="false" var="title"/>
   <util:panel id="title" title="${title}">
     <spring:message code="application_name" htmlEscape="false" var="app_name"/>
-    <h3>
-      <spring:message arguments="${app_name}" code="welcome_titlepane"/>
-    </h3>
+        <p>Taskname: ${taskname}</p>
+        <p>Person: ${person}</p>
+        <p>Person Function: ${personfunction}</p>
+        <p>Building: ${building}</p>
+        <p>Roomno: ${roomno}</p>
+
   </util:panel>
 </div>
