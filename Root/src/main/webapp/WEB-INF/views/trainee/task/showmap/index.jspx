@@ -100,7 +100,7 @@ window.onload=initialize2013;
 <p><input type="button" value="Show Map" onClick="initialize2013();"></input></p>
 </div>
 
-<div id="directionsPanel"  style="float:right;width:300px;" >
+<div id="directionsPanel"  style="width:300px;" >
 Google Maps
 </div>
 
@@ -110,7 +110,7 @@ Google Maps
 </div>
 </div>
 
-<div id="map_canvas" style="float:right;width:400px;height:600px">
+<div id="map_canvas" style="width:400px;height:600px">
 
 </div>
 		
