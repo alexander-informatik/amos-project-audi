@@ -1,12 +1,16 @@
 package de.osramos.ss13.proj1.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -75,4 +79,8 @@ public class Taskdb {
 
     @Pattern(regexp = "(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
     private String gps_End;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    private Date timeslot;
 }

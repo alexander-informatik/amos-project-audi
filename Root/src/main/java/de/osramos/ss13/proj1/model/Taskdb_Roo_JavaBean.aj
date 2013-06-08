@@ -5,6 +5,7 @@ package de.osramos.ss13.proj1.model;
 
 import de.osramos.ss13.proj1.model.Taskdb;
 import de.osramos.ss13.proj1.model.Userdb;
+import java.util.Date;
 
 privileged aspect Taskdb_Roo_JavaBean {
     
@@ -166,6 +167,14 @@ privileged aspect Taskdb_Roo_JavaBean {
     
     public void Taskdb.setGps_End(String gps_End) {
         this.gps_End = gps_End;
+    }
+    
+    public Date Taskdb.getTimeslot() {
+        return this.timeslot;
+    }
+    
+    public void Taskdb.setTimeslot(Date timeslot) {
+        this.timeslot = timeslot;
     }
     
 }
