@@ -30,6 +30,7 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     public Taskdb TaskdbDataOnDemand.getNewTransientTaskdb(int index) {
         Taskdb obj = new Taskdb();
         setBuilding(obj, index);
+        setCompletionPassword(obj, index);
         setGps_1(obj, index);
         setGps_2(obj, index);
         setGps_3(obj, index);
@@ -54,6 +55,11 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     public void TaskdbDataOnDemand.setBuilding(Taskdb obj, int index) {
         String building = "building_" + index;
         obj.setBuilding(building);
+    }
+    
+    public void TaskdbDataOnDemand.setCompletionPassword(Taskdb obj, int index) {
+        String completionPassword = "completionPassword_" + index;
+        obj.setCompletionPassword(completionPassword);
     }
     
     public void TaskdbDataOnDemand.setPerson(Taskdb obj, int index) {
