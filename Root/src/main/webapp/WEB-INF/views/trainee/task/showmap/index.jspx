@@ -19,11 +19,11 @@
     var latlng = new google.maps.LatLng(${gpsstart});
 
 
+
 directionsDisplay = new google.maps.DirectionsRenderer();
 
 
     var myOptions = {
-      zoom: 8,
       center: latlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
 mapTypeControlOptions: {
@@ -37,7 +37,6 @@ directionDisplay = new google.maps.DirectionsRenderer();
 map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     directionsDisplay.setMap(map);
     directionsDisplay.setPanel(document.getElementById("directionsPanel"));
-
 
 
 calcRoute();
@@ -110,8 +109,12 @@ Google Maps
 </div>
 </div>
 
+<div id="currentgps" style="width:300px;">
+</div>
+
 <div id="map_canvas" style="width:400px;height:600px">
 
 </div>
+
 		
 </body>
