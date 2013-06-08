@@ -168,4 +168,12 @@ privileged aspect Taskdb_Roo_JavaBean {
         this.gps_End = gps_End;
     }
     
+    public Boolean Taskdb.getTaskDone() {
+        return this.taskDone;
+    }
+    
+    public void Taskdb.setTaskDone(Boolean taskDone) {
+        this.taskDone = taskDone;
+    }
+    
 }

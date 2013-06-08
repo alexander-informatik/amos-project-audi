@@ -47,6 +47,7 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
         setPerson(obj, index);
         setPersonfunction(obj, index);
         setRoomno(obj, index);
+        setTaskDone(obj, index);
         setTaskname(obj, index);
         return obj;
     }
@@ -69,6 +70,11 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     public void TaskdbDataOnDemand.setRoomno(Taskdb obj, int index) {
         String roomno = "roomno_" + index;
         obj.setRoomno(roomno);
+    }
+    
+    public void TaskdbDataOnDemand.setTaskDone(Taskdb obj, int index) {
+        Boolean taskDone = Boolean.TRUE;
+        obj.setTaskDone(taskDone);
     }
     
     public void TaskdbDataOnDemand.setTaskname(Taskdb obj, int index) {
