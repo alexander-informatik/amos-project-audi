@@ -170,10 +170,14 @@ privileged aspect Taskdb_Roo_JavaBean {
     
     public String Taskdb.getCompletionPassword() {
         return this.completionPassword;
+    public Boolean Taskdb.getTaskDone() {
+        return this.taskDone;
     }
     
     public void Taskdb.setCompletionPassword(String completionPassword) {
         this.completionPassword = completionPassword;
+    public void Taskdb.setTaskDone(Boolean taskDone) {
+        this.taskDone = taskDone;
     }
     
 }

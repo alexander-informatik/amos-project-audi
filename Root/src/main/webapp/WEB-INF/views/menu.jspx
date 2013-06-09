@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
-		<menu:category id="c_password" z="user-managed">
+        <menu:category id="c_password" z="user-managed">
             <menu:item id="i_controller__user_lostpasswordindex_id" messageCode="global_generic" url="/user/lostpassword/index" z="jM81kvAPpGLapAC2y7HgR79GH2c="/>
             <menu:item id="i_controller__user_changepasswordindex_id" messageCode="global_generic" url="/user/changepassword/index" z="IBJAn2DuFJ0zhzP0YzmQxJlSJSc="/>
         </menu:category>
@@ -36,6 +36,7 @@
                 <menu:item id="i_controller__trainee_traineeprogressindex_id" messageCode="global_generic" url="/trainee/traineeprogress/index" z="ZxBOlf2P51tr0lJAayC/eP0KSN4="/>
                 <menu:item id="i_controller__trainee_routefeedbackindex_id" messageCode="global_generic" url="/trainee/routefeedback/index" z="ZLf1T/mAK7VXAfbhZiHE2ftgFk8="/>
                 <menu:item id="i_controller__trainee_taskfeedbackindex_id" messageCode="global_generic" url="/trainee/taskfeedback/index" z="oszbfNjwQA34ZgocRDsgOSGpcvM="/>
+                <menu:item id="i_controller__trainee_markascompleted_taskindex_id" messageCode="global_generic" url="/trainee/markascompleted/task/index" z="R8qpKWFIBHjHp8UecVl0PvfZB2I="/>
             </menu:category>
         </sec:authorize>
     </menu:menu>

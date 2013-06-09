@@ -77,4 +77,5 @@ public class Taskdb {
     private String gps_End;
 
     private String completionPassword;
+    private Boolean taskDone;
 }
