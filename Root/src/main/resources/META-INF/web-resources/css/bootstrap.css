@@ -6016,6 +6016,7 @@ margin-bottom: 0;
 }
 
 .hero-unit {
+overflow: auto;
 padding: 60px;
 margin-bottom: 30px;
 margin-right: 21px;
