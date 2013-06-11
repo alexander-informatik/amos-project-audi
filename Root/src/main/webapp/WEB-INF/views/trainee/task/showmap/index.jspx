@@ -45,10 +45,8 @@ var marker = new google.maps.Marker({
 
 
  function newgps(position) {
-      document.getElementById('currentgps').innerHTML = position.coords.latitude + "," + position.coords.longitude;
 		var googlegps = new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
 		marker.setPosition(googlegps);		
-		map.panTo(googlegps); 
     }
 
     var watchId = navigator.geolocation.watchPosition(newgps);
@@ -125,8 +123,6 @@ Google Maps
 </div>
 </div>
 
-<div id="currentgps" style="width:300px;">
-</div>
 
 <div id="map_canvas" style="width:400px;height:600px">
 <div/>
