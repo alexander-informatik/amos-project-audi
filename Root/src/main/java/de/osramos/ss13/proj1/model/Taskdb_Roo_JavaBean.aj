@@ -16,6 +16,14 @@ privileged aspect Taskdb_Roo_JavaBean {
         this.taskname = taskname;
     }
     
+    public String Taskdb.getDescription() {
+        return this.description;
+    }
+    
+    public void Taskdb.setDescription(String description) {
+        this.description = description;
+    }
+    
     public String Taskdb.getPerson() {
         return this.person;
     }

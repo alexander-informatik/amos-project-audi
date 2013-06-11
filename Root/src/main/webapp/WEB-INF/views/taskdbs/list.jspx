@@ -5,11 +5,11 @@
     <page:list id="pl_de_osramos_ss13_proj1_model_Taskdb" items="${taskdbs}" z="lVUIhuu8XNVAaUOm+9N/wM7vQCk=">
         <table:table data="${taskdbs}" id="l_de_osramos_ss13_proj1_model_Taskdb" path="/taskdbs" z="7qMCoZwC04mIbhA1NYfo24ReNF4=">
             <table:column id="c_de_osramos_ss13_proj1_model_Taskdb_taskname" property="taskname" z="Ep9jJe511gNc4XCjei3DQO/BH4s="/>
-            <table:column id="c_de_osramos_ss13_proj1_model_Taskdb_person" property="person" z="oCOSluSJy10d06OJpY7rlJGCdRA="/>
+            <table:column id="c_de_osramos_ss13_proj1_model_Taskdb_description" property="description" z="uAPPC8OmnAXrwQ+wRMcD1FB47Sk="/>
+			<table:column id="c_de_osramos_ss13_proj1_model_Taskdb_person" property="person" z="oCOSluSJy10d06OJpY7rlJGCdRA="/>
             <table:column id="c_de_osramos_ss13_proj1_model_Taskdb_personfunction" property="personfunction" z="v4Fq4SbLUi4qjKrfunkpBWkSYK0="/>
             <table:column id="c_de_osramos_ss13_proj1_model_Taskdb_building" property="building" z="epO830NzWllZIT8K5g0M7IRZsgw="/>
             <table:column id="c_de_osramos_ss13_proj1_model_Taskdb_roomno" property="roomno" z="jy4ojWc9DbEfBZjAVXwF8dRKEp8="/>
-            <table:column id="c_de_osramos_ss13_proj1_model_Taskdb_trainee" property="trainee" z="Xm1GRnIAgVU/fqbiL+eFRoJ5xT8="/>
         </table:table>
     </page:list>
 </div>

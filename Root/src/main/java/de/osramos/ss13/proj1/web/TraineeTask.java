@@ -58,6 +58,7 @@ public class TraineeTask {
 		if (task.getTrainee().getUsername().equals(authorizedUsername)) {
 			uiModel.addAttribute("taskid", id);
 			uiModel.addAttribute("taskname", task.getTaskname());
+			uiModel.addAttribute("description", task.getDescription());
 			uiModel.addAttribute("person", task.getPerson());
 			uiModel.addAttribute("personfunction", task.getPersonfunction());
 			uiModel.addAttribute("building", task.getBuilding());

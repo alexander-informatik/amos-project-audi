@@ -8,6 +8,7 @@
 <thead>
 <tr>
 <th>Taskname</th>
+<th>Description</th>
 <th>Person</th>
 <th>Personfunction</th>
 <th>Building</th>
@@ -20,12 +21,13 @@
 <c:forEach var="task" items="${tasklist}">
 <tr>
     <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_taskname" >${task.taskname}</div></td>
+	<td><div id="c_de_osramos_ss13_proj1_model_Taskdb_description" >${task.Description}</div></td>
     <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_person" >${task.person}</div></td>
     <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_personfunction" >${task.personfunction}</div></td>
     <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_building">${task.building}</div></td>
     <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_roomno" >${task.roomno}</div></td>
 
-	<td class="utilbox"><a title="Show Taskdb" alt="Show Taskdb" href="/proj1/trainee/task/${task.id}">
+	<td class="utilbox"><a title="Show Taskdb" alt="Show Taskdb" href="/proj1/senior/tasklist/${task.id}">
 	<img title="Show Taskdb" src="/proj1/resources/images/resultset_next.png" class="btn btn-info" alt="Show Taskdb" /></a>
 	</td>
 

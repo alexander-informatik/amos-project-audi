@@ -4,7 +4,8 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_de_osramos_ss13_proj1_model_Taskdb" object="${taskdb}" path="/taskdbs" z="08K2TQtNYOoJ4yANQyZekFLPyOc=">
         <field:display field="taskname" id="s_de_osramos_ss13_proj1_model_Taskdb_taskname" object="${taskdb}" z="8R41klI0/Pzxs3b1jeeWQtBjgng="/>
-        <field:display field="person" id="s_de_osramos_ss13_proj1_model_Taskdb_person" object="${taskdb}" z="hWS9C7iA/kza2NtRN0Fo5J0JkH0="/>
+        <field:display field="description" id="s_de_osramos_ss13_proj1_model_Taskdb_description" object="${taskdb}" z="vReLY/XgwtIfn2oNT8xgPbSXzhU="/>
+		<field:display field="person" id="s_de_osramos_ss13_proj1_model_Taskdb_person" object="${taskdb}" z="hWS9C7iA/kza2NtRN0Fo5J0JkH0="/>
         <field:display field="personfunction" id="s_de_osramos_ss13_proj1_model_Taskdb_personfunction" object="${taskdb}" z="dtmdD5KFbnGpNa5u+FW0Zm3FDU4="/>
         <field:display field="building" id="s_de_osramos_ss13_proj1_model_Taskdb_building" object="${taskdb}" z="YcIs9VyO6QQSqp90va1/4dYw2p0="/>
         <field:display field="roomno" id="s_de_osramos_ss13_proj1_model_Taskdb_roomno" object="${taskdb}" z="0xjwMfjkd2BDhanqPuYrFbfXMIs="/>

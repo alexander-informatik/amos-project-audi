@@ -25,11 +25,12 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     private List<Taskdb> TaskdbDataOnDemand.data;
     
     @Autowired
-    UserdbDataOnDemand TaskdbDataOnDemand.userdbDataOnDemand;
+    private UserdbDataOnDemand TaskdbDataOnDemand.userdbDataOnDemand;
     
     public Taskdb TaskdbDataOnDemand.getNewTransientTaskdb(int index) {
         Taskdb obj = new Taskdb();
         setBuilding(obj, index);
+        setDescription(obj, index);
         setGps_1(obj, index);
         setGps_2(obj, index);
         setGps_3(obj, index);
@@ -54,6 +55,11 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     public void TaskdbDataOnDemand.setBuilding(Taskdb obj, int index) {
         String building = "building_" + index;
         obj.setBuilding(building);
+    }
+    
+    public void TaskdbDataOnDemand.setDescription(Taskdb obj, int index) {
+        String description = "description_" + index;
+        obj.setDescription(description);
     }
     
     public void TaskdbDataOnDemand.setPerson(Taskdb obj, int index) {

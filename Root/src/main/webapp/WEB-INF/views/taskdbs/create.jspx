@@ -4,7 +4,8 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_de_osramos_ss13_proj1_model_Taskdb" modelAttribute="taskdb" path="/taskdbs" render="${empty dependencies}" z="tCaOemoE1t1bysR75BVfwqzQVrM=">
         <field:input field="taskname" id="c_de_osramos_ss13_proj1_model_Taskdb_taskname" required="true" z="r4Jo+86JGgxo+U1RoJUrd7NXzvA="/>
-        <field:input field="person" id="c_de_osramos_ss13_proj1_model_Taskdb_person" required="true" z="HMa7I8pHMZxQZxl+4KxTeZRUH+4="/>
+        <field:input field="description" id="c_de_osramos_ss13_proj1_model_Taskdb_description" required="true" z="XYxOJRh4Ds3eJD2k9DWlZ1wZcEQ="/>
+		<field:input field="person" id="c_de_osramos_ss13_proj1_model_Taskdb_person" required="true" z="HMa7I8pHMZxQZxl+4KxTeZRUH+4="/>
         <field:input field="personfunction" id="c_de_osramos_ss13_proj1_model_Taskdb_personfunction" required="true" z="Bm49RE2QRvn5ks1EcayD6/U4e6Y="/>
         <field:input field="building" id="c_de_osramos_ss13_proj1_model_Taskdb_building" required="true" z="T1eMDVvyxNK9YZSYaP0hhmShLPo="/>
         <field:input field="roomno" id="c_de_osramos_ss13_proj1_model_Taskdb_roomno" required="true" z="pI3uyeSCFqsrr6vrEnBbmIx27pc="/>

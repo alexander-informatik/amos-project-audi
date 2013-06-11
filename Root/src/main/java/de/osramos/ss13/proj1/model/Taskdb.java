@@ -18,6 +18,9 @@ public class Taskdb {
 
     @NotNull
     private String taskname;
+    
+    @NotNull
+    private String description;
 
     @NotNull
     private String person;

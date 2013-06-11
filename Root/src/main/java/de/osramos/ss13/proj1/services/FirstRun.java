@@ -107,8 +107,9 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent>{
 		Userdb trainee = Userdb.findUserdbsByUsernameEquals("trainee").getSingleResult();
 
 		Taskdb t = null;
-		
+	/*	
 		t = new Taskdb();
+		t.setDescription("description A");
 		t.setPerson("Mr. Bond");
 		t.setBuilding("Building ??");
 		t.setPersonfunction("Function 007");
@@ -118,8 +119,9 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent>{
 		t.setGps_Start("51.522416,-0.069551");
 		t.setGps_End("51.500194,-0.057192");
 		t.persist();
-		
+		*/
 		t = new Taskdb();
+		t.setDescription("description B");
 		t.setPerson("Mr. Powers");
 		t.setBuilding("Club X");
 		t.setPersonfunction("Function uncertain");

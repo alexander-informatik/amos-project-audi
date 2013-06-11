@@ -8,6 +8,7 @@
 <thead>
 <tr>
 <th>Taskname</th>
+<th>Description</th>
 <th>Person</th>
 <th>Personfunction</th>
 <th>Building</th>
@@ -20,7 +21,8 @@
 <c:forEach var="task" items="${tasklist}">
 <tr>
     <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_taskname" >${task.taskname}</div></td>
-    <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_person" >${task.person}</div></td>
+    <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_description" >${task.description}</div></td>
+	<td><div id="c_de_osramos_ss13_proj1_model_Taskdb_person" >${task.person}</div></td>
     <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_personfunction" >${task.personfunction}</div></td>
     <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_building">${task.building}</div></td>
     <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_roomno" >${task.roomno}</div></td>

@@ -58,11 +58,22 @@ public class SeniorTasklist {
 		String authorizedUsername = SecurityContextHolder.getContext()
 				.getAuthentication().getName();
 
-
+		if(page != null || size != null) {
+			int sizeNo = size == null ? 10 : size.intValue();
+			final int firstResult = page == null ? 0 : (page.intValue() - 1)
+					* sizeNo;
+			uiModel.addAttribute("tasklist", Taskdb.findTaskdbEntries(
+					firstResult, sizeNo));
+			float nrOfPages = (float) Taskdb.countTaskdbs() / sizeNo;
+			uiModel.addAttribute("maxPages",
+					(int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0)
+							? nrOfPages + 1
+							: nrOfPages));
+		} else {
 			uiModel.addAttribute("tasklist", Taskdb
-					.findTaskdbsByPersonEquals(authorizedUsername));
-		
+					.findTaskdbsByTraineeUsername(authorizedUsername));
+		}
+
 		return "senior/tasklist/index";
 	}
-
 }
