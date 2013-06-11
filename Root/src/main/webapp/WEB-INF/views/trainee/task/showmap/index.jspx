@@ -129,7 +129,7 @@ Google Maps
 </div>
 
 <div id="map_canvas" style="width:400px;height:600px">
-
+<div/>
 </div>
 
 		
