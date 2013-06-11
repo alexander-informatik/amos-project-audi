@@ -43,31 +43,30 @@ import de.osramos.ss13.proj1.model.Taskdb;
 @Controller
 public class SeniorTasklistForTrainee {
 
-
-@RequestMapping(method = RequestMethod.POST, value = "{id}")
-public void post(@PathVariable Long id, ModelMap modelMap,
-		HttpServletRequest request, HttpServletResponse response) {
-}
-
-@RequestMapping(value = "/{id}", produces = "text/html")
-public String index(@PathVariable("id") Long id, Model uiModel) {
-	Taskdb task = Taskdb.findTaskdb(id);
-
-	String authorizedUsername = SecurityContextHolder.getContext()
-			.getAuthentication().getName();
-
-	if (task.getTrainee().getUsername().equals(authorizedUsername)) {
-		uiModel.addAttribute("taskid", id);
-		uiModel.addAttribute("taskname", task.getTaskname());
-		uiModel.addAttribute("person", task.getPerson());
-		uiModel.addAttribute("personfunction", task.getPersonfunction());
-		uiModel.addAttribute("building", task.getBuilding());
-		uiModel.addAttribute("roomno", task.getRoomno());
-	} else {
-		uiModel.addAttribute("taskname",
-				"This task is not assigned to you!");
+	@RequestMapping(method = RequestMethod.POST, value = "{id}")
+	public void post(@PathVariable Long id, ModelMap modelMap,
+			HttpServletRequest request, HttpServletResponse response) {
 	}
 
-	return "senior/tasklist/trainee/index";
-}
+	@RequestMapping(value = "/{id}", produces = "text/html")
+	public String index(@PathVariable("id") Long id, Model uiModel) {
+		Taskdb task = Taskdb.findTaskdb(id);
+
+		String authorizedUsername = SecurityContextHolder.getContext()
+				.getAuthentication().getName();
+
+		if (task.getTrainee().getUsername().equals(authorizedUsername)) {
+			uiModel.addAttribute("taskid", id);
+			uiModel.addAttribute("taskname", task.getTaskname());
+			uiModel.addAttribute("person", task.getPerson());
+			uiModel.addAttribute("personfunction", task.getPersonfunction());
+			uiModel.addAttribute("building", task.getBuilding());
+			uiModel.addAttribute("roomno", task.getRoomno());
+		} else {
+			uiModel.addAttribute("taskname",
+					"This task is not assigned to you!");
+		}
+
+		return "senior/tasklist/trainee/index";
+	}
 }

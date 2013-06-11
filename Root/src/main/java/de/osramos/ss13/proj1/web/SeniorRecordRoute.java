@@ -48,15 +48,15 @@ public class SeniorRecordRoute {
 	public void post(@PathVariable Boolean recordpermission, ModelMap modelMap,
 			HttpServletRequest request, HttpServletResponse response) {
 	}
-	
+
 	@RequestMapping(produces = "text/html")
 	public String index(
 			@RequestParam(value = "recordpermission", required = false) Boolean recordpermission,
 			Model uiModel) {
 
-			uiModel.addAttribute("recordpermission", recordpermission);
-		
-			return "senior/recordroute/index";
+		uiModel.addAttribute("recordpermission", recordpermission);
+
+		return "senior/recordroute/index";
 	}
-	
+
 }

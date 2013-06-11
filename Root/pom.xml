@@ -322,10 +322,59 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-taglibs</artifactId>
             <version>${spring-security.version}</version>
-        </dependency>
+        </dependency>  
     </dependencies>
     <build>
         <plugins>
+	<!-- automatically format file - Alexander Schmidt -->
+	<plugin>
+        <groupId>com.googlecode.maven-java-formatter-plugin</groupId>
+        <artifactId>maven-java-formatter-plugin</artifactId>
+        <version>0.3.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>format</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+	<compilerSource>${java.version}</compilerSource>
+    	<compilerCompliance>${java.version}</compilerCompliance>
+    	<compilerTargetPlatform>${java.version}</compilerTargetPlatform>
+        </configuration>
+        
+      </plugin>
+
+
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>license-maven-plugin</artifactId>
+    <version>1.5</version>
+    <configuration>
+        <licenseName>amos_license</licenseName>
+        <licenseResolver>${project.baseUri}license</licenseResolver>
+	<inceptionYear>2013</inceptionYear>
+	<organizationName>Amos-Project</organizationName>
+	<roots>
+                <root>src/main/java</root>
+                <root>src/test/java</root>
+        </roots>
+    </configuration>
+    <executions>
+        <execution>
+            <id>first</id>
+            <goals>
+                <goal>update-file-header</goal>
+            </goals>
+            <phase>process-sources</phase>
+        </execution>
+    </executions>
+</plugin>
+
+
+
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>

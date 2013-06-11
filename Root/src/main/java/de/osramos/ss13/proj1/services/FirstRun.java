@@ -1,5 +1,31 @@
 package de.osramos.ss13.proj1.services;
 
+/*
+ * #%L
+ * proj1
+ * %%
+ * Copyright (C) 2013 Amos-Project
+ * %%
+ * Copyright (c) 2013 by Alexander Schmidt, Sascha Ströbel, Nina Aures, Riehle, http://dirkriehle.com
+ * -
+ * This file is part of the Amos Project - Productive Games application.
+ * -
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * -
+ * This program is distributed in the hope that it will be useful, 
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * -
+ * You should have received a copy of the GNU Affero General Public
+ * License along with this program. If not, see
+ * <http://www.gnu.org/licenses/>.
+ * #L%
+ */
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,33 +36,24 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.ContextStartedEvent;
 
-public class FirstRun implements ApplicationListener<ContextRefreshedEvent>{
+public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 	static boolean first = true;
-    public synchronized void onApplicationEvent(ContextRefreshedEvent context ) {
-    	if(first)
-    	{
-    		first= false;
-    		PopulateDatabase();
-    	}
-    }
-
-	
-    
-    
-
-	public void PopulateDatabase()
-	{
-		// populate with default usernames and passwords
-		CreateUsers();
-		
-		// create example tasks
-		createTasks();
-		
-		
+	public synchronized void onApplicationEvent(ContextRefreshedEvent context) {
+		if (first) {
+			first = false;
+			PopulateDatabase();
+		}
 	}
 
+	public void PopulateDatabase() {
+		// populate with default usernames and passwords
+		CreateUsers();
 
-	
+		// create example tasks
+		createTasks();
+
+	}
+
 	private void CreateUsers() {
 		Userdb user = null;
 
@@ -104,10 +121,11 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent>{
 	}
 
 	private void createTasks() {
-		Userdb trainee = Userdb.findUserdbsByUsernameEquals("trainee").getSingleResult();
+		Userdb trainee = Userdb.findUserdbsByUsernameEquals("trainee")
+				.getSingleResult();
 
 		Taskdb t = null;
-	
+
 		t = new Taskdb();
 		t.setDescription("description A");
 		t.setPerson("Mr. Bond");
@@ -119,7 +137,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent>{
 		t.setGps_Start("51.522416,-0.069551");
 		t.setGps_End("51.500194,-0.057192");
 		t.persist();
-		
+
 		t = new Taskdb();
 		t.setDescription("description B");
 		t.setPerson("Mr. Powers");

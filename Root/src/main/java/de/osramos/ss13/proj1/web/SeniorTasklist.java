@@ -58,7 +58,7 @@ public class SeniorTasklist {
 		String authorizedUsername = SecurityContextHolder.getContext()
 				.getAuthentication().getName();
 
-		if(page != null || size != null) {
+		if (page != null || size != null) {
 			int sizeNo = size == null ? 10 : size.intValue();
 			final int firstResult = page == null ? 0 : (page.intValue() - 1)
 					* sizeNo;
