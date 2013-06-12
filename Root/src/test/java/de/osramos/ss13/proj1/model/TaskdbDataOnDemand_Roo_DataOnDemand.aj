@@ -29,6 +29,7 @@ package de.osramos.ss13.proj1.model;
  * #L%
  */
 
+import de.osramos.ss13.proj1.model.Route;
 import de.osramos.ss13.proj1.model.Taskdb;
 import de.osramos.ss13.proj1.model.TaskdbDataOnDemand;
 import de.osramos.ss13.proj1.model.UserdbDataOnDemand;
@@ -51,7 +52,7 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     private List<Taskdb> TaskdbDataOnDemand.data;
     
     @Autowired
-    private UserdbDataOnDemand TaskdbDataOnDemand.userdbDataOnDemand;
+    UserdbDataOnDemand TaskdbDataOnDemand.userdbDataOnDemand;
     
     public Taskdb TaskdbDataOnDemand.getNewTransientTaskdb(int index) {
         Taskdb obj = new Taskdb();
@@ -74,6 +75,7 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
         setPerson(obj, index);
         setPersonfunction(obj, index);
         setRoomno(obj, index);
+        setRoute(obj, index);
         setTaskname(obj, index);
         return obj;
     }
@@ -101,6 +103,11 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     public void TaskdbDataOnDemand.setRoomno(Taskdb obj, int index) {
         String roomno = "roomno_" + index;
         obj.setRoomno(roomno);
+    }
+    
+    public void TaskdbDataOnDemand.setRoute(Taskdb obj, int index) {
+        Route route = null;
+        obj.setRoute(route);
     }
     
     public void TaskdbDataOnDemand.setTaskname(Taskdb obj, int index) {

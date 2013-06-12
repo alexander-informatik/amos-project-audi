@@ -29,6 +29,7 @@ package de.osramos.ss13.proj1.model;
  * #L%
  */
 
+import de.osramos.ss13.proj1.model.Route;
 import de.osramos.ss13.proj1.model.Taskdb;
 import de.osramos.ss13.proj1.model.Userdb;
 
@@ -200,6 +201,14 @@ privileged aspect Taskdb_Roo_JavaBean {
     
     public void Taskdb.setGps_End(String gps_End) {
         this.gps_End = gps_End;
+    }
+    
+    public Route Taskdb.getRoute() {
+        return this.route;
+    }
+    
+    public void Taskdb.setRoute(Route route) {
+        this.route = route;
     }
     
 }

@@ -5,7 +5,7 @@
     <form:update id="fu_de_osramos_ss13_proj1_model_Taskdb" modelAttribute="taskdb" path="/taskdbs" versionField="Version" z="23k5pv4ltb5wqPOjXVh30EN4wu8=">
         <field:input field="taskname" id="c_de_osramos_ss13_proj1_model_Taskdb_taskname" required="true" z="r4Jo+86JGgxo+U1RoJUrd7NXzvA="/>
         <field:input field="description" id="c_de_osramos_ss13_proj1_model_Taskdb_description" required="true" z="XYxOJRh4Ds3eJD2k9DWlZ1wZcEQ="/>
-		<field:input field="person" id="c_de_osramos_ss13_proj1_model_Taskdb_person" required="true" z="HMa7I8pHMZxQZxl+4KxTeZRUH+4="/>
+        <field:input field="person" id="c_de_osramos_ss13_proj1_model_Taskdb_person" required="true" z="HMa7I8pHMZxQZxl+4KxTeZRUH+4="/>
         <field:input field="personfunction" id="c_de_osramos_ss13_proj1_model_Taskdb_personfunction" required="true" z="Bm49RE2QRvn5ks1EcayD6/U4e6Y="/>
         <field:input field="building" id="c_de_osramos_ss13_proj1_model_Taskdb_building" required="true" z="T1eMDVvyxNK9YZSYaP0hhmShLPo="/>
         <field:input field="roomno" id="c_de_osramos_ss13_proj1_model_Taskdb_roomno" required="true" z="pI3uyeSCFqsrr6vrEnBbmIx27pc="/>
@@ -24,5 +24,6 @@
         <field:input field="gps_11" id="c_de_osramos_ss13_proj1_model_Taskdb_gps_11" validationRegex="^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+" z="uP+uP7CoaIBBdmZsIW7/Ly1XSzE="/>
         <field:input field="gps_12" id="c_de_osramos_ss13_proj1_model_Taskdb_gps_12" validationRegex="^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+" z="FHx+NnTQJ2vtq+5oZoI7sdaxOAs="/>
         <field:input field="gps_End" id="c_de_osramos_ss13_proj1_model_Taskdb_gps_End" validationRegex="(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+" z="y0oXfOeNUBXoCFQjKBmzRcGjfkA="/>
+        <field:select field="route" id="c_de_osramos_ss13_proj1_model_Taskdb_route" itemValue="id" items="${routes}" path="/routes" z="oWVtlkb5pqGPp4GrJLGygzoxPxo="/>
     </form:update>
 </div>
