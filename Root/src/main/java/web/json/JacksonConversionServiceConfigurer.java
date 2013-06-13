@@ -1,4 +1,4 @@
-package de.osramos.ss13.proj1.model;
+package web.json;
 
 /*
  * #%L
@@ -26,20 +26,6 @@ package de.osramos.ss13.proj1.model;
  * #L%
  */
 
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
-import org.springframework.roo.addon.json.RooJson;
-import org.springframework.roo.addon.tostring.RooToString;
+public class JacksonConversionServiceConfigurer {
 
-@RooJavaBean
-@RooToString
-@RooJson
-@RooJpaActiveRecord
-public class Gpscoordinate {
-
-	private String latitude;
-
-	private String longitude;
-
-	private int orderedposition;
 }
