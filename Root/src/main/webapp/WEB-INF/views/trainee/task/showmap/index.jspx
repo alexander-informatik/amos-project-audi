@@ -8,85 +8,93 @@
 <script src="//www.google.com/jsapi?key=AIzaSyCZfHRnq7tigC-COeQRmoa9Cxr0vbrK6xw"><div /></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"><div /></script>
 <script type="text/javascript">
-  var directionDisplay;
-  var directionsService = new google.maps.DirectionsService();
-  var map;
-  var marker;
+ 
+var directionsDisplay = new google.maps.DirectionsRenderer();
+var directionsService = new google.maps.DirectionsService();
+var map;
+var marker;
 
-  function initialize2013() {
+function initializeMap() 
+{
 
+	var latlng = new google.maps.LatLng(51.182598,10.080042);
+	
+	var myOptions = 
+		{
+			zoom: 12,
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			mapTypeControlOptions: 
+			{
+	        		mapTypeIds: [google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE],
+	        		style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
+	      		}
+		};
+	
+	
+	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+	directionsDisplay.setMap(map);
+	directionsDisplay.setPanel(document.getElementById("directionsPanel"));
+	
+	var image = '${mapiconURL}';
+	var marker = 
+		new google.maps.Marker(
+		{
+			position: latlng,
+			map: map,
+			title: 'Position',
+			icon: image
+		});
 
-    var latlng = new google.maps.LatLng(${gpsstart});
-
-
-directionsDisplay = new google.maps.DirectionsRenderer();
-
-
-    var myOptions = {
-      center: latlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-mapTypeControlOptions: {
-        mapTypeIds: [google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE],
-        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
-      }
-    };
-
-directionDisplay = new google.maps.DirectionsRenderer();
-
-map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-    directionsDisplay.setMap(map);
-    directionsDisplay.setPanel(document.getElementById("directionsPanel"));
-
-var marker = new google.maps.Marker({
-      position: latlng,
-      map: map,
-      title: 'Position'
-  });
-
-
- function newgps(position) {
+	
+	
+	function newgps(position) {
 		var googlegps = new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
 		marker.setPosition(googlegps);		
-    }
+		map.setCenter(googlegps);
+	}
+	var watchId = navigator.geolocation.watchPosition(newgps);
 
-    var watchId = navigator.geolocation.watchPosition(newgps);
-
-  
-
-calcRoute();
-
-
-
+	calcRoute();
 }
 
 
+google.maps.event.addDomListener(window, 'load', initializeMap);
+
+  
 
 
-function calcRoute() {
-
-    var start = "${gpsstart}";
-    var ende = "${gpsend}";
-    var reglang = "en";
 
 
-    var request = {
-        origin:start, 
-        destination:ende,
-        travelMode: google.maps.DirectionsTravelMode.WALKING,
-	region:reglang
-    };
+
+function calcRoute() 
+{
+
+	var start = "${gpsstart}";
+	var ende = "${gpsend}";
+	var reglang = "en";
 
 
-    directionsService.route(request, function(response, status) {
-      if (status == google.maps.DirectionsStatus.OK) {
+	var request = 
+	{
+		origin:start, 
+        	destination:ende,
+        	travelMode: google.maps.DirectionsTravelMode.WALKING,
+		region:reglang
+	};
 
-        directionsDisplay.setDirections(response);
-      }
-    });
 
-  }  
+    directionsService.route(request, function(response, status) 
+	{
+		if (status == google.maps.DirectionsStatus.OK)
+		{
+			directionsDisplay.setDirections(response);
+		}
+	});
 
-window.onload=initialize2013;
+}  
+
+window.onload=initializeMap;
 
 </script>
 
@@ -110,7 +118,7 @@ window.onload=initialize2013;
 <p>Taskname: ${taskname}</p>
 <p>Start: ${gpsstart}</p>
 <p>End: ${gpsend}</p>
-<p><input type="button" value="Show Map" onClick="initialize2013();"></input></p>
+<p><input type="button" value="Show Map" onClick="initializeMap();"></input></p>
 </div>
 
 <div id="directionsPanel"  style="width:300px;" >
