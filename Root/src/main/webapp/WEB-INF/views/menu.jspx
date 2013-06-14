@@ -37,6 +37,7 @@
                 <menu:item id="i_controller__trainee_routefeedbackindex_id" messageCode="global_generic" url="/trainee/routefeedback/index" z="ZLf1T/mAK7VXAfbhZiHE2ftgFk8="/>
                 <menu:item id="i_controller__trainee_taskfeedbackindex_id" messageCode="global_generic" url="/trainee/taskfeedback/index" z="oszbfNjwQA34ZgocRDsgOSGpcvM="/>
                 <menu:item id="i_controller__senior_routeindex_id" messageCode="global_generic" url="/senior/route/index" z="yBQPZ8oCevfTkHOAm4vRg5qtAGk="/>
+                <menu:item id="i_controller__senior_tasklist_taskindex_id" messageCode="global_generic" url="/senior/tasklist/task/index" z="+5hHy71lPE0rEUVdn1dNvhW01lE="/>
             </menu:category>
         </sec:authorize>
     </menu:menu>

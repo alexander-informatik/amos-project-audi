@@ -34,9 +34,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@RequestMapping("/senior/tasklist/**")
+@RequestMapping("/senior/tasklist/task/**")
 @Controller
-public class SeniorTasklist {
+public class SeniorTask {
 
 	@RequestMapping(method = RequestMethod.POST, value = "{id}")
 	public void post(@PathVariable Long id, ModelMap modelMap,
@@ -45,6 +45,6 @@ public class SeniorTasklist {
 
 	@RequestMapping
 	public String index() {
-		return "senior/tasklist/index";
+		return "senior/tasklist/task/index";
 	}
 }

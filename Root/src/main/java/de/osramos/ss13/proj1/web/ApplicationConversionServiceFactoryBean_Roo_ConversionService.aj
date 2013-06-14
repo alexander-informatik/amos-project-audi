@@ -29,7 +29,6 @@ package de.osramos.ss13.proj1.web;
  * #L%
  */
 
-import de.osramos.ss13.proj1.model.Taskdb;
 import de.osramos.ss13.proj1.model.Userdb;
 import de.osramos.ss13.proj1.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -39,30 +38,6 @@ import org.springframework.format.FormatterRegistry;
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
     declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
-    
-    public Converter<Taskdb, String> ApplicationConversionServiceFactoryBean.getTaskdbToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<de.osramos.ss13.proj1.model.Taskdb, java.lang.String>() {
-            public String convert(Taskdb taskdb) {
-                return new StringBuilder().append(taskdb.getTaskname()).append(' ').append(taskdb.getDescription()).append(' ').append(taskdb.getPerson()).append(' ').append(taskdb.getPersonfunction()).toString();
-            }
-        };
-    }
-    
-    public Converter<Long, Taskdb> ApplicationConversionServiceFactoryBean.getIdToTaskdbConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, de.osramos.ss13.proj1.model.Taskdb>() {
-            public de.osramos.ss13.proj1.model.Taskdb convert(java.lang.Long id) {
-                return Taskdb.findTaskdb(id);
-            }
-        };
-    }
-    
-    public Converter<String, Taskdb> ApplicationConversionServiceFactoryBean.getStringToTaskdbConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, de.osramos.ss13.proj1.model.Taskdb>() {
-            public de.osramos.ss13.proj1.model.Taskdb convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), Taskdb.class);
-            }
-        };
-    }
     
     public Converter<Userdb, String> ApplicationConversionServiceFactoryBean.getUserdbToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<de.osramos.ss13.proj1.model.Userdb, java.lang.String>() {
@@ -89,9 +64,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     }
     
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
-        registry.addConverter(getTaskdbToStringConverter());
-        registry.addConverter(getIdToTaskdbConverter());
-        registry.addConverter(getStringToTaskdbConverter());
         registry.addConverter(getUserdbToStringConverter());
         registry.addConverter(getIdToUserdbConverter());
         registry.addConverter(getStringToUserdbConverter());
