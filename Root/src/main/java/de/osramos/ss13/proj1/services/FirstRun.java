@@ -123,7 +123,8 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 	private void createTasks() {
 		Userdb trainee = Userdb.findUserdbsByUsernameEquals("trainee")
 				.getSingleResult();
-
+		Userdb senior = Userdb.findUserdbsByUsernameEquals("senior")
+				.getSingleResult();
 		Taskdb t = null;
 
 		t = new Taskdb();
@@ -134,6 +135,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setRoomno("007");
 		t.setTaskname("Your first mission");
 		t.setTrainee(trainee);
+		t.setSenior(senior);
 		t.setGps_Start("51.522416,-0.069551");
 		t.setGps_End("51.500194,-0.057192");
 		t.persist();
@@ -146,6 +148,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setRoomno("no number");
 		t.setTaskname("Your punishment");
 		t.setTrainee(trainee);
+		t.setSenior(senior);
 		t.setGps_Start("55.841205,-4.232883");
 		t.setGps_End("55.815365,-4.242496");
 		t.persist();
