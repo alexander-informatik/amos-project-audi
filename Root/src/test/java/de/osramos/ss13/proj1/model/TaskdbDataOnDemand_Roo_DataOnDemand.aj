@@ -3,13 +3,41 @@
 
 package de.osramos.ss13.proj1.model;
 
-import de.osramos.ss13.proj1.model.Date;
+/*
+ * #%L
+ * proj1
+ * %%
+ * Copyright (C) 2013 Amos-Project
+ * %%
+ * Copyright (c) 2013 by Alexander Schmidt, Sascha Ströbel, Nina Aures, Riehle, http://dirkriehle.com
+ * -
+ * This file is part of the Amos Project - Productive Games application.
+ * -
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * -
+ * This program is distributed in the hope that it will be useful, 
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * -
+ * You should have received a copy of the GNU Affero General Public
+ * License along with this program. If not, see
+ * <http://www.gnu.org/licenses/>.
+ * #L%
+ */
+
 import de.osramos.ss13.proj1.model.Route;
 import de.osramos.ss13.proj1.model.Taskdb;
 import de.osramos.ss13.proj1.model.TaskdbDataOnDemand;
 import de.osramos.ss13.proj1.model.UserdbDataOnDemand;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -92,7 +120,7 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     }
     
     public void TaskdbDataOnDemand.setTimeslot(Taskdb obj, int index) {
-        Date timeslot = null;
+        Date timeslot = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH), Calendar.getInstance().get(Calendar.HOUR_OF_DAY), Calendar.getInstance().get(Calendar.MINUTE), Calendar.getInstance().get(Calendar.SECOND) + new Double(Math.random() * 1000).intValue()).getTime();
         obj.setTimeslot(timeslot);
     }
     
