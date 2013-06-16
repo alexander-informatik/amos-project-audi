@@ -92,6 +92,22 @@ privileged aspect Taskdb_Roo_JavaBean {
         this.trainee = trainee;
     }
     
+    public Userdb Taskdb.getSenior() {
+        return this.senior;
+    }
+    
+    public void Taskdb.setSenior(Userdb senior) {
+        this.senior = senior;
+    }
+    
+    public Route Taskdb.getRoute() {
+        return this.route;
+    }
+    
+    public void Taskdb.setRoute(Route route) {
+        this.route = route;
+    }
+    
     public String Taskdb.getGps_Start() {
         return this.gps_Start;
     }
@@ -204,16 +220,8 @@ privileged aspect Taskdb_Roo_JavaBean {
         this.gps_End = gps_End;
     }
     
-    public Route Taskdb.getRoute() {
-        return this.route;
     public Date Taskdb.getTimeslot() {
         return this.timeslot;
-    }
-    
     public void Taskdb.setTimeslot(Date timeslot) {
         this.timeslot = timeslot;
-    public void Taskdb.setRoute(Route route) {
-        this.route = route;
-    }
-    
 }

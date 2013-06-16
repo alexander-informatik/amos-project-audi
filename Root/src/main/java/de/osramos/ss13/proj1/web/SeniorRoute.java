@@ -47,7 +47,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import de.osramos.ss13.proj1.model.Gpscoordinate;
 
-
 @RequestMapping("/senior/route/**")
 @Controller
 public class SeniorRoute {

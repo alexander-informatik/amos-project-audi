@@ -67,6 +67,12 @@ public class Taskdb {
 	@ManyToOne
 	private Userdb trainee;
 
+	@ManyToOne
+	private Userdb senior;
+
+	@ManyToOne
+	private Route route;
+
 	@Pattern(regexp = "(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
 	private String gps_Start;
 
@@ -108,9 +114,6 @@ public class Taskdb {
 
 	@Pattern(regexp = "(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
 	private String gps_End;
-
-	@ManyToOne
-	private Route route;
 	
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
