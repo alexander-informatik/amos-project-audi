@@ -25,5 +25,6 @@
         <field:display field="gps_11" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_11" object="${taskdb}" z="Ma44q84lwpN8PyO6Ct4DvGbj1WE="/>
         <field:display field="gps_12" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_12" object="${taskdb}" z="Z08uTFh2Yaj24w+lUiqk0e6p5lg="/>
         <field:display field="route" id="s_de_osramos_ss13_proj1_model_Taskdb_route" object="${taskdb}" z="epc6kfY7ffBejQ1w0EBMIJBYREk="/>
+        <field:display date="true" dateTimePattern="${taskdb_timeslot_date_format}" field="timeslot" id="s_de_osramos_ss13_proj1_model_Taskdb_timeslot" object="${taskdb}" z="1HbuimjIMYZ3ntP+7h+GYUQH3AQ="/>
     </page:show>
 </div>
