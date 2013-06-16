@@ -220,6 +220,14 @@ privileged aspect Taskdb_Roo_JavaBean {
         this.gps_End = gps_End;
     }
     
+    public Date Taskdb.getTimeslot() {
+        return this.timeslot;
+    }
+    
+    public void Taskdb.setTimeslot(Date timeslot) {
+        this.timeslot = timeslot;
+    }
+    
     public String Taskdb.getCompletionPassword() {
         return this.completionPassword;
     }
@@ -234,14 +242,6 @@ privileged aspect Taskdb_Roo_JavaBean {
     
     public void Taskdb.setTaskDone(Boolean taskDone) {
         this.taskDone = taskDone;
-    }
-    
-    public Date Taskdb.getTimeslot() {
-        return this.timeslot;
-    }
-    
-    public void Taskdb.setTimeslot(Date timeslot) {
-        this.timeslot = timeslot;
     }
     
 }
