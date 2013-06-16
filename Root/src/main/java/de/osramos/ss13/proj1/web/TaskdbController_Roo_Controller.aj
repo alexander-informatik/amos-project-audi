@@ -3,39 +3,11 @@
 
 package de.osramos.ss13.proj1.web;
 
-/*
- * #%L
- * proj1
- * %%
- * Copyright (C) 2013 Amos-Project
- * %%
- * Copyright (c) 2013 by Alexander Schmidt, Sascha Ströbel, Nina Aures, Riehle, http://dirkriehle.com
- * -
- * This file is part of the Amos Project - Productive Games application.
- * -
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- * -
- * This program is distributed in the hope that it will be useful, 
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Affero General Public License for more details.
- * -
- * You should have received a copy of the GNU Affero General Public
- * License along with this program. If not, see
- * <http://www.gnu.org/licenses/>.
- * #L%
- */
-
 import de.osramos.ss13.proj1.model.Taskdb;
 import de.osramos.ss13.proj1.web.TaskdbController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.joda.time.format.DateTimeFormat;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,7 +38,6 @@ privileged aspect TaskdbController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String TaskdbController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("taskdb", Taskdb.findTaskdb(id));
         uiModel.addAttribute("itemId", id);
         return "taskdbs/show";
@@ -83,7 +54,6 @@ privileged aspect TaskdbController_Roo_Controller {
         } else {
             uiModel.addAttribute("taskdbs", Taskdb.findAllTaskdbs());
         }
-        addDateTimeFormatPatterns(uiModel);
         return "taskdbs/list";
     }
     
@@ -112,10 +82,6 @@ privileged aspect TaskdbController_Roo_Controller {
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/taskdbs";
-    }
-    
-    void TaskdbController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("taskdb_timeslot_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }
     
     String TaskdbController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

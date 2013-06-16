@@ -26,6 +26,6 @@
         <field:input field="gps_11" id="c_de_osramos_ss13_proj1_model_Taskdb_gps_11" validationRegex="^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+" z="uP+uP7CoaIBBdmZsIW7/Ly1XSzE="/>
         <field:input field="gps_12" id="c_de_osramos_ss13_proj1_model_Taskdb_gps_12" validationRegex="^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+" z="FHx+NnTQJ2vtq+5oZoI7sdaxOAs="/>
         <field:input field="gps_End" id="c_de_osramos_ss13_proj1_model_Taskdb_gps_End" validationRegex="(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+" z="y0oXfOeNUBXoCFQjKBmzRcGjfkA="/>
-        <field:datetime dateTimePattern="${taskdb_timeslot_date_format}" field="timeslot" id="c_de_osramos_ss13_proj1_model_Taskdb_timeslot" z="o9a87v3TTfuU+h2FR28/HqM3WKw="/>
+        <field:input field="timeslot" id="c_de_osramos_ss13_proj1_model_Taskdb_timeslot" z="PNvTn3F/gHzd8MLGYnOffHcNzE0="/>
     </form:update>
 </div>
