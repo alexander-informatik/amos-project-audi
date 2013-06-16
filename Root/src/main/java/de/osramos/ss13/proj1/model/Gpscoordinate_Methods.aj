@@ -26,24 +26,18 @@ package de.osramos.ss13.proj1.model;
  * #L%
  */
 
-import javax.persistence.ManyToOne;
-import org.springframework.roo.addon.javabean.RooJavaBean;
-import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
-import org.springframework.roo.addon.json.RooJson;
-import org.springframework.roo.addon.tostring.RooToString;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
-@RooJavaBean
-@RooToString
-@RooJson
-@RooJpaActiveRecord(finders = {"findGpscoordinatesByRoute"})
-public class Gpscoordinate {
+public aspect Gpscoordinate_Methods {
 
-	private String latitude;
-
-	private String longitude;
-
-	private int orderedposition;
-
-	@ManyToOne
-	private Route route;
+	
+	public static TypedQuery<Gpscoordinate> Gpscoordinate.findGpscoordinatesByRouteOrderedByOrderedPosition(Route route) {
+        if (route == null) throw new IllegalArgumentException("The route argument is required");
+        EntityManager em = Gpscoordinate.entityManager();
+        TypedQuery<Gpscoordinate> q = em.createQuery("SELECT o FROM Gpscoordinate AS o WHERE o.route = :route ORDER BY orderedposition", Gpscoordinate.class);
+        q.setParameter("route", route);
+        return q;
+    }
+	
 }

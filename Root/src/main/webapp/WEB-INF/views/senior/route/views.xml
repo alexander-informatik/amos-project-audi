@@ -7,4 +7,7 @@
 <definition extends="default" name="senior/route/create">
         <put-attribute name="body" value="/WEB-INF/views/senior/route/create.jspx"/>
     </definition>
+<definition extends="default" name="senior/route/update">
+	<put-attribute name="body" value="/WEB-INF/views/senior/route/update.jspx"/>
+</definition>
 </tiles-definitions>

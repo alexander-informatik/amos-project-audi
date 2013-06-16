@@ -30,6 +30,7 @@ package de.osramos.ss13.proj1.model;
  */
 
 import de.osramos.ss13.proj1.model.Gpscoordinate;
+import de.osramos.ss13.proj1.model.Route;
 
 privileged aspect Gpscoordinate_Roo_JavaBean {
     
@@ -55,6 +56,14 @@ privileged aspect Gpscoordinate_Roo_JavaBean {
     
     public void Gpscoordinate.setOrderedposition(int orderedposition) {
         this.orderedposition = orderedposition;
+    }
+    
+    public Route Gpscoordinate.getRoute() {
+        return this.route;
+    }
+    
+    public void Gpscoordinate.setRoute(Route route) {
+        this.route = route;
     }
     
 }

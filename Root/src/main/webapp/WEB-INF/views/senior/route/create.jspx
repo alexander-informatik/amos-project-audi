@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+<div 
+xmlns:jsp="http://java.sun.com/JSP/Page"
+xmlns:spring="http://www.springframework.org/tags"
+xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
+xmlns:form="http://www.springframework.org/tags/form"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
   <jsp:output omit-xml-declaration="yes"/>
   <spring:message code="label__senior_route_create" htmlEscape="false" var="title"/>
@@ -10,169 +17,23 @@
     </h3>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<body>
-
-<spring:url value="/resources/img/mapicon.png" var="mapiconURL" />
-
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"><div /></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"><div /></script>
-<script id="jqueryui" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"><div /></script>
-<script src="//www.google.com/jsapi?key=AIzaSyCZfHRnq7tigC-COeQRmoa9Cxr0vbrK6xw"><div /></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"><div /></script>
-<script type="text/javascript">
-
-var map;
-var marker;
-var markerpositions=new Array();
-
-function initializeMap() {
-
-	var latlng = new google.maps.LatLng(51.182598,10.080042);
-	
-	var myOptions = 
-		{
-			zoom: 12,
-			center: latlng,
-			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			mapTypeControlOptions: 
-			{
-	        		mapTypeIds: [google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE],
-	        		style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
-	      		}
-		};
-	
-	
-	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-	//directionsDisplay.setMap(map);
-	//directionsDisplay.setPanel(document.getElementById("directionsPanel"));
-	
-	var image = '${mapiconURL}';
-	var marker = 
-		new google.maps.Marker(
-		{
-			position: latlng,
-			map: map,
-			title: 'Position',
-			icon: image
-		});
-
-	map.setCenter(latlng);
-	
-
-
-	google.maps.event.addListener(map,"click",function(clickpos)
-	{
-		//var last = document.getElementById("currentgps").innerHTML;
-		//document.getElementById("currentgps").innerHTML = clickpos.latLng;
-		
-
-
-		
-		markerpositions[markerpositions.length] = clickpos.latLng;
-
-		var newMarker = 
-		new google.maps.Marker(
-		{
-			position: latlng,
-			map: map,
-			title: 'Position',
-			icon: image,
-			title: markerpositions.length.toString(),
-		});
-
-		newMarker.setPosition(clickpos.latLng);
-
-
-		var drawPath = new google.maps.Polyline(
-			{
-			    path: markerpositions,
-			    strokeColor: '#FF0000',
-			    strokeOpacity: 1.0,
-		   	    strokeWeight: 2
-		 	 });
-		
-		drawPath.setMap(map);
-
-	
-	});
-
-
-
-}
-
-
-google.maps.event.addDomListener(window, 'load', initializeMap);
-
-
-
-
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div>
-<p>Route: </p>
-<p>Name of Startpoint: </p>
-<p>Name of Endpoint: </p>
-<p><input type="button" value="Show Map" onClick="initializeMap();"></input></p>
-</div>
-
-<div id="directionsPanel"  style="width:300px;" >
-Google Maps
-</div>
-
-
-<div id="text">
-<div id="error" >
-</div>
-</div>
-
-
-<div id="map_canvas" style="width:400px;height:600px">
-<div/>
-</div>
-
-		
-</body>
-
-
-
-
-
-
-
-
-
-
-
+<form:form modelAttribute="route" method="post">
+    <table>
+    <tr>
+        <td><spring:message code="label_de_osramos_ss13_proj1_model_route_startpointname"/></td>
+        <td><form:input path="startpointName" /></td> 
+    </tr>
+    <tr>
+        <td><spring:message code="label_de_osramos_ss13_proj1_model_route_endpointname"/></td>
+        <td><form:input path="endpointName" /></td> 
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="submit"/>
+        </td>
+    </tr>
+</table> 
+</form:form> 
 
 
   </util:panel>

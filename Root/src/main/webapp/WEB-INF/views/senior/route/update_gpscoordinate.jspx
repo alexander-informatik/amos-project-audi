@@ -1,0 +1,36 @@
+				<form:form modelAttribute="Gpscoordinate" action="route" method="post">
+				  	<fieldset>		
+						<legend>Gps Coordinate Fields</legend>
+						<p>
+							<form:input path="longitude" /><form:errors path="longitude" />
+						</p>
+						<p>	
+							<form:input path="latitude" /><form:errors path="latitude" />
+						</p>
+						<p>	
+							<input id="create" type="submit" value="Create" />
+						</p>
+					</fieldset>
+				</form:form>
+				<div id="msg">empty</div>
+
+
+
+<script type="text/javascript">	
+
+		$(document).ready(function() {
+			$("#Gpscoordinate").submit(function() {
+				var gpscoordinate = $(this).serializeObject();
+				$.postJSON("route", gpscoordinate, function(data) {	
+					$('#msg').html(data.longitude);
+					alert(data.longitude);
+				});
+				return false;			
+			});
+		});
+
+		
+
+		
+		
+	</script>
