@@ -220,6 +220,22 @@ privileged aspect Taskdb_Roo_JavaBean {
         this.gps_End = gps_End;
     }
     
+    public String Taskdb.getCompletionPassword() {
+        return this.completionPassword;
+    }
+    
+    public void Taskdb.setCompletionPassword(String completionPassword) {
+        this.completionPassword = completionPassword;
+    }
+    
+    public Boolean Taskdb.getTaskDone() {
+        return this.taskDone;
+    }
+    
+    public void Taskdb.setTaskDone(Boolean taskDone) {
+        this.taskDone = taskDone;
+    }
+    
     public Date Taskdb.getTimeslot() {
         return this.timeslot;
     }

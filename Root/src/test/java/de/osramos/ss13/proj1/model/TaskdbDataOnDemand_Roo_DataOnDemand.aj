@@ -60,6 +60,7 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     public Taskdb TaskdbDataOnDemand.getNewTransientTaskdb(int index) {
         Taskdb obj = new Taskdb();
         setBuilding(obj, index);
+        setCompletionPassword(obj, index);
         setDescription(obj, index);
         setGps_1(obj, index);
         setGps_2(obj, index);
@@ -79,6 +80,7 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
         setPersonfunction(obj, index);
         setRoomno(obj, index);
         setRoute(obj, index);
+        setTaskDone(obj, index);
         setTaskname(obj, index);
         setTimeslot(obj, index);
         return obj;
@@ -87,6 +89,11 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     public void TaskdbDataOnDemand.setBuilding(Taskdb obj, int index) {
         String building = "building_" + index;
         obj.setBuilding(building);
+    }
+    
+    public void TaskdbDataOnDemand.setCompletionPassword(Taskdb obj, int index) {
+        String completionPassword = "completionPassword_" + index;
+        obj.setCompletionPassword(completionPassword);
     }
     
     public void TaskdbDataOnDemand.setDescription(Taskdb obj, int index) {
@@ -112,6 +119,11 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     public void TaskdbDataOnDemand.setRoute(Taskdb obj, int index) {
         Route route = null;
         obj.setRoute(route);
+    }
+    
+    public void TaskdbDataOnDemand.setTaskDone(Taskdb obj, int index) {
+        Boolean taskDone = Boolean.TRUE;
+        obj.setTaskDone(taskDone);
     }
     
     public void TaskdbDataOnDemand.setTaskname(Taskdb obj, int index) {

@@ -116,5 +116,7 @@ public class Taskdb {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "M-")
+	private String completionPassword;
+	private Boolean taskDone;
 	private Date timeslot;
 }
