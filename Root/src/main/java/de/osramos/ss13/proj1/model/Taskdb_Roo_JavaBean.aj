@@ -32,6 +32,7 @@ package de.osramos.ss13.proj1.model;
 import de.osramos.ss13.proj1.model.Route;
 import de.osramos.ss13.proj1.model.Taskdb;
 import de.osramos.ss13.proj1.model.Userdb;
+import java.util.Date;
 
 privileged aspect Taskdb_Roo_JavaBean {
     
@@ -89,6 +90,22 @@ privileged aspect Taskdb_Roo_JavaBean {
     
     public void Taskdb.setTrainee(Userdb trainee) {
         this.trainee = trainee;
+    }
+    
+    public Userdb Taskdb.getSenior() {
+        return this.senior;
+    }
+    
+    public void Taskdb.setSenior(Userdb senior) {
+        this.senior = senior;
+    }
+    
+    public Route Taskdb.getRoute() {
+        return this.route;
+    }
+    
+    public void Taskdb.setRoute(Route route) {
+        this.route = route;
     }
     
     public String Taskdb.getGps_Start() {
@@ -203,12 +220,28 @@ privileged aspect Taskdb_Roo_JavaBean {
         this.gps_End = gps_End;
     }
     
-    public Route Taskdb.getRoute() {
-        return this.route;
+    public Date Taskdb.getTimeslot() {
+        return this.timeslot;
     }
     
-    public void Taskdb.setRoute(Route route) {
-        this.route = route;
+    public void Taskdb.setTimeslot(Date timeslot) {
+        this.timeslot = timeslot;
+    }
+    
+    public String Taskdb.getCompletionPassword() {
+        return this.completionPassword;
+    }
+    
+    public void Taskdb.setCompletionPassword(String completionPassword) {
+        this.completionPassword = completionPassword;
+    }
+    
+    public Boolean Taskdb.getTaskDone() {
+        return this.taskDone;
+    }
+    
+    public void Taskdb.setTaskDone(Boolean taskDone) {
+        this.taskDone = taskDone;
     }
     
 }

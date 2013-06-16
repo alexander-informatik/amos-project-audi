@@ -10,6 +10,8 @@
         <field:display field="building" id="s_de_osramos_ss13_proj1_model_Taskdb_building" object="${taskdb}" z="YcIs9VyO6QQSqp90va1/4dYw2p0="/>
         <field:display field="roomno" id="s_de_osramos_ss13_proj1_model_Taskdb_roomno" object="${taskdb}" z="0xjwMfjkd2BDhanqPuYrFbfXMIs="/>
         <field:display field="trainee" id="s_de_osramos_ss13_proj1_model_Taskdb_trainee" object="${taskdb}" z="FuTO0RYiviZjZsX8aKVQ+YEciHA="/>
+        <field:display field="senior" id="s_de_osramos_ss13_proj1_model_Taskdb_senior" object="${taskdb}" z="jG+x5WbLM+/szTNPlvwM5oOIkpw="/>
+        <field:display field="route" id="s_de_osramos_ss13_proj1_model_Taskdb_route" object="${taskdb}" z="epc6kfY7ffBejQ1w0EBMIJBYREk="/>
         <field:display field="gps_Start" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_Start" object="${taskdb}" z="XRxaZSmH54P0sdoaisuDOEGHIn4="/>
         <field:display field="gps_1" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_1" object="${taskdb}" z="kST/9fhua0w0Qd1N4P+fAnNehbQ="/>
         <field:display field="gps_2" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_2" object="${taskdb}" z="7W11tlrXGrYRVNYOhf/m9XJ5xfs="/>
@@ -24,6 +26,8 @@
         <field:display field="gps_10" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_10" object="${taskdb}" z="ULnmQ0RfT78M2n1SF0pM5Or6URE="/>
         <field:display field="gps_11" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_11" object="${taskdb}" z="Ma44q84lwpN8PyO6Ct4DvGbj1WE="/>
         <field:display field="gps_12" id="s_de_osramos_ss13_proj1_model_Taskdb_gps_12" object="${taskdb}" z="Z08uTFh2Yaj24w+lUiqk0e6p5lg="/>
-        <field:display field="route" id="s_de_osramos_ss13_proj1_model_Taskdb_route" object="${taskdb}" z="epc6kfY7ffBejQ1w0EBMIJBYREk="/>
+        <field:display date="true" dateTimePattern="${taskdb_timeslot_date_format}" field="timeslot" id="s_de_osramos_ss13_proj1_model_Taskdb_timeslot" object="${taskdb}" z="1HbuimjIMYZ3ntP+7h+GYUQH3AQ="/>
+        <field:display field="completionPassword" id="s_de_osramos_ss13_proj1_model_Taskdb_completionPassword" object="${taskdb}" z="LUyVEgmfjY5uG35qUwiOTLfvu9o="/>
+        <field:display field="taskDone" id="s_de_osramos_ss13_proj1_model_Taskdb_taskDone" object="${taskdb}" z="x3rWH54aZcI+/gXNxK3dg0mZ+qg="/>
     </page:show>
 </div>

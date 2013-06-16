@@ -9,7 +9,9 @@
         <field:input field="personfunction" id="c_de_osramos_ss13_proj1_model_Taskdb_personfunction" required="true" z="Bm49RE2QRvn5ks1EcayD6/U4e6Y="/>
         <field:input field="building" id="c_de_osramos_ss13_proj1_model_Taskdb_building" required="true" z="T1eMDVvyxNK9YZSYaP0hhmShLPo="/>
         <field:input field="roomno" id="c_de_osramos_ss13_proj1_model_Taskdb_roomno" required="true" z="pI3uyeSCFqsrr6vrEnBbmIx27pc="/>
-        <field:select field="trainee" id="c_de_osramos_ss13_proj1_model_Taskdb_trainee" itemValue="id" items="${userdbs}" path="/userdbs" z="X/B1JRZdDfUsx5lQ+FbgP0n9Bnc="/>
+        <field:select field="trainee" id="c_de_osramos_ss13_proj1_model_Taskdb_trainee" itemValue="id" items="${userdbt}" path="/userdbs" z="user-managed"/>
+        <field:select field="senior" id="c_de_osramos_ss13_proj1_model_Taskdb_senior" itemValue="id" items="${userdbs}" path="/userdbs" z="ddt/qokPrF06gbUoVvPF32PSsbQ="/>
+        <field:select field="route" id="c_de_osramos_ss13_proj1_model_Taskdb_route" itemValue="id" items="${routes}" path="/routes" z="oWVtlkb5pqGPp4GrJLGygzoxPxo="/>
         <field:input field="gps_Start" id="c_de_osramos_ss13_proj1_model_Taskdb_gps_Start" validationRegex="(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+" z="A8NbxdvioePZZor1Vu7W2F5WDhY="/>
         <field:input field="gps_1" id="c_de_osramos_ss13_proj1_model_Taskdb_gps_1" validationRegex="^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+" z="+rP04zAdPItgxsoaSXJzJVjdZGo="/>
         <field:input field="gps_2" id="c_de_osramos_ss13_proj1_model_Taskdb_gps_2" validationRegex="^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+" z="yzGBziSTXSJQON08qDY4MPUaqN4="/>
@@ -24,7 +26,9 @@
         <field:input field="gps_11" id="c_de_osramos_ss13_proj1_model_Taskdb_gps_11" validationRegex="^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+" z="uP+uP7CoaIBBdmZsIW7/Ly1XSzE="/>
         <field:input field="gps_12" id="c_de_osramos_ss13_proj1_model_Taskdb_gps_12" validationRegex="^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+" z="FHx+NnTQJ2vtq+5oZoI7sdaxOAs="/>
         <field:input field="gps_End" id="c_de_osramos_ss13_proj1_model_Taskdb_gps_End" validationRegex="(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+" z="y0oXfOeNUBXoCFQjKBmzRcGjfkA="/>
-        <field:select field="route" id="c_de_osramos_ss13_proj1_model_Taskdb_route" itemValue="id" items="${routes}" path="/routes" z="oWVtlkb5pqGPp4GrJLGygzoxPxo="/>
+        <field:datetime dateTimePattern="${taskdb_timeslot_date_format}" field="timeslot" id="c_de_osramos_ss13_proj1_model_Taskdb_timeslot" z="o9a87v3TTfuU+h2FR28/HqM3WKw="/>
+        <field:input field="completionPassword" id="c_de_osramos_ss13_proj1_model_Taskdb_completionPassword" z="mWv8E4nP9sH/dNH+YE1z9oYf/Pw="/>
+        <field:checkbox field="taskDone" id="c_de_osramos_ss13_proj1_model_Taskdb_taskDone" z="mcaLrcZ3kfS8euaLrpox20tnpoM="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_de_osramos_ss13_proj1_model_Taskdb" render="${not empty dependencies}" z="J/hRz846U6pWNuANoVOAAR4mVCw="/>
 </div>

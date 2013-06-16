@@ -42,7 +42,6 @@ function initializeMap()
 		{
 			position: latlng,
 			map: map,
-			title: 'Position',
 			icon: image
 		});
 
@@ -53,7 +52,19 @@ function initializeMap()
 		marker.setPosition(googlegps);		
 		map.setCenter(googlegps);
 	}
-	var watchId = navigator.geolocation.watchPosition(newgps);
+
+function gpserror(err)
+{
+}
+
+gpsoptions = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 20000
+};
+
+
+	var watchId = window.navigator.geolocation.watchPosition(newgps, gpserror, gpsoptions);
 
 	calcRoute();
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:form="http://www.springframework.org/tags/form"  xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <jsp:output omit-xml-declaration="yes"/>
+  <spring:message code="label_trainee_markascompleted_task_index" htmlEscape="false" var="title"/>
+  <util:panel id="title" title="${title}">
+    <spring:message code="application_name" htmlEscape="false" var="app_name"/>
+    <h3>
+      <spring:message arguments="${app_name}" code="welcome_titlepane"/>
+    </h3>
+
+
+<c:if test="${sent != true}">
+<form:form method="post">
+    <table>
+    <tr>
+        <td><spring:message code="label_de_osramos_ss13_proj1_model_taskdb_completionpassword"/></td>
+        <td><form:input path="completionPassword" /></td> 
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="submit"/>
+        </td>
+    </tr>
+</table> 
+</form:form> 
+</c:if>
+
+<c:if test="${sent == true}">
+<c:if test="${success == true}">
+<spring:message code="label_trainee_markascompleted_task_success"/>
+</c:if>
+
+<c:if test="${success != true}">
+<spring:message code="label_trainee_markascompleted_task_nosuccess"/>
+</c:if>
+</c:if>
+
+
+  </util:panel>
+</div>

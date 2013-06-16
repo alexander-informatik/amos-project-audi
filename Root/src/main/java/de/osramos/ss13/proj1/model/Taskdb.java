@@ -26,13 +26,15 @@ package de.osramos.ss13.proj1.model;
  * #L%
  */
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.ManyToMany;
+import java.util.Date;
+
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
@@ -63,6 +65,12 @@ public class Taskdb {
 
 	@ManyToOne
 	private Userdb trainee;
+
+	@ManyToOne
+	private Userdb senior;
+
+	@ManyToOne
+	private Route route;
 
 	@Pattern(regexp = "(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
 	private String gps_Start;
@@ -106,6 +114,11 @@ public class Taskdb {
 	@Pattern(regexp = "(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
 	private String gps_End;
 
-	@ManyToOne
-	private Route route;
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(style = "M-")
+	private Date timeslot;
+
+	private String completionPassword;
+	private Boolean taskDone;
+
 }

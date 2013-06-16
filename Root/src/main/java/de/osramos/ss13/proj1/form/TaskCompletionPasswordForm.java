@@ -1,4 +1,4 @@
-package de.osramos.ss13.proj1.web;
+package de.osramos.ss13.proj1.form;
 
 /*
  * #%L
@@ -26,26 +26,27 @@ package de.osramos.ss13.proj1.web;
  * #L%
  */
 
-import java.util.List;
-
 import de.osramos.ss13.proj1.model.Taskdb;
-import de.osramos.ss13.proj1.model.Userdb;
 
-import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+public class TaskCompletionPasswordForm {
 
-@RequestMapping("/taskdbs")
-@Controller
-@RooWebScaffold(path = "taskdbs", formBackingObject = Taskdb.class)
-public class TaskdbController {
+	public long taskid;
+	public String completionPassword;
 
-	void populateEditForm(Model uiModel, Taskdb taskdb) {
-		uiModel.addAttribute("taskdb", taskdb);
-		uiModel.addAttribute("userdbt", Userdb.findUserdbsByUserroleEquals(
-				"trainee").getResultList());
-		uiModel.addAttribute("userdbs", Userdb.findUserdbsByUserroleEquals(
-				"senior").getResultList());
+	public String getCompletionPassword() {
+		return completionPassword;
 	}
+
+	public void setCompletionPassword(String completionPassword) {
+		this.completionPassword = completionPassword;
+	}
+
+	public long getTaskid() {
+		return taskid;
+	}
+
+	public void setTaskid(long taskid) {
+		this.taskid = taskid;
+	}
+
 }
