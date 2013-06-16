@@ -39,5 +39,8 @@
                 <menu:item id="i_controller__senior_routeindex_id" messageCode="global_generic" url="/senior/route/index" z="yBQPZ8oCevfTkHOAm4vRg5qtAGk="/>
             </menu:category>
         </sec:authorize>
+        <menu:category id="c_view" z="HjmI4Chx/kBYfS/6HjBLbCA+XpU=">
+            <menu:item id="i_view___senior_routecreate_id" messageCode="global_generic" url="//senior/route/create" z="iTk1hTHPvtc6w4L6XmzIhjPkIGI="/>
+        </menu:category>
     </menu:menu>
 </div>

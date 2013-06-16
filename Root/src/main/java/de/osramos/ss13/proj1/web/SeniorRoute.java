@@ -47,7 +47,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import de.osramos.ss13.proj1.model.Gpscoordinate;
 
-
+//@RooWebJson(jsonObject = Gpscoordinate.class)
 @RequestMapping("/senior/route/**")
 @Controller
 public class SeniorRoute {
@@ -58,10 +58,10 @@ public class SeniorRoute {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String index(Model model) {
+	public String create(Model model) {
 		// you have to create an empty model first
 		model.addAttribute("Gpscoordinate", new Gpscoordinate());
-		return "senior/route/index";
+		return "senior/route/create";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
