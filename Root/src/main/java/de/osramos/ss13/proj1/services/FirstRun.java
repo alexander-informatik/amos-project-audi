@@ -99,6 +99,26 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 
 		try {
 			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("testsenior")
+					.getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = new Userdb();
+					user.setFirstname("testsenior");
+					user.setLastname("TESTSENIOR");
+					user.setUsername("testsenior");
+					user.setUserrole("senior");
+					user.setPassword("testsenior");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+
+		try {
+			user = null;
 			user = Userdb.findUserdbsByUsernameEquals("trainee")
 					.getSingleResult();
 		} catch (Exception e) {
@@ -124,6 +144,8 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		Userdb trainee = Userdb.findUserdbsByUsernameEquals("trainee")
 				.getSingleResult();
 		Userdb senior = Userdb.findUserdbsByUsernameEquals("senior")
+				.getSingleResult();
+		Userdb testsenior = Userdb.findUserdbsByUsernameEquals("testsenior")
 				.getSingleResult();
 		Taskdb t = null;
 
@@ -151,6 +173,19 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setSenior(senior);
 		t.setGps_Start("55.841205,-4.232883");
 		t.setGps_End("55.815365,-4.242496");
+		t.persist();
+
+		t = new Taskdb();
+		t.setDescription("description C");
+		t.setPerson("Mr. C");
+		t.setBuilding("Building C");
+		t.setPersonfunction("Function C");
+		t.setRoomno("Room C");
+		t.setTaskname("Task C");
+		t.setTrainee(trainee);
+		t.setSenior(testsenior);
+		t.setGps_Start("1.0,1.0");
+		t.setGps_End("1.1,1.1");
 		t.persist();
 	}
 }

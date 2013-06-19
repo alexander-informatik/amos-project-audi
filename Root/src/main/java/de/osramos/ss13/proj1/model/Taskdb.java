@@ -27,13 +27,11 @@ package de.osramos.ss13.proj1.model;
  */
 
 import java.util.Date;
-
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
@@ -42,7 +40,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord(finders = {"findTaskdbsByTrainee", "findTaskdbsById",
-		"findTaskdbsByPersonEquals"})
+		"findTaskdbsByPersonEquals", "findTaskdbsBySenior"})
 public class Taskdb {
 
 	@NotNull
@@ -119,6 +117,6 @@ public class Taskdb {
 	private Date timeslot;
 
 	private String completionPassword;
-	private Boolean taskDone;
 
+	private Boolean taskDone;
 }

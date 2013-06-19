@@ -52,6 +52,14 @@ privileged aspect Taskdb_Roo_Finder {
         return q;
     }
     
+    public static TypedQuery<Taskdb> Taskdb.findTaskdbsBySenior(Userdb senior) {
+        if (senior == null) throw new IllegalArgumentException("The senior argument is required");
+        EntityManager em = Taskdb.entityManager();
+        TypedQuery<Taskdb> q = em.createQuery("SELECT o FROM Taskdb AS o WHERE o.senior = :senior", Taskdb.class);
+        q.setParameter("senior", senior);
+        return q;
+    }
+    
     public static TypedQuery<Taskdb> Taskdb.findTaskdbsByTrainee(Userdb trainee) {
         if (trainee == null) throw new IllegalArgumentException("The trainee argument is required");
         EntityManager em = Taskdb.entityManager();

@@ -40,4 +40,11 @@ public aspect Taskdb_Methods {
 	        q.setParameter("usernameTrainee", usernameTrainee);
 	        return q.getResultList();
 	    }
+	 public static List<Taskdb> Taskdb.findTaskdbsBySeniorUsername(String usernameSenior) {
+	        if (usernameSenior == null) throw new IllegalArgumentException("The usernameSenior argument is required");
+	        EntityManager em = Taskdb.entityManager();
+	        TypedQuery<Taskdb> q = em.createQuery("SELECT o FROM Taskdb AS o WHERE o.senior.username = :usernameSenior", Taskdb.class);
+	        q.setParameter("usernameSenior", usernameSenior);
+	        return q.getResultList();
+	    }
 }
