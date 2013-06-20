@@ -98,9 +98,8 @@ public class SeniorRoute {
 		}
 		uiModel.asMap().clear();
 		route.persist();
-		return "redirect:/senior/route/"
-				+ encodeUrlPathSegment(route.getId().toString(),
-						httpServletRequest);
+		return "redirect:/senior/route/";
+		//+ encodeUrlPathSegment(route.getId().toString(),	httpServletRequest); // implement later if really needed
 	}
 
 	// CREATE
@@ -149,7 +148,7 @@ public class SeniorRoute {
 		gpscoordinate.setOrderedposition(gpscoordinates.size());
 
 		gpscoordinate.persist();
-		System.out.println("AJAX POST 1 GPS " + gpscoordinate.toJson());
+		//System.out.println("AJAX POST 1 GPS " + gpscoordinate.toJson());
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json; charset=utf-8");
@@ -171,8 +170,7 @@ public class SeniorRoute {
 				.findGpscoordinatesByRouteOrderedByOrderedPosition(route)
 				.getResultList();
 
-		System.out.println("AJAX GET ALL GPS "
-				+ Gpscoordinate.toJsonArray(result));
+		//System.out.println("AJAX GET ALL GPS " + Gpscoordinate.toJsonArray(result));
 
 		return new ResponseEntity<String>(Gpscoordinate.toJsonArray(result),
 				headers, HttpStatus.OK);
@@ -185,11 +183,11 @@ public class SeniorRoute {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "application/json; charset=utf-8");
 		if (gpscoordinate == null) {
-			System.out.println("AJAX GET 1 GPS " + "not found");
+			//System.out.println("AJAX GET 1 GPS " + "not found");
 			return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
 		}
 
-		System.out.println("AJAX GET 1 GPS " + gpscoordinate.toJson());
+		//System.out.println("AJAX GET 1 GPS " + gpscoordinate.toJson());
 		return new ResponseEntity<String>(gpscoordinate.toJson(), headers,
 				HttpStatus.OK);
 	}
@@ -203,7 +201,7 @@ public class SeniorRoute {
 				.fromJsonToGpscoordinate(json);
 
 		if (gpscoordinateUpdate.getId() == null) {
-			System.out.println("AJAX PUT 1 GPS " + "not found ID");
+			//System.out.println("AJAX PUT 1 GPS " + "not found ID");
 			return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
 		}
 		// Update only longitude and latitude and keep everything else from database
@@ -213,11 +211,11 @@ public class SeniorRoute {
 		gpscoordinate.setLongitude(gpscoordinateUpdate.getLongitude());
 
 		if (gpscoordinate.merge() == null) {
-			System.out.println("AJAX PUT 1 GPS " + "not found when merging");
+			//System.out.println("AJAX PUT 1 GPS " + "not found when merging");
 			return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
 		}
 
-		System.out.println("AJAX PUT 1 GPS " + gpscoordinate.toJson());
+		//System.out.println("AJAX PUT 1 GPS " + gpscoordinate.toJson());
 
 		return new ResponseEntity<String>(gpscoordinate.toJson(), headers,
 				HttpStatus.OK);
