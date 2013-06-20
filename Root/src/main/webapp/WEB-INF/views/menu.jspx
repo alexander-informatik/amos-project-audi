@@ -20,6 +20,7 @@
             <menu:category id="c_taskdb" z="9Sbb4YxhD/iSGUtL3AHvm/B0LR8=">
                 <menu:item id="i_taskdb_new" messageCode="global_menu_new" url="/taskdbs?form" z="tytZ5i/6AFaE1Ab7t/kcUlYwi5U="/>
                 <menu:item id="i_taskdb_list" messageCode="global_menu_list" url="/taskdbs?page=1&amp;size=${empty param.size ? 10 : param.size}" z="s0rWYYsUSRQjOiDrk06uKCdxhk0="/>
+                <menu:item id="i_view__senior_routecreate_id" messageCode="global_generic" url="/senior/route/create" z="user-managed"/>
                 <menu:item id="i_controller__senior_tasklistindex_id" messageCode="global_generic" url="/senior/tasklist/index" z="vXyYxDkxpemuc84O4YDOMhpVyms="/>
                 <menu:item id="i_controller__senior_tasklist_traineeindex_id" messageCode="global_generic" url="/senior/tasklist/trainee/index" z="wxOhefUL2imXU6n2XsbUYbSA7Y8="/>
                 <menu:item id="i_controller__senior_pointofinterestindex_id" messageCode="global_generic" url="/senior/pointofinterest/index" z="fRdSfokI//H1RoO+Td31GFaLSOU="/>

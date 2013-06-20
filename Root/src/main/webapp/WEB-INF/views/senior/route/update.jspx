@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div 
+xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:spring="http://www.springframework.org/tags" 
+xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
+
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+xmlns:form="http://www.springframework.org/tags/form"
+
+version="2.0">
+
+  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+  <jsp:output omit-xml-declaration="yes"/>
+
+
+<spring:url value="/resources/js-lib/jquery-1.4.min.js" var="url_jquery" />
+<spring:url value="/resources/js-lib/json.min.js" var="url_json" />
+
+<script type="text/javascript" src="${url_jquery}"><div/></script>
+<script type="text/javascript" src="${url_json}"><div/></script>
+
+
+  <spring:message code="label_senior_route_update" htmlEscape="false" var="title"/>
+  <util:panel id="title" title="${title}">
+    <spring:message code="application_name" htmlEscape="false" var="app_name"/>
+    <h3>
+      <spring:message arguments="${app_name}" code="welcome_titlepane"/>
+    </h3>
+
+
+
+
+
+<spring:url value="/resources/img/mapicon.png" var="mapiconURL" />
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"><div /></script>
+<script src="//www.google.com/jsapi?key=AIzaSyCZfHRnq7tigC-COeQRmoa9Cxr0vbrK6xw"><div /></script>
+<script type="text/javascript">
+
+var map;
+var marker;
+var markersArray = new Array();
+var markerpositions=new Array();
+var drawPath = new google.maps.Polyline(
+			{
+			    strokeColor: '#FF0000',
+			    strokeOpacity: 1.0,
+		   	    strokeWeight: 2
+		 	 });
+
+function initializeMap() {
+
+	var latlng = new google.maps.LatLng(51.182598,10.080042);
+	
+	var myOptions = 
+		{
+			zoom: 12,
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			mapTypeControlOptions: 
+			{
+	        		mapTypeIds: [google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE],
+	        		style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
+	      		}
+		};
+	
+	
+	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+	map.setCenter(latlng);
+	
+
+
+
+	google.maps.event.addListener(map,"click",function(clickpos)
+	{
+		sendgps(clickpos.latLng.lat().toString(), clickpos.latLng.lng().toString());
+	});
+
+	showallgps();
+
+}
+
+
+
+
+
+	function showgps(id, latitude, longitude, orderedposition)
+	{
+		var latLng = new google.maps.LatLng(latitude, longitude);
+		var image = '${mapiconURL}';
+		var newMarker = 
+			new google.maps.Marker(
+			{
+				position: latLng,
+				map: map,
+				icon: image,
+				title: orderedposition.toString()
+			});
+			newMarker.setDraggable(true);
+			newMarker.setPosition(latLng);
+			markersArray.push(newMarker);
+
+
+			google.maps.event.addListener(newMarker, "dragend", function(event)
+			{
+      				var position = newMarker.getPosition();
+				updategps(id,position.lat().toString(),position.lng().toString());
+			});
+
+			markerpositions[markerpositions.length] = latLng;
+	}
+
+	
+	function showallgps()
+	{
+		for(var i = 0;	i &lt; markersArray.length;i++	)
+		{
+    			markersArray[i].setMap(null);	
+		}
+		markersArray = new Array();
+		markerpositions=new Array();
+
+		// load gps coordinates
+	
+		$.getJSON('./${route.id}?gpscoordinates', function(data)
+		{
+			var elem = document.getElementById("gpspos");
+			$('#gpspos').empty();
+
+			$.each(data, function(i, item)
+			{
+				showgps(item.id, item.latitude,item.longitude,item.orderedposition);
+			});
+
+		
+			drawPath.setPath(markerpositions);
+			drawPath.setMap(map);
+		});
+
+		
+	
+	}
+
+
+	function sendgps(latitude, longitude)
+	{
+		var thing = { longitude: longitude , latitude: latitude }
+		
+		$.postJSON('./${route.id}', thing, function(data) 
+		{
+			showallgps();
+		});
+		
+	}
+
+	function updategps(id, latitude, longitude)
+	{
+		var thing = { id: id, longitude: longitude , latitude: latitude }
+		
+		$.postJSON('./?updategpscoordinate', thing, function(data) 
+		{
+			showallgps();
+		});
+		
+	}
+
+
+
+
+google.maps.event.addDomListener(window, 'load', initializeMap);
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div>
+<p>Route: </p>
+<p>Name of Startpoint: ${route.startpointName}</p>
+<p>Name of Endpoint: ${route.endpointName}</p>
+<p><input type="button" value="Show Map" onClick="initializeMap();"></input></p>
+<p><input type="button" value="showallgps" onClick="showallgps();"></input></p>
+<p><input type="button" value="sendgps" onClick="sendgps();"></input></p>
+<p><div id="gpspos">empty</div></p>
+</div>
+
+<div id="directionsPanel"  style="width:300px;" >
+Google Maps
+</div>
+
+
+<div id="text">
+<div id="error" >
+</div>
+</div>
+
+
+<div id="map_canvas" style="width:400px;height:600px">
+<div/>
+</div>
+
+
+
+
+
+
+
+
+  </util:panel>
+</div>

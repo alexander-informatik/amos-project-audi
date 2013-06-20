@@ -26,15 +26,12 @@ package de.osramos.ss13.proj1.services;
  * #L%
  */
 
-import java.util.HashSet;
-import java.util.Set;
-
-import de.osramos.ss13.proj1.model.Taskdb;
-import de.osramos.ss13.proj1.model.Userdb;
-
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.ContextStartedEvent;
+
+import de.osramos.ss13.proj1.model.Route;
+import de.osramos.ss13.proj1.model.Taskdb;
+import de.osramos.ss13.proj1.model.Userdb;
 
 public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 	static boolean first = true;
@@ -51,6 +48,9 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 
 		// create example tasks
 		createTasks();
+
+		// create sample routes
+		createRoutes();
 
 	}
 
@@ -187,5 +187,13 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setGps_Start("1.0,1.0");
 		t.setGps_End("1.1,1.1");
 		t.persist();
+	}
+
+	private void createRoutes() {
+		Route r = new Route();
+		r.setStartpointName("Building A1");
+		r.setEndpointName("Building B2");
+		r.persist();
+
 	}
 }
