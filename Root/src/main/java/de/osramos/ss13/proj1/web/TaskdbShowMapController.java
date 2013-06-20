@@ -40,8 +40,6 @@ import de.osramos.ss13.proj1.model.Taskdb;
 @Controller
 public class TaskdbShowMapController {
 
-	//  return "trainee/taskdb/showmap/index";
-
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String getMap(@PathVariable Long id, ModelMap model) {
 
@@ -57,7 +55,7 @@ public class TaskdbShowMapController {
 				String end = "no route found";
 
 				if (route != null) {
-					System.out.println("route not null");
+					//System.out.println("route not null");
 					Gpscoordinate s = Gpscoordinate
 							.findFirstGpscoordinatesByRoute(route);
 					Gpscoordinate e = Gpscoordinate
@@ -68,9 +66,8 @@ public class TaskdbShowMapController {
 						end = e.getLatitude() + "," + e.getLongitude();
 					}
 
-					System.out.println(start + " " + end);
+					//System.out.println(start + " " + end);
 				}
-				System.out.println("route done");
 				//String[] s = start.split(",");
 				//String s1 = s[0];
 				//String s2 = s[1];
@@ -81,6 +78,9 @@ public class TaskdbShowMapController {
 
 				model.addAttribute("gpsstart", start);
 				model.addAttribute("gpsend", end);
+
+				model.addAttribute("StartpointName", route.getStartpointName());
+				model.addAttribute("EndpointName", route.getEndpointName());
 
 				//model.addAttribute("gpsstartlatitude", s1);
 				//model.addAttribute("gpsstartlongitude", s2);

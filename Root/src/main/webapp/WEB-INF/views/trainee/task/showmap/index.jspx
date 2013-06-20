@@ -127,8 +127,8 @@ window.onload=initializeMap;
 
 <div>
 <p>Taskname: ${taskname}</p>
-<p>Start: ${gpsstart}</p>
-<p>End: ${gpsend}</p>
+<p>Start: ${StartpointName}</p>
+<p>End: ${EndpointName}</p>
 <p><input type="button" value="Show Map" onClick="initializeMap();"></input></p>
 </div>
 

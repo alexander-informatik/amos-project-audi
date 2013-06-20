@@ -43,5 +43,11 @@ public class ApplicationConversionServiceFactoryBean
 		super.installFormatters(registry);
 		// Register application converters and formatters
 
+		registry.addConverter(getRouteToStringConverter());
+		registry.addConverter(getIdToRouteConverter());
+		registry.addConverter(getStringToRouteConverter());
+		registry.addConverter(getTaskdbToStringConverter());
+		registry.addConverter(getIdToTaskdbConverter());
+		registry.addConverter(getStringToTaskdbConverter());
 	}
 }
