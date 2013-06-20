@@ -28,6 +28,7 @@ package de.osramos.ss13.proj1.web;
 
 import java.util.List;
 
+import de.osramos.ss13.proj1.model.Route;
 import de.osramos.ss13.proj1.model.Taskdb;
 import de.osramos.ss13.proj1.model.Userdb;
 
@@ -47,5 +48,7 @@ public class TaskdbController {
 				"trainee").getResultList());
 		uiModel.addAttribute("userdbs", Userdb.findUserdbsByUserroleEquals(
 				"senior").getResultList());
+		uiModel.addAttribute("routes", Route.findAllRoutes());
 	}
+
 }

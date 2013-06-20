@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import de.osramos.ss13.proj1.model.Gpscoordinate;
+import de.osramos.ss13.proj1.model.Route;
 import de.osramos.ss13.proj1.model.Taskdb;
 
 @RequestMapping("/trainee/task/showmap")
@@ -50,9 +52,25 @@ public class TaskdbShowMapController {
 			if (o != null) {
 
 				model.addAttribute("taskname", o.getTaskname());
-				String start = o.getGps_Start();
-				String end = o.getGps_End();
+				Route route = o.getMap();
+				String start = "no route found";
+				String end = "no route found";
 
+				if (route != null) {
+					System.out.println("route not null");
+					Gpscoordinate s = Gpscoordinate
+							.findFirstGpscoordinatesByRoute(route);
+					Gpscoordinate e = Gpscoordinate
+							.findLastGpscoordinatesByRouteReverseOrdered(route);
+
+					if (s != null && e != null) {
+						start = s.getLatitude() + "," + s.getLongitude();
+						end = e.getLatitude() + "," + e.getLongitude();
+					}
+
+					System.out.println(start + " " + end);
+				}
+				System.out.println("route done");
 				//String[] s = start.split(",");
 				//String s1 = s[0];
 				//String s2 = s[1];

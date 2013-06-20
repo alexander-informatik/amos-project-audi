@@ -40,4 +40,42 @@ public aspect Gpscoordinate_Methods {
         return q;
     }
 	
+	
+	
+	public static Gpscoordinate Gpscoordinate.findFirstGpscoordinatesByRoute(Route route) {
+        if (route == null) throw new IllegalArgumentException("The route argument is required");
+        EntityManager em = Gpscoordinate.entityManager();
+        TypedQuery<Gpscoordinate> q = em.createQuery("SELECT o FROM Gpscoordinate AS o WHERE o.route = :route ORDER BY orderedposition", Gpscoordinate.class);
+        q.setParameter("route", route);
+        q.setMaxResults(1);
+        Gpscoordinate r = null;
+        try
+        {
+        r = q.getSingleResult();
+        }
+        catch(Exception e)
+        {
+        	
+        }
+        return r;
+    }
+	
+	public static Gpscoordinate Gpscoordinate.findLastGpscoordinatesByRouteReverseOrdered(Route route) {
+        if (route == null) throw new IllegalArgumentException("The route argument is required");
+        EntityManager em = Gpscoordinate.entityManager();
+        TypedQuery<Gpscoordinate> q = em.createQuery("SELECT o FROM Gpscoordinate AS o WHERE o.route = :route ORDER BY orderedposition DESC", Gpscoordinate.class);
+        q.setParameter("route", route);
+        q.setMaxResults(1);
+        Gpscoordinate r = null;
+        try
+        {
+        r = q.getSingleResult();
+        }
+        catch(Exception e)
+        {
+        	
+        }
+        return r;
+    }
+	
 }

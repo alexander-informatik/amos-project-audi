@@ -46,11 +46,11 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		// populate with default usernames and passwords
 		CreateUsers();
 
-		// create example tasks
-		createTasks();
-
 		// create sample routes
 		createRoutes();
+
+		// create example tasks
+		createTasks();
 
 	}
 
@@ -147,6 +147,8 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 				.getSingleResult();
 		Userdb testsenior = Userdb.findUserdbsByUsernameEquals("testsenior")
 				.getSingleResult();
+		Route route = Route.findAllRoutes().get(0);
+		System.out.println("route" + route.getStartpointName());
 		Taskdb t = null;
 
 		t = new Taskdb();
@@ -158,8 +160,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setTaskname("Your first mission");
 		t.setTrainee(trainee);
 		t.setSenior(senior);
-		t.setGps_Start("51.522416,-0.069551");
-		t.setGps_End("51.500194,-0.057192");
+		t.setMap(route);
 		t.persist();
 
 		t = new Taskdb();
@@ -171,8 +172,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setTaskname("Your punishment");
 		t.setTrainee(trainee);
 		t.setSenior(senior);
-		t.setGps_Start("55.841205,-4.232883");
-		t.setGps_End("55.815365,-4.242496");
+		t.setMap(route);
 		t.persist();
 
 		t = new Taskdb();
@@ -184,8 +184,6 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setTaskname("Task C");
 		t.setTrainee(trainee);
 		t.setSenior(testsenior);
-		t.setGps_Start("1.0,1.0");
-		t.setGps_End("1.1,1.1");
 		t.persist();
 	}
 

@@ -62,24 +62,10 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
         setBuilding(obj, index);
         setCompletionPassword(obj, index);
         setDescription(obj, index);
-        setGps_1(obj, index);
-        setGps_2(obj, index);
-        setGps_3(obj, index);
-        setGps_4(obj, index);
-        setGps_5(obj, index);
-        setGps_6(obj, index);
-        setGps_7(obj, index);
-        setGps_8(obj, index);
-        setGps_9(obj, index);
-        setGps_10(obj, index);
-        setGps_11(obj, index);
-        setGps_12(obj, index);
-        setGps_End(obj, index);
-        setGps_Start(obj, index);
+        setMap(obj, index);
         setPerson(obj, index);
         setPersonfunction(obj, index);
         setRoomno(obj, index);
-        setRoute(obj, index);
         setTaskDone(obj, index);
         setTaskname(obj, index);
         setTimeslot(obj, index);
@@ -101,6 +87,11 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
         obj.setDescription(description);
     }
     
+    public void TaskdbDataOnDemand.setMap(Taskdb obj, int index) {
+        Route map = null;
+        obj.setMap(map);
+    }
+    
     public void TaskdbDataOnDemand.setPerson(Taskdb obj, int index) {
         String person = "person_" + index;
         obj.setPerson(person);
@@ -114,11 +105,6 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     public void TaskdbDataOnDemand.setRoomno(Taskdb obj, int index) {
         String roomno = "roomno_" + index;
         obj.setRoomno(roomno);
-    }
-    
-    public void TaskdbDataOnDemand.setRoute(Taskdb obj, int index) {
-        Route route = null;
-        obj.setRoute(route);
     }
     
     public void TaskdbDataOnDemand.setTaskDone(Taskdb obj, int index) {

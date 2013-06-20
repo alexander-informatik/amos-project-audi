@@ -68,49 +68,7 @@ public class Taskdb {
 	private Userdb senior;
 
 	@ManyToOne
-	private Route route;
-
-	@Pattern(regexp = "(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_Start;
-
-	@Pattern(regexp = "^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_1;
-
-	@Pattern(regexp = "^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_2;
-
-	@Pattern(regexp = "^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_3;
-
-	@Pattern(regexp = "^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_4;
-
-	@Pattern(regexp = "^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_5;
-
-	@Pattern(regexp = "^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_6;
-
-	@Pattern(regexp = "^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_7;
-
-	@Pattern(regexp = "^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_8;
-
-	@Pattern(regexp = "^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_9;
-
-	@Pattern(regexp = "^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_10;
-
-	@Pattern(regexp = "^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_11;
-
-	@Pattern(regexp = "^$|(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_12;
-
-	@Pattern(regexp = "(-+)?\\d+\\.\\d+,(-+)?\\d+\\.\\d+", message = "Please enter GPS Coordinates in Google Format: two floating point numbers seperated by a comma for longitude and latitude")
-	private String gps_End;
+	private Route map;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(style = "M-")
