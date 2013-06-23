@@ -44,6 +44,8 @@ public class Gpscoordinate {
 
 	private int orderedposition;
 
+	private String additional_information;
+
 	@ManyToOne
 	private Route route;
 }
