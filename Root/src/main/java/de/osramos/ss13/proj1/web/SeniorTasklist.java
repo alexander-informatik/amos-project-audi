@@ -76,8 +76,6 @@ public class SeniorTasklist {
 							? nrOfPages + 1
 							: nrOfPages));
 		} else {
-			//suche noch mit Trainee, deswegen keine Treffer
-			//wie kann ich in Taskdb_Method.aj Änderungen vornehmen?
 			uiModel.addAttribute("tasklist", Taskdb
 					.findTaskdbsBySeniorUsername(authorizedUsername));
 		}

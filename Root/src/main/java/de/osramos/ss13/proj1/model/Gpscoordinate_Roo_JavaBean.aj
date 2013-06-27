@@ -58,6 +58,14 @@ privileged aspect Gpscoordinate_Roo_JavaBean {
         this.orderedposition = orderedposition;
     }
     
+    public String Gpscoordinate.getAdditional_information() {
+        return this.additional_information;
+    }
+    
+    public void Gpscoordinate.setAdditional_information(String additional_information) {
+        this.additional_information = additional_information;
+    }
+    
     public Route Gpscoordinate.getRoute() {
         return this.route;
     }

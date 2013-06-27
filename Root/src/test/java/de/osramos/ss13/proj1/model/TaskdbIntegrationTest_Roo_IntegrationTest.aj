@@ -50,7 +50,7 @@ privileged aspect TaskdbIntegrationTest_Roo_IntegrationTest {
     declare @type: TaskdbIntegrationTest: @Transactional;
     
     @Autowired
-    TaskdbDataOnDemand TaskdbIntegrationTest.dod;
+    private TaskdbDataOnDemand TaskdbIntegrationTest.dod;
     
     @Test
     public void TaskdbIntegrationTest.testCountTaskdbs() {

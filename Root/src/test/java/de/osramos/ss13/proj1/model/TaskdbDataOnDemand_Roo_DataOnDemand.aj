@@ -55,7 +55,7 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     private List<Taskdb> TaskdbDataOnDemand.data;
     
     @Autowired
-    UserdbDataOnDemand TaskdbDataOnDemand.userdbDataOnDemand;
+    private UserdbDataOnDemand TaskdbDataOnDemand.userdbDataOnDemand;
     
     public Taskdb TaskdbDataOnDemand.getNewTransientTaskdb(int index) {
         Taskdb obj = new Taskdb();

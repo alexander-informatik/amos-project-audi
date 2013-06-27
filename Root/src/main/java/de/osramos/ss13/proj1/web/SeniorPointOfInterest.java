@@ -34,17 +34,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@RequestMapping("/senior/pointofinterest/**")
+@RequestMapping("/senior/pointofinterest")
 @Controller
 public class SeniorPointOfInterest {
 
-	@RequestMapping(method = RequestMethod.POST, value = "{id}")
-	public void post(@PathVariable Long id, ModelMap modelMap,
-			HttpServletRequest request, HttpServletResponse response) {
-	}
-
-	@RequestMapping
+	@RequestMapping(produces = "text/html")
 	public String index() {
 		return "senior/pointofinterest/index";
+	}
+
+	// CREATE
+	@RequestMapping(params = "create", produces = "text/html")
+	public String create() {
+		return "senior/pointofinterest/create";
 	}
 }

@@ -4,4 +4,7 @@
     <definition extends="default" name="senior/pointofinterest/index">
         <put-attribute name="body" value="/WEB-INF/views/senior/pointofinterest/index.jspx"/>
     </definition>
+    <definition extends="default" name="senior/pointofinterest/create">
+        <put-attribute name="body" value="/WEB-INF/views/senior/pointofinterest/create.jspx"/>
+    </definition>
 </tiles-definitions>
