@@ -138,6 +138,90 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 			}
 		}
 
+		try {
+			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("maxmus")
+					.getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = null;
+					user = new Userdb();
+					user.setFirstname("Max");
+					user.setLastname("MUSTERMANN");
+					user.setUsername("maxmus");
+					user.setUserrole("trainee");
+					user.setPassword("maxmus");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+
+		try {
+			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("tobsch")
+					.getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = null;
+					user = new Userdb();
+					user.setFirstname("Tobias");
+					user.setLastname("SCHULZ");
+					user.setUsername("tobsch");
+					user.setUserrole("senior");
+					user.setPassword("tobsch");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+
+		try {
+			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("manmei")
+					.getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = null;
+					user = new Userdb();
+					user.setFirstname("Manuel");
+					user.setLastname("MEIER");
+					user.setUsername("manmei");
+					user.setUserrole("admin");
+					user.setPassword("manmei");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+
+		try {
+			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("axesch")
+					.getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = null;
+					user = new Userdb();
+					user.setFirstname("Axel");
+					user.setLastname("SCHULZ");
+					user.setUsername("axesch");
+					user.setUserrole("trainee");
+					user.setPassword("axesch");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+
 	}
 
 	private void createTasks() {
@@ -146,6 +230,10 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		Userdb senior = Userdb.findUserdbsByUsernameEquals("senior")
 				.getSingleResult();
 		Userdb testsenior = Userdb.findUserdbsByUsernameEquals("testsenior")
+				.getSingleResult();
+		Userdb maxmus = Userdb.findUserdbsByUsernameEquals("maxmus")
+				.getSingleResult();
+		Userdb tobsch = Userdb.findUserdbsByUsernameEquals("tobsch")
 				.getSingleResult();
 		Route route = Route.findAllRoutes().get(0);
 		System.out.println("route" + route.getStartpointName());
@@ -185,6 +273,41 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setTrainee(trainee);
 		t.setSenior(testsenior);
 		t.persist();
+
+		t = new Taskdb();
+		t.setDescription("Find the Cafeteria");
+		t.setPerson("-");
+		t.setBuilding("Building D1");
+		t.setPersonfunction("-");
+		t.setRoomno("-");
+		t.setTaskname("What is the main dish of today?");
+		t.setTrainee(maxmus);
+		t.setSenior(tobsch);
+		t.persist();
+
+		t = new Taskdb();
+		t.setDescription("Get to know the HR department");
+		t.setPerson("Manuel Meier");
+		t.setBuilding("Building C2");
+		t.setPersonfunction("Recruiter");
+		t.setRoomno("01.231");
+		t.setTaskname("Ask Manuel Meier for his favorite color");
+		t.setTrainee(maxmus);
+		t.setSenior(tobsch);
+		t.persist();
+
+		t = new Taskdb();
+		t.setDescription("Use the bus shuttle");
+		t.setPerson("-");
+		t.setBuilding("-");
+		t.setPersonfunction("-");
+		t.setRoomno("-");
+		t
+				.setTaskname("Take the bus shuttle from A to B. Ask the driver for his name when you get out.");
+		t.setTrainee(maxmus);
+		t.setSenior(tobsch);
+		t.persist();
+
 	}
 
 	private void createRoutes() {
