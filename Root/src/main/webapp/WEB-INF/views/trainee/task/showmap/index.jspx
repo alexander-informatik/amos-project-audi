@@ -1,28 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div 
+xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:spring="http://www.springframework.org/tags" 
+xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
 
-<body>
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+xmlns:form="http://www.springframework.org/tags/form"
+
+version="2.0">
+
+<jsp:directive.page contentType="text/html;charset=UTF-8"/>
+<jsp:output omit-xml-declaration="yes"/>
+
+
+<spring:url value="/resources/js-lib/jquery-1.4.min.js" var="url_jquery" />
+<spring:url value="/resources/js-lib/json.min.js" var="url_json" />
+<spring:url value="/resources/img/mapicon.png" var="mapiconURL" />
+<spring:url value="/resources/img/mapicon_currentlocation.png" var="mapicon_currentLocationURL" />
+
+<script type="text/javascript" src="${url_jquery}"><div/></script>
+<script type="text/javascript" src="${url_json}"><div/></script>
 
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"><div /></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"><div /></script>
 <script id="jqueryui" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"><div /></script>
 <script src="//www.google.com/jsapi?key=AIzaSyCZfHRnq7tigC-COeQRmoa9Cxr0vbrK6xw"><div /></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"><div /></script>
+
+
 <script type="text/javascript">
  
+var latlng_default = new google.maps.LatLng(48.79326, 11.41279);
+
 var directionsDisplay = new google.maps.DirectionsRenderer();
 var directionsService = new google.maps.DirectionsService();
 var map;
-var marker;
+var markersArray = new Array();
+var markerpositions=new Array();
+var drawPath = new google.maps.Polyline(
+			{
+			    strokeColor: '#FF0000',
+			    strokeOpacity: 1.0,
+		   	    strokeWeight: 2
+		 	 });
 
-function initializeMap() 
-{
 
-	var latlng = new google.maps.LatLng(51.182598,10.080042);
-	
-	var myOptions = 
+var drawPath_currentLocation_to_nextWaypoint = new google.maps.Polyline(
+			{
+			    strokeColor: '#00FF00',
+			    strokeOpacity: 1.0,
+		   	    strokeWeight: 2
+		 	 });
+var marker_currentLocation;
+var idxNextWaypoint = 0;
+var WaypointDetectionDistance = 50;
+
+var gpsoptions = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 20000
+};
+
+
+var watchId = window.navigator.geolocation.watchPosition(device_newgps_received, device_gpserror, gpsoptions);
+
+
+
+	function initializeMap() 
+	{
+		var myOptions = 
 		{
 			zoom: 12,
-			center: latlng,
+			center: latlng_default,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			mapTypeControlOptions: 
 			{
@@ -32,80 +81,177 @@ function initializeMap()
 		};
 	
 	
-	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-	directionsDisplay.setMap(map);
-	directionsDisplay.setPanel(document.getElementById("directionsPanel"));
-	
-	var image = '${mapiconURL}';
-	var marker = 
-		new google.maps.Marker(
-		{
-			position: latlng,
-			map: map,
-			icon: image
-		});
+		map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+		map.setCenter(latlng_default);
+		
+		//directionsDisplay.setMap(map);
+		//directionsDisplay.setPanel(document.getElementById("directionsPanel"));
+		//calcRoute();
 
-	
-	
-	function newgps(position) {
-		var googlegps = new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
-		marker.setPosition(googlegps);		
-		map.setCenter(googlegps);
+		showallgps();
 	}
 
-function gpserror(err)
-{
-}
-
-gpsoptions = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 20000
-};
-
-
-	var watchId = window.navigator.geolocation.watchPosition(newgps, gpserror, gpsoptions);
-
-	calcRoute();
-}
-
-
-google.maps.event.addDomListener(window, 'load', initializeMap);
-
-  
 
 
 
-
-
-function calcRoute() 
-{
-
-	var start = "${gpsstart}";
-	var ende = "${gpsend}";
-	var reglang = "en";
-
-
-	var request = 
+	function showgps(id, latitude, longitude, orderedposition)
 	{
-		origin:start, 
-        	destination:ende,
-        	travelMode: google.maps.DirectionsTravelMode.WALKING,
-		region:reglang
-	};
+		var latLng = new google.maps.LatLng(latitude, longitude);
+		var image = '${mapiconURL}';
+		var newMarker = 
+			new google.maps.Marker(
+			{
+				position: latLng,
+				map: map,
+				icon: image,
+				title: orderedposition.toString()
+			});
+			//newMarker.setDraggable(true);
+			newMarker.setPosition(latLng);
+			markersArray.push(newMarker);
 
 
-    directionsService.route(request, function(response, status) 
+			//google.maps.event.addListener(newMarker, "dragend", function(event)
+			//{
+      			//	var position = newMarker.getPosition();
+			//	updategps(id,position.lat().toString(),position.lng().toString());
+			//});
+
+			markerpositions[markerpositions.length] = latLng;
+	}
+
+	
+	function showallgps()
 	{
-		if (status == google.maps.DirectionsStatus.OK)
+		for(var i = 0;	i &lt; markersArray.length;i++	)
 		{
-			directionsDisplay.setDirections(response);
+    			markersArray[i].setMap(null);	
 		}
-	});
+		markersArray = new Array();
+		markerpositions=new Array();
 
-}  
+		// load gps coordinates
+	
+		$.getJSON('/proj1/senior/route/${task.map.id}?gpscoordinates', function(data)
+		{
+			$.each(data, function(i, item)
+			{
+				//alert(item.orderedposition);
+				showgps(item.id, item.latitude,item.longitude,item.orderedposition);
+			});
 
-window.onload=initializeMap;
+		
+			drawPath.setPath(markerpositions);
+			drawPath.setMap(map);
+		});
+
+		
+	
+	}
+
+
+
+	function calcRoute() 
+	{
+
+		var start = "${gpsstart}";
+		var ende = "${gpsend}";
+		var reglang = "en";
+
+
+		var request = 
+		{
+			origin:start, 
+        		destination:ende,
+        		travelMode: google.maps.DirectionsTravelMode.WALKING,
+			region:reglang
+		};
+
+
+    		directionsService.route(request, function(response, status) 
+		{
+			if (status == google.maps.DirectionsStatus.OK)
+			{
+				directionsDisplay.setDirections(response);
+			}
+		});
+
+	}  
+
+
+	function device_newgps_received(position)
+	{
+		var googlegps = new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
+				
+		map.setCenter(googlegps);
+
+		var image = '${mapicon_currentLocationURL}';
+		if(!marker_currentLocation)
+		{
+			marker_currentLocation = new google.maps.Marker(
+			{
+				position: googlegps,
+				map: map,
+				icon: image,
+				title: 'Your location!'
+			});
+		}
+		else
+		{
+			marker_currentLocation.setPosition(googlegps);
+		}
+
+		var nextWaypoint =  markerpositions[idxNextWaypoint];
+		var d = distance( googlegps.lng(), googlegps.lat(), nextWaypoint.lng(), nextWaypoint.lat() );
+		if(d &lt; WaypointDetectionDistance)
+		{
+			idxNextWaypoint++;
+		}
+
+		if(idxNextWaypoint &lt; markerpositions.length)
+		{
+			positions=new Array();
+			positions[0] = googlegps;
+			positions[1] = markerpositions[idxNextWaypoint];
+			drawPath_currentLocation_to_nextWaypoint.setPath(positions);
+			drawPath_currentLocation_to_nextWaypoint.setMap(map);
+		}
+	}
+
+	function device_gpserror(err)
+	{
+	}
+
+
+
+	function distance(lon1, lat1, lon2, lat2)
+	{
+		var R = 6371; // Radius of the earth in km
+		var dLat = (lat2-lat1).toRad();
+		var dLon = (lon2-lon1).toRad(); 
+		var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+		       	Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+		      	Math.sin(dLon/2) * Math.sin(dLon/2); 
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+		var d = R * c * 1000; // Distance in m
+  		return d;
+	}
+
+/** Converts numeric degrees to radians */
+	if (typeof(Number.prototype.toRad) === "undefined") 
+	{
+  		Number.prototype.toRad = function() 
+		{
+    			return this * Math.PI / 180;
+  		}
+	}
+
+
+
+
+	google.maps.event.addDomListener(window, 'load', initializeMap);
+
+	window.onload=initializeMap;
 
 </script>
 
@@ -114,22 +260,20 @@ window.onload=initializeMap;
 
 
 
-
-
-
-
-
-
-
-
+  <spring:message code="label_trainee_taskdb_showmap_index" htmlEscape="false" var="title"/>
+  <util:panel id="title" title="${title}">
+    <spring:message code="application_name" htmlEscape="false" var="app_name"/>
+    <h3>
+      <spring:message arguments="${app_name}" code="welcome_titlepane"/>
+    </h3>
 
 
 
 <div>
-<p>Taskname: ${taskname}</p>
-<p>Start: ${StartpointName}</p>
-<p>End: ${EndpointName}</p>
-<p><input type="button" value="Show Map" onClick="initializeMap();"></input></p>
+<p>Taskname: ${task.taskname}</p>
+<p>Name of Startpoint: ${task.map.startpointName}</p>
+<p>Name of Endpoint: ${task.map.endpointName}</p>
+<p><input type="button" value="Show Map" onClick="showallgps();"></input></p>
 </div>
 
 <div id="directionsPanel"  style="width:300px;" >
@@ -147,5 +291,7 @@ Google Maps
 <div/>
 </div>
 
-		
-</body>
+
+
+</util:panel>
+</div>

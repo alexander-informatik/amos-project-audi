@@ -16,24 +16,11 @@ version="2.0">
 
 <spring:url value="/resources/js-lib/jquery-1.4.min.js" var="url_jquery" />
 <spring:url value="/resources/js-lib/json.min.js" var="url_json" />
+<spring:url value="/resources/img/mapicon.png" var="mapiconURL" />
+
 
 <script type="text/javascript" src="${url_jquery}"><div/></script>
 <script type="text/javascript" src="${url_json}"><div/></script>
-
-
-  <spring:message code="label_senior_route_update" htmlEscape="false" var="title"/>
-  <util:panel id="title" title="${title}">
-    <spring:message code="application_name" htmlEscape="false" var="app_name"/>
-    <h3>
-      <spring:message arguments="${app_name}" code="welcome_titlepane"/>
-    </h3>
-
-
-
-
-
-<spring:url value="/resources/img/mapicon.png" var="mapiconURL" />
-
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"><div /></script>
 <script src="//www.google.com/jsapi?key=AIzaSyCZfHRnq7tigC-COeQRmoa9Cxr0vbrK6xw"><div /></script>
 <script type="text/javascript">
@@ -48,15 +35,16 @@ var drawPath = new google.maps.Polyline(
 			    strokeOpacity: 1.0,
 		   	    strokeWeight: 2
 		 	 });
+var latlng_default = new google.maps.LatLng(48.79326, 11.41279);
 
-function initializeMap() {
 
-	var latlng = new google.maps.LatLng(51.182598,10.080042);
-	
-	var myOptions = 
+	function initializeMap() 
+	{
+
+		var myOptions = 
 		{
 			zoom: 12,
-			center: latlng,
+			center: latlng_default,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			mapTypeControlOptions: 
 			{
@@ -66,20 +54,20 @@ function initializeMap() {
 		};
 	
 	
-	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-	map.setCenter(latlng);
+		map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+		map.setCenter(latlng_default);
 	
 
 
 
-	google.maps.event.addListener(map,"click",function(clickpos)
-	{
-		sendgps(clickpos.latLng.lat().toString(), clickpos.latLng.lng().toString());
-	});
+		google.maps.event.addListener(map,"click",function(clickpos)
+		{
+			sendgps(clickpos.latLng.lat().toString(), clickpos.latLng.lng().toString());
+		});
 
-	showallgps();
+		showallgps();
 
-}
+	}
 
 
 
@@ -186,8 +174,12 @@ google.maps.event.addDomListener(window, 'load', initializeMap);
 
 
 
-
-
+  <spring:message code="label_senior_route_update" htmlEscape="false" var="title"/>
+  <util:panel id="title" title="${title}">
+    <spring:message code="application_name" htmlEscape="false" var="app_name"/>
+    <h3>
+      <spring:message arguments="${app_name}" code="welcome_titlepane"/>
+    </h3>
 
 
 <div>
@@ -209,10 +201,6 @@ Google Maps
 <div id="map_canvas" style="width:400px;height:600px">
 <div/>
 </div>
-
-
-
-
 
 
 

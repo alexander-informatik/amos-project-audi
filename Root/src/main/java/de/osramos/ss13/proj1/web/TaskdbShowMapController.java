@@ -46,11 +46,12 @@ public class TaskdbShowMapController {
 		model.addAttribute("taskid", id);
 
 		try {
-			Taskdb o = (Taskdb) Taskdb.findTaskdbsById(id).getSingleResult();
-			if (o != null) {
+			Taskdb task = (Taskdb) Taskdb.findTaskdbsById(id).getSingleResult();
+			if (task != null) {
+				model.addAttribute("task", task);
 
-				model.addAttribute("taskname", o.getTaskname());
-				Route route = o.getMap();
+				//model.addAttribute("taskname", task.getTaskname());
+				Route route = task.getMap();
 				String start = "no route found";
 				String end = "no route found";
 
@@ -79,15 +80,8 @@ public class TaskdbShowMapController {
 				model.addAttribute("gpsstart", start);
 				model.addAttribute("gpsend", end);
 
-				model.addAttribute("StartpointName", route.getStartpointName());
-				model.addAttribute("EndpointName", route.getEndpointName());
-
-				//model.addAttribute("gpsstartlatitude", s1);
-				//model.addAttribute("gpsstartlongitude", s2);
-				//model.addAttribute("gpsendlatitude", e1);
-				//model.addAttribute("gpsendlongitude", e2);
 			} else {
-				model.addAttribute("taskname", "taskid not found");
+
 			}
 		} catch (Exception e) {
 		}
