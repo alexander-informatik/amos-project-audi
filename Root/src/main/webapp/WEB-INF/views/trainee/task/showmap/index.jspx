@@ -70,7 +70,7 @@ var watchId = window.navigator.geolocation.watchPosition(device_newgps_received,
 	{
 		var myOptions = 
 		{
-			zoom: 12,
+			zoom: 18,
 			center: latlng_default,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			mapTypeControlOptions: 
@@ -216,6 +216,11 @@ var watchId = window.navigator.geolocation.watchPosition(device_newgps_received,
 			drawPath_currentLocation_to_nextWaypoint.setPath(positions);
 			drawPath_currentLocation_to_nextWaypoint.setMap(map);
 		}
+		else
+		{
+			drawPath_currentLocation_to_nextWaypoint.setPath(null);
+			drawPath_currentLocation_to_nextWaypoint.setMap(null);	
+		}
 	}
 
 	function device_gpserror(err)
@@ -251,7 +256,7 @@ var watchId = window.navigator.geolocation.watchPosition(device_newgps_received,
 
 	google.maps.event.addDomListener(window, 'load', initializeMap);
 
-	window.onload=initializeMap;
+	//window.onload=initializeMap;
 
 </script>
 
@@ -260,12 +265,6 @@ var watchId = window.navigator.geolocation.watchPosition(device_newgps_received,
 
 
 
-  <spring:message code="label_trainee_taskdb_showmap_index" htmlEscape="false" var="title"/>
-  <util:panel id="title" title="${title}">
-    <spring:message code="application_name" htmlEscape="false" var="app_name"/>
-    <h3>
-      <spring:message arguments="${app_name}" code="welcome_titlepane"/>
-    </h3>
 
 
 
@@ -293,5 +292,4 @@ Google Maps
 
 
 
-</util:panel>
 </div>
