@@ -59,8 +59,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 
 		try {
 			user = null;
-			user = Userdb.findUserdbsByUsernameEquals("all")
-					.getSingleResult();
+			user = Userdb.findUserdbsByUsernameEquals("all").getSingleResult();
 		} catch (Exception e) {
 		} finally {
 			try {
@@ -245,6 +244,8 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 	}
 
 	private void createTasks() {
+		Userdb all = Userdb.findUserdbsByUsernameEquals("all")
+				.getSingleResult();
 		Userdb trainee = Userdb.findUserdbsByUsernameEquals("trainee")
 				.getSingleResult();
 		Userdb senior = Userdb.findUserdbsByUsernameEquals("senior")
@@ -256,6 +257,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		Userdb tobsch = Userdb.findUserdbsByUsernameEquals("tobsch")
 				.getSingleResult();
 		Route route = Route.findAllRoutes().get(0);
+		Route route1 = Route.findAllRoutes().get(1);
 		System.out.println("route" + route.getStartpointName());
 		Taskdb t = null;
 
@@ -266,8 +268,8 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setPersonfunction("Function 007");
 		t.setRoomno("007");
 		t.setTaskname("Your first mission");
-		t.setTrainee(trainee);
-		t.setSenior(senior);
+		t.setTrainee(all);
+		t.setSenior(all);
 		t.setMap(route);
 		t.persist();
 
@@ -278,9 +280,9 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setPersonfunction("Function uncertain");
 		t.setRoomno("no number");
 		t.setTaskname("Your punishment");
-		t.setTrainee(trainee);
-		t.setSenior(senior);
-		t.setMap(route);
+		t.setTrainee(all);
+		t.setSenior(all);
+		t.setMap(route1);
 		t.persist();
 
 		t = new Taskdb();
@@ -322,7 +324,8 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setBuilding("-");
 		t.setPersonfunction("-");
 		t.setRoomno("-");
-		t.setTaskname("Take the bus shuttle from A to B. Ask the driver for his name when you get out.");
+		t
+				.setTaskname("Take the bus shuttle from A to B. Ask the driver for his name when you get out.");
 		t.setTrainee(maxmus);
 		t.setSenior(tobsch);
 		t.persist();
@@ -330,10 +333,16 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 	}
 
 	private void createRoutes() {
-		Route r = new Route();
+		Route r = null;
+
+		r = new Route();
 		r.setStartpointName("Building A1");
 		r.setEndpointName("Building B2");
 		r.persist();
 
+		r = new Route();
+		r.setStartpointName("Building X");
+		r.setEndpointName("Building Z");
+		r.persist();
 	}
 }
