@@ -28,47 +28,79 @@ version="2.0">
 
 <script type="text/javascript">
  
-var latlng_default = new google.maps.LatLng(48.79326, 11.41279);
-
-var directionsDisplay = new google.maps.DirectionsRenderer();
-var directionsService = new google.maps.DirectionsService();
-var map;
-var route_markersArray = new Array();
-var drawPath = new google.maps.Polyline(
-			{
-			    strokeColor: '#FF0000',
-			    strokeOpacity: 1.0,
-		   	    strokeWeight: 2
-		 	 });
-
-
-var drawPath_currentLocation_to_nextWaypoint = new google.maps.Polyline(
-			{
-			    strokeColor: '#00FF00',
-			    strokeOpacity: 1.0,
-		   	    strokeWeight: 2
-		 	 });
-var marker_currentLocation;
-var idxNextWaypoint = 0;
-var WaypointDetectionDistance = 50;
-
-var gpsoptions = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 20000
-};
-
-
-var watchId = window.navigator.geolocation.watchPosition(device_newgps_received, device_gpserror, gpsoptions);
-
-
-
-	function initializeMap() 
+	function aGpsPosition()
 	{
+	}
+
+	function aGpsPosition(geolocationposition)
+	{
+		this.timestamp = geolocationposition.timestamp;
+		this.latitude = geolocationposition.coords.latitude;
+		this.longitude = geolocationposition.coords.longitude;
+		this.altitude = geolocationposition.coords.altitude;
+		this.accuracy = geolocationposition.coords.accuracy;
+		this.altitudeAccuracy = geolocationposition.coords.altitudeAccuracy;
+		this.heading = geolocationposition.coords.heading;
+		this.speed = geolocationposition.coords.speed;
+	}
+
+	aGpsPosition.prototype.toLatLng = function()
+	{
+		return new google.maps.LatLng(this.latitude, this.longitude);
+	}
+
+	function aMap()
+	{
+		var myclass = this;
+
+		this.test = "it works";
+		this.latlng_default = new google.maps.LatLng(48.79326, 11.41279);
+		this.map;
+		this.marker_currentLocation;
+		this.idxNextWaypoint = 0;
+		this.WaypointDetectionDistance = 50;
+	
+		this.directionsDisplay = new google.maps.DirectionsRenderer();
+		this.directionsService = new google.maps.DirectionsService();
+		
+		this.route_markersArray = new Array();
+		this.drawPath = new google.maps.Polyline(
+		{
+		    strokeColor: '#FF0000',
+		    strokeOpacity: 1.0,
+	   	    strokeWeight: 2
+	 	 });
+	
+	
+		this.drawPath_currentLocation_to_nextWaypoint = new google.maps.Polyline(
+		{
+		   strokeColor: '#00FF00',
+		   strokeOpacity: 1.0,
+		   strokeWeight: 2
+		});
+	
+		this.gpsoptions = 
+		{
+			enableHighAccuracy: true,
+			timeout: 5000,
+			maximumAge: 20000
+		};
+	
+		this.watchId = window.navigator.geolocation.watchPosition
+		(
+			function(pos) { myclass.device_newgps_received(new aGpsPosition(pos)); },
+			this.device_gpserror, 
+			this.gpsoptions
+		);
+	}
+
+	aMap.prototype.initializeMap = function() 
+	{
+		
 		var myOptions = 
 		{
 			zoom: 18,
-			center: latlng_default,
+			center: this.latlng_default,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 			mapTypeControlOptions: 
 			{
@@ -76,22 +108,25 @@ var watchId = window.navigator.geolocation.watchPosition(device_newgps_received,
 	        		style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
 	      		}
 		};
-	
-	
-		map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-		map.setCenter(latlng_default);
 		
+		this.map = new google.maps.Map(window.document.getElementById("map_canvas"), myOptions);
+
+		this.map.setCenter(this.latlng_default);
+	
 		//directionsDisplay.setMap(map);
 		//directionsDisplay.setPanel(document.getElementById("directionsPanel"));
 		//calcRoute();
 
-		showallgps();
+
+		this.showallgps();
+
 	}
 
 
 
 
-	function createNewMarker(id, latitude, longitude, orderedposition)
+
+	aMap.prototype.createNewMarker = function(id, latitude, longitude, orderedposition)
 	{
 		var latLng = new google.maps.LatLng(latitude, longitude);
 		var image = '${mapiconURL}';
@@ -99,13 +134,13 @@ var watchId = window.navigator.geolocation.watchPosition(device_newgps_received,
 			new google.maps.Marker(
 			{
 				position: latLng,
-				map: map,
+				map: this.map,
 				icon: image,
 				title: orderedposition.toString()
 			});
 			//newMarker.setDraggable(true);
 			newMarker.setPosition(latLng);
-			route_markersArray.push(newMarker);
+			this.route_markersArray.push(newMarker);
 
 
 			//google.maps.event.addListener(newMarker, "dragend", function(event)
@@ -118,39 +153,39 @@ var watchId = window.navigator.geolocation.watchPosition(device_newgps_received,
 	}
 
 	
-	function showallgps()
-	{
-		removeMarkersFromMap(route_markersArray);
-		// load gps coordinates
-		
+	aMap.prototype.showallgps = function()
+	{	
+		var myclass = this;
+		this.removeMarkersFromMap(this.route_markersArray);
+		// load gps coordinates	
 		$.getJSON('/proj1/senior/route/${task.map.id}?gpscoordinates', function(data)
 		{
+			
 			$.each(data, function(i, item)
 			{
 				//alert(item.orderedposition);
-				var m = createNewMarker(item.id, item.latitude,item.longitude,item.orderedposition);
+				var m = myclass.createNewMarker(item.id, item.latitude,item.longitude,item.orderedposition);
 				//route_markersArray.push(m);
 			});
 
-			drawPath1(route_markersArray);
+			
+			myclass.drawPath1(myclass.route_markersArray);
 		});
-
-		
 	
 	}
 
-	function drawPath1(markersArray)
+	aMap.prototype.drawPath1 = function(markersArray)
 	{
 		var path = [];
     		for(var key in markersArray)
 		{
         		path.push(markersArray[key].getPosition());
     		}
-		drawPath.setPath(path);
-		drawPath.setMap(map);
+		this.drawPath.setPath(path);
+		this.drawPath.setMap(this.map);
 	}
 
-	function removeMarkersFromMap(markersArray)
+	aMap.prototype.removeMarkersFromMap = function(markersArray)
 	{
 		for(var i = 0;	i &lt; markersArray.length;i++	)
 		{
@@ -161,7 +196,7 @@ var watchId = window.navigator.geolocation.watchPosition(device_newgps_received,
 
 
 
-	function calcRoute() 
+	aMap.prototype.calcRoute = function() 
 	{
 
 		var start = "${gpsstart}";
@@ -178,7 +213,7 @@ var watchId = window.navigator.geolocation.watchPosition(device_newgps_received,
 		};
 
 
-    		directionsService.route(request, function(response, status) 
+    		this.directionsService.route(request, function(response, status) 
 		{
 			if (status == google.maps.DirectionsStatus.OK)
 			{
@@ -189,56 +224,65 @@ var watchId = window.navigator.geolocation.watchPosition(device_newgps_received,
 	}  
 
 
-	function device_newgps_received(position)
+	aMap.prototype.device_newgps_received = function(position)
 	{
-		var googlegps = new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
-				
-		map.setCenter(googlegps);
+		alert(this.test);
+		var myclass = amap;
 
+		var googlegps = position.toLatLng();//new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
+				
+		myclass.map.setCenter(googlegps);
 		var image = '${mapicon_currentLocationURL}';
-		if(!marker_currentLocation)
+		if(!myclass.marker_currentLocation)
 		{
-			marker_currentLocation = new google.maps.Marker(
+			myclass.marker_currentLocation = new google.maps.Marker(
 			{
 				position: googlegps,
-				map: map,
+				map: myclass.map,
 				icon: image,
 				title: 'Your location!'
 			});
 		}
 		else
 		{
-			marker_currentLocation.setPosition(googlegps);
+			myclass.marker_currentLocation.setPosition(googlegps);
 		}
-
-		var nextWaypoint =  route_markersArray[idxNextWaypoint].getPosition();
-		var d = distance( googlegps.lng(), googlegps.lat(), nextWaypoint.lng(), nextWaypoint.lat() );
-		if(d &lt; WaypointDetectionDistance)
+		var nextWaypoint =  myclass.route_markersArray[myclass.idxNextWaypoint].getPosition();
+		var d = googlegps.getDistance( nextWaypoint );
+		if(d &lt; myclass.WaypointDetectionDistance)
 		{
-			idxNextWaypoint++;
+			myclass.idxNextWaypoint++;
 		}
-
-		if(idxNextWaypoint &lt; route_markersArray.length)
+		if(myclass.idxNextWaypoint &lt; myclass.route_markersArray.length)
 		{
 			positions=new Array();
 			positions[0] = googlegps;
-			positions[1] = route_markersArray[idxNextWaypoint].getPosition();
-			drawPath_currentLocation_to_nextWaypoint.setPath(positions);
-			drawPath_currentLocation_to_nextWaypoint.setMap(map);
+			positions[1] = myclass.route_markersArray[myclass.idxNextWaypoint].getPosition();
+			myclass.drawPath_currentLocation_to_nextWaypoint.setPath(positions);
+			myclass.drawPath_currentLocation_to_nextWaypoint.setMap(myclass.map);
 		}
 		else
 		{
-			drawPath_currentLocation_to_nextWaypoint.setMap(null);	
+			myclass.drawPath_currentLocation_to_nextWaypoint.setMap(null);	
 		}
 	}
 
-	function device_gpserror(err)
+	aMap.prototype.device_gpserror = function(err)
 	{
 	}
 
+	//Geolocation.prototype.mytest = function()
+	function t()
+	{
+		alert("position test");
+	}
 
+	google.maps.LatLng.prototype.getDistance = function(otherLatLng)
+	{
+		return getDistanceFromGps( this.lng(), this.lat(), otherLatLng.lng(), otherLatLng.lat() );
+	}
 
-	function distance(lon1, lat1, lon2, lat2)
+	function getDistanceFromGps(lon1, lat1, lon2, lat2)
 	{
 		var R = 6371; // Radius of the earth in km
 		var dLat = (lat2-lat1).toRad();
@@ -263,8 +307,15 @@ var watchId = window.navigator.geolocation.watchPosition(device_newgps_received,
 
 
 
-	google.maps.event.addDomListener(window, 'load', initializeMap);
+	var amap = new aMap();
+	function init()
+	{
+		amap.initializeMap();
+	}
 
+	
+	google.maps.event.addDomListener(window, 'load', init);
+	//window.onload = init;
 </script>
 
 
@@ -279,7 +330,7 @@ var watchId = window.navigator.geolocation.watchPosition(device_newgps_received,
 <p>Taskname: ${task.taskname}</p>
 <p>Name of Startpoint: ${task.map.startpointName}</p>
 <p>Name of Endpoint: ${task.map.endpointName}</p>
-<p><input type="button" value="Show Map" onClick="showallgps();"></input></p>
+<p><input type="button" value="Show Map" onClick="a.initializeMap();"></input></p>
 </div>
 
 <div id="directionsPanel"  style="width:300px;" >
