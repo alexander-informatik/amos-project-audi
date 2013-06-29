@@ -16,8 +16,10 @@ version="2.0">
 
 <spring:url value="/resources/js-lib/jquery-1.4.min.js" var="url_jquery" />
 <spring:url value="/resources/js-lib/json.min.js" var="url_json" />
-<spring:url value="/resources/img/mapicon.png" var="mapiconURL" />
-<spring:url value="/resources/img/mapicon_currentlocation.png" var="mapicon_currentLocationURL" />
+<spring:url value="/resources/img/mapicon.png" var="url_mapicon" />
+<spring:url value="/resources/img/mapicon_currentlocation.png" var="url_mapicon_currentlocation" />
+<spring:url value="/resources/img/mapicon_start.png" var="url_mapicon_start" />
+<spring:url value="/resources/img/mapicon_finish.png" var="url_mapicon_finish" />
 
 <script type="text/javascript" src="${url_jquery}"><div/></script>
 <script type="text/javascript" src="${url_json}"><div/></script>
@@ -35,6 +37,7 @@ version="2.0">
 	function aGpsPosition(geolocationposition)
 	{
 		this.timestamp = geolocationposition.timestamp;
+
 		this.latitude = geolocationposition.coords.latitude;
 		this.longitude = geolocationposition.coords.longitude;
 		this.altitude = geolocationposition.coords.altitude;
@@ -47,6 +50,31 @@ version="2.0">
 	aGpsPosition.prototype.toLatLng = function()
 	{
 		return new google.maps.LatLng(this.latitude, this.longitude);
+	}
+
+	aGpsPosition.prototype.getDistance = function(other)
+	{
+		var olat;
+		var olong;
+
+		if(other instanceof google.maps.LatLng)
+		{
+			olat = other.lat();
+			olong = other.lng();
+		}
+		else
+		if(other instanceof aGpsPosition)
+		{
+			olat = other.latitude;
+			olong = other.longitude;
+		}
+		else
+		{
+			alert("Error: Other coordinate is not of compatible type!");
+			return;
+		}
+
+		return getDistanceFromGps( this.longitude, this.latitude, olong, olat );
 	}
 
 	function aMap()
@@ -122,34 +150,60 @@ version="2.0">
 
 	}
 
-
-
-
-
-	aMap.prototype.createNewMarker = function(id, latitude, longitude, orderedposition)
+	aMap.prototype.createNewMarker = function(icontype, latlng, title)
 	{
-		var latLng = new google.maps.LatLng(latitude, longitude);
-		var image = '${mapiconURL}';
-		var newMarker = 
+		var image;
+		if(0 == icontype.localeCompare("start"))
+		{
+			image = '${url_mapicon_start}';
+		}
+		else
+		if(0 == icontype.localeCompare("finish"))
+		{
+			image = '${url_mapicon_finish}';
+		}
+		else
+		if(0 == icontype.localeCompare("currentlocation"))
+		{
+			image = '${url_mapicon_currentlocation}';
+		}
+		else
+		{
+			image = '${url_mapicon}';
+		}
+
+		var m = 
 			new google.maps.Marker(
 			{
-				position: latLng,
+				position: latlng,
 				map: this.map,
 				icon: image,
-				title: orderedposition.toString()
+				title: title
 			});
+
+		return m;
+	}
+
+
+
+
+	aMap.prototype.createNewMarkerFromGpsCoordinate = function(gpscoordinate, icontype)
+	{
+		var latlng = new google.maps.LatLng(gpscoordinate.latitude, gpscoordinate.longitude);
+		var newMarker = this.createNewMarker(icontype,latlng,gpscoordinate.orderedposition.toString());
+
 			//newMarker.setDraggable(true);
-			newMarker.setPosition(latLng);
-			this.route_markersArray.push(newMarker);
+			newMarker.setPosition(latlng);
+			//this.route_markersArray.push(newMarker);
 
 
 			//google.maps.event.addListener(newMarker, "dragend", function(event)
 			//{
       			//	var position = newMarker.getPosition();
-			//	updategps(id,position.lat().toString(),position.lng().toString());
+			//	updategps(gpscoordinate.id,position.lat().toString(),position.lng().toString());
 			//});
 
-			//return newMarker;
+			return newMarker;
 	}
 
 	
@@ -160,12 +214,20 @@ version="2.0">
 		// load gps coordinates	
 		$.getJSON('/proj1/senior/route/${task.map.id}?gpscoordinates', function(data)
 		{
-			
+			console.log("len: " + data.length);
 			$.each(data, function(i, item)
 			{
-				//alert(item.orderedposition);
-				var m = myclass.createNewMarker(item.id, item.latitude,item.longitude,item.orderedposition);
-				//route_markersArray.push(m);
+				var icontype = "default";
+				if(0 == i)
+				{
+					icontype = "start";
+				}
+				if(data.length-1 == i)
+				{
+					icontype = "finish";
+				}
+				var m = myclass.createNewMarkerFromGpsCoordinate(item,icontype);
+				myclass.route_markersArray.push(m);
 			});
 
 			
@@ -224,46 +286,38 @@ version="2.0">
 	}  
 
 
-	aMap.prototype.device_newgps_received = function(position)
+	aMap.prototype.device_newgps_received = function(pos)
 	{
-		alert(this.test);
-		var myclass = amap;
-
-		var googlegps = position.toLatLng();//new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
+		var latlng = pos.toLatLng();//new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
 				
-		myclass.map.setCenter(googlegps);
-		var image = '${mapicon_currentLocationURL}';
-		if(!myclass.marker_currentLocation)
+		this.map.setCenter(latlng);
+		
+		if(!this.marker_currentLocation)
 		{
-			myclass.marker_currentLocation = new google.maps.Marker(
-			{
-				position: googlegps,
-				map: myclass.map,
-				icon: image,
-				title: 'Your location!'
-			});
+			this.marker_currentLocation = this.createNewMarker("currentlocation",latlng,"Your location!");
 		}
 		else
 		{
-			myclass.marker_currentLocation.setPosition(googlegps);
+			this.marker_currentLocation.setPosition(googlegps);
 		}
-		var nextWaypoint =  myclass.route_markersArray[myclass.idxNextWaypoint].getPosition();
-		var d = googlegps.getDistance( nextWaypoint );
-		if(d &lt; myclass.WaypointDetectionDistance)
+		var nextWaypoint =  this.route_markersArray[this.idxNextWaypoint].getPosition();
+		var d = latlng.getDistance( nextWaypoint );
+		
+		if(d &lt; this.WaypointDetectionDistance)
 		{
-			myclass.idxNextWaypoint++;
+			this.idxNextWaypoint++;
 		}
-		if(myclass.idxNextWaypoint &lt; myclass.route_markersArray.length)
+		if(this.idxNextWaypoint &lt; this.route_markersArray.length)
 		{
 			positions=new Array();
-			positions[0] = googlegps;
-			positions[1] = myclass.route_markersArray[myclass.idxNextWaypoint].getPosition();
-			myclass.drawPath_currentLocation_to_nextWaypoint.setPath(positions);
-			myclass.drawPath_currentLocation_to_nextWaypoint.setMap(myclass.map);
+			positions[0] = latlng;
+			positions[1] = this.route_markersArray[this.idxNextWaypoint].getPosition();
+			this.drawPath_currentLocation_to_nextWaypoint.setPath(positions);
+			this.drawPath_currentLocation_to_nextWaypoint.setMap(this.map);
 		}
 		else
 		{
-			myclass.drawPath_currentLocation_to_nextWaypoint.setMap(null);	
+			this.drawPath_currentLocation_to_nextWaypoint.setMap(null);	
 		}
 	}
 
