@@ -59,6 +59,26 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 
 		try {
 			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("all")
+					.getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = new Userdb();
+					user.setFirstname("Developer");
+					user.setLastname("DEVELOPER");
+					user.setUsername("all");
+					user.setUserrole("all");
+					user.setPassword("all");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+
+		try {
+			user = null;
 			user = Userdb.findUserdbsByUsernameEquals("admin")
 					.getSingleResult();
 		} catch (Exception e) {
@@ -302,8 +322,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setBuilding("-");
 		t.setPersonfunction("-");
 		t.setRoomno("-");
-		t
-				.setTaskname("Take the bus shuttle from A to B. Ask the driver for his name when you get out.");
+		t.setTaskname("Take the bus shuttle from A to B. Ask the driver for his name when you get out.");
 		t.setTrainee(maxmus);
 		t.setSenior(tobsch);
 		t.persist();
