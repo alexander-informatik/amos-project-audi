@@ -59,6 +59,25 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 
 		try {
 			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("all").getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = new Userdb();
+					user.setFirstname("Developer");
+					user.setLastname("DEVELOPER");
+					user.setUsername("all");
+					user.setUserrole("all");
+					user.setPassword("all");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+
+		try {
+			user = null;
 			user = Userdb.findUserdbsByUsernameEquals("admin")
 					.getSingleResult();
 		} catch (Exception e) {
@@ -138,16 +157,107 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 			}
 		}
 
+		try {
+			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("maxmus")
+					.getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = null;
+					user = new Userdb();
+					user.setFirstname("Max");
+					user.setLastname("MUSTERMANN");
+					user.setUsername("maxmus");
+					user.setUserrole("trainee");
+					user.setPassword("maxmus");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+
+		try {
+			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("tobsch")
+					.getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = null;
+					user = new Userdb();
+					user.setFirstname("Tobias");
+					user.setLastname("SCHULZ");
+					user.setUsername("tobsch");
+					user.setUserrole("senior");
+					user.setPassword("tobsch");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+
+		try {
+			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("manmei")
+					.getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = null;
+					user = new Userdb();
+					user.setFirstname("Manuel");
+					user.setLastname("MEIER");
+					user.setUsername("manmei");
+					user.setUserrole("admin");
+					user.setPassword("manmei");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+
+		try {
+			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("axesch")
+					.getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = null;
+					user = new Userdb();
+					user.setFirstname("Axel");
+					user.setLastname("SCHULZ");
+					user.setUsername("axesch");
+					user.setUserrole("trainee");
+					user.setPassword("axesch");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+
 	}
 
 	private void createTasks() {
+		Userdb all = Userdb.findUserdbsByUsernameEquals("all")
+				.getSingleResult();
 		Userdb trainee = Userdb.findUserdbsByUsernameEquals("trainee")
 				.getSingleResult();
 		Userdb senior = Userdb.findUserdbsByUsernameEquals("senior")
 				.getSingleResult();
 		Userdb testsenior = Userdb.findUserdbsByUsernameEquals("testsenior")
 				.getSingleResult();
+		Userdb maxmus = Userdb.findUserdbsByUsernameEquals("maxmus")
+				.getSingleResult();
+		Userdb tobsch = Userdb.findUserdbsByUsernameEquals("tobsch")
+				.getSingleResult();
 		Route route = Route.findAllRoutes().get(0);
+		Route route1 = Route.findAllRoutes().get(1);
 		System.out.println("route" + route.getStartpointName());
 		Taskdb t = null;
 
@@ -158,8 +268,8 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setPersonfunction("Function 007");
 		t.setRoomno("007");
 		t.setTaskname("Your first mission");
-		t.setTrainee(trainee);
-		t.setSenior(senior);
+		t.setTrainee(all);
+		t.setSenior(all);
 		t.setMap(route);
 		t.persist();
 
@@ -170,9 +280,9 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setPersonfunction("Function uncertain");
 		t.setRoomno("no number");
 		t.setTaskname("Your punishment");
-		t.setTrainee(trainee);
-		t.setSenior(senior);
-		t.setMap(route);
+		t.setTrainee(all);
+		t.setSenior(all);
+		t.setMap(route1);
 		t.persist();
 
 		t = new Taskdb();
@@ -185,13 +295,54 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setTrainee(trainee);
 		t.setSenior(testsenior);
 		t.persist();
+
+		t = new Taskdb();
+		t.setDescription("Find the Cafeteria");
+		t.setPerson("-");
+		t.setBuilding("Building D1");
+		t.setPersonfunction("-");
+		t.setRoomno("-");
+		t.setTaskname("What is the main dish of today?");
+		t.setTrainee(maxmus);
+		t.setSenior(tobsch);
+		t.persist();
+
+		t = new Taskdb();
+		t.setDescription("Get to know the HR department");
+		t.setPerson("Manuel Meier");
+		t.setBuilding("Building C2");
+		t.setPersonfunction("Recruiter");
+		t.setRoomno("01.231");
+		t.setTaskname("Ask Manuel Meier for his favorite color");
+		t.setTrainee(maxmus);
+		t.setSenior(tobsch);
+		t.persist();
+
+		t = new Taskdb();
+		t.setDescription("Use the bus shuttle");
+		t.setPerson("-");
+		t.setBuilding("-");
+		t.setPersonfunction("-");
+		t.setRoomno("-");
+		t
+				.setTaskname("Take the bus shuttle from A to B. Ask the driver for his name when you get out.");
+		t.setTrainee(maxmus);
+		t.setSenior(tobsch);
+		t.persist();
+
 	}
 
 	private void createRoutes() {
-		Route r = new Route();
+		Route r = null;
+
+		r = new Route();
 		r.setStartpointName("Building A1");
 		r.setEndpointName("Building B2");
 		r.persist();
 
+		r = new Route();
+		r.setStartpointName("Building X");
+		r.setEndpointName("Building Z");
+		r.persist();
 	}
 }

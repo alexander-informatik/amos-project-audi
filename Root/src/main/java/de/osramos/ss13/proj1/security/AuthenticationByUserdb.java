@@ -80,6 +80,11 @@ public class AuthenticationByUserdb
 			if (user.getUserrole().equals("trainee")) {
 				authorities.add(new GrantedAuthorityImpl("ROLE_TRAINEE"));
 			}
+			if (user.getUserrole().equals("all")) {
+				authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+				authorities.add(new GrantedAuthorityImpl("ROLE_SENIOR"));
+				authorities.add(new GrantedAuthorityImpl("ROLE_TRAINEE"));
+			}
 
 		} catch (EmptyResultDataAccessException e) {
 			throw new BadCredentialsException("Invalid username or password");
