@@ -15,17 +15,28 @@
         <sec:authorize access="hasAnyRole('ROLE_SENIOR')">
             <menu:category id="c_taskdb" z="9Sbb4YxhD/iSGUtL3AHvm/B0LR8=">
                 <menu:item id="i_taskdb_new" messageCode="global_menu_new" url="/taskdbs?form" z="tytZ5i/6AFaE1Ab7t/kcUlYwi5U="/>
-                <menu:item id="i_taskdb_list" messageCode="global_menu_list" url="/taskdbs?page=1&amp;size=${empty param.size ? 10 : param.size}" z="s0rWYYsUSRQjOiDrk06uKCdxhk0="/>
-                <menu:item id="i_view__senior_routecreate_id" messageCode="global_generic" url="/senior/route" z="user-managed"/>
+                <menu:item id="i_taskdb_list" messageCode="seniortask_menu_list" url="/taskdbs?page=1&amp;size=${empty param.size ? 10 : param.size}" z="s0rWYYsUSRQjOiDrk06uKCdxhk0="/>
+                <!-- <menu:item id="i_view__senior_routecreate_id" messageCode="global_generic" url="/senior/route" z="user-managed"/> -->
                 <menu:item id="i_controller__senior_tasklistindex_id" messageCode="global_generic" url="/senior/tasklist/index" z="vXyYxDkxpemuc84O4YDOMhpVyms="/>
 				<!--<menu:item id="i_controller__senior_taskindex_id" messageCode="global_generic" url="/senior/task/index" z="4+/JZ2JvcJHdJMX3HuwIe5Afdq0="/> -->
                 <menu:item id="i_controller__senior_tasklist_traineeindex_id" messageCode="global_generic" url="/senior/tasklist/trainee/index" z="wxOhefUL2imXU6n2XsbUYbSA7Y8="/>
-                <menu:item id="i_controller__senior_pointofinterestindex_id" messageCode="global_generic" url="/senior/pointofinterest/index" z="fRdSfokI//H1RoO+Td31GFaLSOU="/>
-                <menu:item id="i_controller__senior_routeindex_id" messageCode="global_generic" url="/senior/route/index" z="yBQPZ8oCevfTkHOAm4vRg5qtAGk="/>
-				<menu:item id="i_controller__senior_recordrouteindex_id" messageCode="global_generic" url="/senior/recordroute/index" z="jDJfq0vBNLZNpjV72HPoVB2Gr+s="/>
+                <!-- <menu:item id="i_controller__senior_pointofinterestindex_id" messageCode="global_generic" url="/senior/pointofinterest/index" z="fRdSfokI//H1RoO+Td31GFaLSOU="/> -->
+                <!-- <menu:item id="i_controller__senior_routeindex_id" messageCode="global_generic" url="/senior/route/index" z="yBQPZ8oCevfTkHOAm4vRg5qtAGk="/>
+				<menu:item id="i_controller__senior_recordrouteindex_id" messageCode="global_generic" url="/senior/recordroute/index" z="jDJfq0vBNLZNpjV72HPoVB2Gr+s="/> -->
                 <menu:item id="i_controller__senior_traineeprogressindex_id" messageCode="global_generic" url="/senior/traineeprogress/index" z="zdFPUv5SEr+sXQNmyiqGBECpR9w="/>
-                <menu:item id="i_controller__senior_gamepathindex_id" messageCode="global_generic" url="/senior/gamepath/index" z="8qgEl6cLt7pz/T94H5QN772lKSY="/>
+                <!-- <menu:item id="i_controller__senior_gamepathindex_id" messageCode="global_generic" url="/senior/gamepath/index" z="8qgEl6cLt7pz/T94H5QN772lKSY="/> -->
+                <!-- <menu:item id="i_controller__senior_taskfeedbackindex_id" messageCode="global_generic" url="/senior/taskfeedback/index" z="XH8GoKkoaEvyK9eQ8O5Hri398x0="/> -->
+            </menu:category>
+            <menu:category id="c_feedback" z="9Sbb4YxhD/iSGUtL3AHvm/B0LR8=">
                 <menu:item id="i_controller__senior_taskfeedbackindex_id" messageCode="global_generic" url="/senior/taskfeedback/index" z="XH8GoKkoaEvyK9eQ8O5Hri398x0="/>
+            </menu:category>
+            <menu:category id="c_poi" z="9Sbb4YxhD/iSGUtL3AHvm/B0LR8=">
+                <menu:item id="i_controller__senior_pointofinterestindex_id" messageCode="global_generic" url="/senior/pointofinterest/index" z="fRdSfokI//H1RoO+Td31GFaLSOU="/>
+            </menu:category>
+            <menu:category id="c_seniorroute" z="user-managed">
+                <menu:item id="i_view__senior_routecreate_id" messageCode="global_generic" url="/senior/route" z="user-managed"/>
+                <menu:item id="i_controller__senior_routeindex_id" messageCode="global_generic" url="/senior/route/index" z="yBQPZ8oCevfTkHOAm4vRg5qtAGk="/>
+                <menu:item id="i_controller__senior_recordrouteindex_id" messageCode="global_generic" url="/senior/recordroute/index" z="jDJfq0vBNLZNpjV72HPoVB2Gr+s="/>
             </menu:category>
         </sec:authorize>
         <sec:authorize access="hasAnyRole('ROLE_TRAINEE')">
@@ -33,9 +44,13 @@
 				<!-- <menu:item id="i_controller__trainee_taskdbindex_id" messageCode="global_generic" url="/trainee/taskdb/index" z="snYRf2XA9k/UYhuUAII30CEzfRc="/> -->
                 <menu:item id="i_controller__trainee_tasklistindex_id" messageCode="global_generic" url="/trainee/tasklist/index" z="wwHEY5ejfmxGKFaXa5b2oc2TyBA="/>
                 <menu:item id="i_controller__trainee_traineeprogressindex_id" messageCode="global_generic" url="/trainee/traineeprogress/index" z="ZxBOlf2P51tr0lJAayC/eP0KSN4="/>
+                <!-- <menu:item id="i_controller__trainee_routefeedbackindex_id" messageCode="global_generic" url="/trainee/routefeedback/index" z="ZLf1T/mAK7VXAfbhZiHE2ftgFk8="/>
+                <menu:item id="i_controller__trainee_taskfeedbackindex_id" messageCode="global_generic" url="/trainee/taskfeedback/index" z="oszbfNjwQA34ZgocRDsgOSGpcvM="/>      -->
+                <!-- <menu:item id="i_controller__trainee_markascompleted_taskindex_id" messageCode="global_generic" url="/trainee/markascompleted/task/index" z="R8qpKWFIBHjHp8UecVl0PvfZB2I="/> -->
+            </menu:category>
+            <menu:category id="c_feedback" z="user-managed">
                 <menu:item id="i_controller__trainee_routefeedbackindex_id" messageCode="global_generic" url="/trainee/routefeedback/index" z="ZLf1T/mAK7VXAfbhZiHE2ftgFk8="/>
                 <menu:item id="i_controller__trainee_taskfeedbackindex_id" messageCode="global_generic" url="/trainee/taskfeedback/index" z="oszbfNjwQA34ZgocRDsgOSGpcvM="/>     
-                <menu:item id="i_controller__trainee_markascompleted_taskindex_id" messageCode="global_generic" url="/trainee/markascompleted/task/index" z="R8qpKWFIBHjHp8UecVl0PvfZB2I="/>
             </menu:category>
         </sec:authorize>
 		<menu:category id="c_password" z="user-managed">
