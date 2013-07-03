@@ -29,6 +29,7 @@ package de.osramos.ss13.proj1.web;
  * #L%
  */
 
+import de.osramos.ss13.proj1.model.MediaUpload;
 import de.osramos.ss13.proj1.model.Userdb;
 import de.osramos.ss13.proj1.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -38,6 +39,30 @@ import org.springframework.format.FormatterRegistry;
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
     declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
+    
+    public Converter<MediaUpload, String> ApplicationConversionServiceFactoryBean.getMediaUploadToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<de.osramos.ss13.proj1.model.MediaUpload, java.lang.String>() {
+            public String convert(MediaUpload mediaUpload) {
+                return new StringBuilder().append(mediaUpload.getFilepath()).append(' ').append(mediaUpload.getFilesize()).append(' ').append(mediaUpload.getContentType()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, MediaUpload> ApplicationConversionServiceFactoryBean.getIdToMediaUploadConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, de.osramos.ss13.proj1.model.MediaUpload>() {
+            public de.osramos.ss13.proj1.model.MediaUpload convert(java.lang.Long id) {
+                return MediaUpload.findMediaUpload(id);
+            }
+        };
+    }
+    
+    public Converter<String, MediaUpload> ApplicationConversionServiceFactoryBean.getStringToMediaUploadConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, de.osramos.ss13.proj1.model.MediaUpload>() {
+            public de.osramos.ss13.proj1.model.MediaUpload convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), MediaUpload.class);
+            }
+        };
+    }
     
     public Converter<Userdb, String> ApplicationConversionServiceFactoryBean.getUserdbToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<de.osramos.ss13.proj1.model.Userdb, java.lang.String>() {
@@ -64,6 +89,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     }
     
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
+        registry.addConverter(getMediaUploadToStringConverter());
+        registry.addConverter(getIdToMediaUploadConverter());
+        registry.addConverter(getStringToMediaUploadConverter());
         registry.addConverter(getUserdbToStringConverter());
         registry.addConverter(getIdToUserdbConverter());
         registry.addConverter(getStringToUserdbConverter());

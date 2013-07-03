@@ -34,7 +34,8 @@ import de.osramos.ss13.proj1.model.Route;
 import de.osramos.ss13.proj1.model.Taskdb;
 
 public aspect ApplicationConversionServiceFactoryBean_ConversionService {
-	 declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
+
+	  declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
 	    
 	    public Converter<Route, String> ApplicationConversionServiceFactoryBean.getRouteToStringConverter() {
 	        return new org.springframework.core.convert.converter.Converter<de.osramos.ss13.proj1.model.Route, java.lang.String>() {
@@ -58,8 +59,8 @@ public aspect ApplicationConversionServiceFactoryBean_ConversionService {
 	                return getObject().convert(getObject().convert(id, Long.class), Route.class);
 	            }
 	        };
-	    }
-	    
+	    }    
+
 	    public Converter<Taskdb, String> ApplicationConversionServiceFactoryBean.getTaskdbToStringConverter() {
 	        return new org.springframework.core.convert.converter.Converter<de.osramos.ss13.proj1.model.Taskdb, java.lang.String>() {
 	            public String convert(Taskdb taskdb) {
@@ -83,8 +84,4 @@ public aspect ApplicationConversionServiceFactoryBean_ConversionService {
 	            }
 	        };
 	    }
-
-	  
-	    
-
 }

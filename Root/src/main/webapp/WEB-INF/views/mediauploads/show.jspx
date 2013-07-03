@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_de_osramos_ss13_proj1_model_MediaUpload" object="${mediaupload}" path="/mediauploads" z="ayjYf/K3FwxCXN4FHoGQQ52Btm8=">
+        <field:display field="filepath" id="s_de_osramos_ss13_proj1_model_MediaUpload_filepath" object="${mediaupload}" z="Uk3VFZK+NJRSgldpjVeidKt84is="/>
+        <field:display field="filesize" id="s_de_osramos_ss13_proj1_model_MediaUpload_filesize" object="${mediaupload}" z="ohzZETHgDa3hK2YHxDffSPaMVE4="/>
+        <field:display field="contentType" id="s_de_osramos_ss13_proj1_model_MediaUpload_contentType" object="${mediaupload}" z="JimzVyThTzR5mc7zQP1LJ7gTdU4="/>
+        <field:display field="content" id="s_de_osramos_ss13_proj1_model_MediaUpload_content" object="${mediaupload}" z="i/5K6nzIz1afGVrkBDpW4PjsOIU="/>
+    </page:show>
+</div>
