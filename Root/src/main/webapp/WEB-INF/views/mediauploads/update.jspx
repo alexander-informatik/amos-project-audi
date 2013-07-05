@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_de_osramos_ss13_proj1_model_MediaUpload" modelAttribute="mediaUpload" path="/mediauploads" versionField="Version" z="/g91kkQ7nlIaKYVTmN9aNoHUtjI=">
+        <field:textarea field="filepath" id="c_de_osramos_ss13_proj1_model_MediaUpload_filepath" required="true" z="ufZg5QMj6Z92GvLCZLQSuIVu4A4="/>
+        <field:input field="filesize" id="c_de_osramos_ss13_proj1_model_MediaUpload_filesize" required="true" z="0NVqPBuc5iuF1HrZHlJ3ct2UE2w="/>
+        <field:input field="contentType" id="c_de_osramos_ss13_proj1_model_MediaUpload_contentType" required="true" z="hHl3BlvsizlHW3XyvrfLwpD2TJA="/>
+        <field:input field="content" id="c_de_osramos_ss13_proj1_model_MediaUpload_content" z="DEdH/SYkTYboU4dAmp5jvIhRlaw="/>
+    </form:update>
+</div>

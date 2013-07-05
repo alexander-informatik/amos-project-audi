@@ -33,6 +33,7 @@ import de.osramos.ss13.proj1.model.Taskdb;
 import de.osramos.ss13.proj1.model.Userdb;
 
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,11 +44,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TaskdbController {
 
 	void populateEditForm(Model uiModel, Taskdb taskdb) {
+		String authorizedUsername = SecurityContextHolder.getContext()
+				.getAuthentication().getName();
 		uiModel.addAttribute("taskdb", taskdb);
 		uiModel.addAttribute("userdbt", Userdb.findUserdbsByUserroleEquals(
 				"trainee").getResultList());
-		uiModel.addAttribute("userdbs", Userdb.findUserdbsByUserroleEquals(
-				"senior").getResultList());
+		// 		uiModel.addAttribute("userdbs", Userdb.findUserdbsByUserroleEquals(
+		// 				"senior").getResultList());
+		uiModel.addAttribute("userdbs", Userdb.findUserdbsByUsernameEquals(
+				authorizedUsername).getResultList());
 		uiModel.addAttribute("routes", Route.findAllRoutes());
 	}
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_de_osramos_ss13_proj1_model_MediaUpload" items="${mediauploads}" z="mvXrHONVQlrpDqUnADBTG+C2apE=">
+        <table:table data="${mediauploads}" id="l_de_osramos_ss13_proj1_model_MediaUpload" path="/mediauploads" z="3K4v3AuxB76q3sMXdLP2QqQuHg8=">
+            <table:column id="c_de_osramos_ss13_proj1_model_MediaUpload_filepath" property="filepath" z="VCACf+G2eXjALVl8YLcz5AYT8Mg="/>
+            <table:column id="c_de_osramos_ss13_proj1_model_MediaUpload_filesize" property="filesize" z="Ruvce+d6CsumRU1BQQ3/eLjpx/Q="/>
+            <table:column id="c_de_osramos_ss13_proj1_model_MediaUpload_contentType" property="contentType" z="DHYkxSqoFDeITcGJ/uODDZIcu20="/>
+            <table:column id="c_de_osramos_ss13_proj1_model_MediaUpload_content" property="content" z="39Q18/fkMbqlQmlguYUZFqu5Gr4="/>
+        </table:table>
+    </page:list>
+</div>
