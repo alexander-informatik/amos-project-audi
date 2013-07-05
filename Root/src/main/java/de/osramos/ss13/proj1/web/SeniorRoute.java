@@ -225,7 +225,7 @@ public class SeniorRoute {
 	public ResponseEntity<String> deleteFromJson(@PathVariable("id") Long id) {
 		Gpscoordinate gpscoordinate = Gpscoordinate.findGpscoordinate(id);
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", "application/json");
+		//headers.add("Content-Type", "application/json");
 		if (gpscoordinate == null) {
 			return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
 		}

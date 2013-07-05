@@ -3,6 +3,7 @@
 	<jsp:output doctype-root-element="HTML" doctype-system="about:legacy-compat" />
 	
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />  
+	
 	<jsp:directive.page pageEncoding="UTF-8" /> 
 			
 	<head>
@@ -24,34 +25,8 @@
   	<body>
    		
    			
-   				<div class="navbar navbar-inverse navbar-fixed-top">
-	   				<tiles:insertAttribute name="header" ignore="true" />
-			    </div>
-   				
-			
-			<div class="container-fluid">
-   				<div class="row-fluid">
-		   			<div class="span3">
-		   				<div class="sidebar-nav">
-		   					<tiles:insertAttribute name="menu" ignore="true" />
-		   				</div>
-		   				
-		   			</div>
-		   			
-		   			<div class="span9">
-		   				<div id="main" class="hero-unit">
-				    		<tiles:insertAttribute name="body"/> 
-					    </div>
-		   			</div>
-				</div>
-				 
-      		</div>
-      		<hr/>
-      		
-    	<footer class="container-fluid">
-	    	<tiles:insertAttribute name="footer" ignore="true"/>
-	    </footer>
-      		
+   	<tiles:insertAttribute name="body"/> 
+					   
       	 
 	</body>
 </html>
