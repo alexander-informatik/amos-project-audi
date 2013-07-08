@@ -48,17 +48,13 @@ public class Taskdb {
 
 	@NotNull
 	private String description;
-
-	@NotNull
+	
 	private String person;
-
-	@NotNull
+	
 	private String personfunction;
-
-	@NotNull
+	
 	private String building;
 
-	@NotNull
 	private String roomno;
 
 	@ManyToOne
