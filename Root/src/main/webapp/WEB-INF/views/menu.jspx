@@ -15,7 +15,7 @@
         <sec:authorize access="hasAnyRole('ROLE_SENIOR')">
             <menu:category id="c_taskdb" z="9Sbb4YxhD/iSGUtL3AHvm/B0LR8=">
                 <menu:item id="i_taskdb_new" messageCode="global_menu_new" url="/taskdbs?form" z="tytZ5i/6AFaE1Ab7t/kcUlYwi5U="/>
-                <menu:item id="i_taskdb_list" messageCode="seniortask_menu_list" url="/taskdbs?page=1&amp;size=${empty param.size ? 10 : param.size}" z="s0rWYYsUSRQjOiDrk06uKCdxhk0="/>
+                <menu:item id="i_taskdb_list" messageCode="seniortask_menu_list" url="/taskdbs?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 <!-- <menu:item id="i_view__senior_routecreate_id" messageCode="global_generic" url="/senior/route" z="user-managed"/> -->
                 <menu:item id="i_controller__senior_tasklistindex_id" messageCode="global_generic" url="/senior/tasklist/index" z="vXyYxDkxpemuc84O4YDOMhpVyms="/>
                 <!--<menu:item id="i_controller__senior_taskindex_id" messageCode="global_generic" url="/senior/task/index" z="4+/JZ2JvcJHdJMX3HuwIe5Afdq0="/> -->
@@ -27,15 +27,15 @@
                 <!-- <menu:item id="i_controller__senior_gamepathindex_id" messageCode="global_generic" url="/senior/gamepath/index" z="8qgEl6cLt7pz/T94H5QN772lKSY="/> -->
                 <!-- <menu:item id="i_controller__senior_taskfeedbackindex_id" messageCode="global_generic" url="/senior/taskfeedback/index" z="XH8GoKkoaEvyK9eQ8O5Hri398x0="/> -->
             </menu:category>
-            <menu:category id="c_feedback" z="9Sbb4YxhD/iSGUtL3AHvm/B0LR8=">
+            <menu:category id="c_feedback" z="user-managed">
                 <menu:item id="i_controller__senior_taskfeedbackindex_id" messageCode="global_generic" url="/senior/taskfeedback/index" z="XH8GoKkoaEvyK9eQ8O5Hri398x0="/>
             </menu:category>
-            <menu:category id="c_poi" z="9Sbb4YxhD/iSGUtL3AHvm/B0LR8=">
+            <menu:category id="c_poi" z="user-managed">
                 <menu:item id="i_controller__senior_pointofinterestindex_id" messageCode="global_generic" url="/senior/pointofinterest/index" z="fRdSfokI//H1RoO+Td31GFaLSOU="/>
             </menu:category>
             <menu:category id="c_seniorroute" z="user-managed">
-                <menu:item id="i_view__senior_routecreate_id" messageCode="global_generic" url="/senior/route" z="user-managed"/>
-                <menu:item id="i_controller__senior_routeindex_id" messageCode="global_generic" url="/senior/route/index" z="yBQPZ8oCevfTkHOAm4vRg5qtAGk="/>
+                <menu:item id="i_view__senior_routecreate_id" messageCode="global_generic" url="/senior/route?create" z="user-managed"/>
+                <menu:item id="i_controller__senior_routeindex_id" messageCode="global_generic" url="/senior/route" z="yBQPZ8oCevfTkHOAm4vRg5qtAGk="/>
                 <menu:item id="i_controller__senior_recordrouteindex_id" messageCode="global_generic" url="/senior/recordroute/index" z="jDJfq0vBNLZNpjV72HPoVB2Gr+s="/>
             </menu:category>
         </sec:authorize>
@@ -57,9 +57,13 @@
             <menu:item id="i_controller__user_lostpasswordindex_id" messageCode="global_generic" url="/user/lostpassword/index" z="jM81kvAPpGLapAC2y7HgR79GH2c="/>
             <menu:item id="i_controller__user_changepasswordindex_id" messageCode="global_generic" url="/user/changepassword/index" z="IBJAn2DuFJ0zhzP0YzmQxJlSJSc="/>
         </menu:category>
-       <!-- <menu:category id="c_mediaupload" z="P7O7JTmz/UsTnoVC+LJZ5Qsmc9o=">
+        <!-- <menu:category id="c_mediaupload" z="P7O7JTmz/UsTnoVC+LJZ5Qsmc9o=">
             <menu:item id="i_mediaupload_new" messageCode="global_menu_new" url="/mediauploads?form" z="KDCGmO3CtT1dhTpINlD78FP4e5M="/>
             <menu:item id="i_mediaupload_list" messageCode="global_menu_list" url="/mediauploads?page=1&amp;size=${empty param.size ? 10 : param.size}" z="qR8hVEysnNu2b3HJbgW85xLnYHY="/>
         </menu:category>-->
+        <menu:category id="c_mediaupload" z="P7O7JTmz/UsTnoVC+LJZ5Qsmc9o=">
+            <menu:item id="i_mediaupload_new" messageCode="global_menu_new" url="/mediauploads?form" z="KDCGmO3CtT1dhTpINlD78FP4e5M="/>
+            <menu:item id="i_mediaupload_list" messageCode="global_menu_list" url="/mediauploads?page=1&amp;size=${empty param.size ? 10 : param.size}" z="qR8hVEysnNu2b3HJbgW85xLnYHY="/>
+        </menu:category>
     </menu:menu>
 </div>
