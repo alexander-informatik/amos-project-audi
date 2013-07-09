@@ -35,9 +35,13 @@
             </menu:category>
             <menu:category id="c_seniorroute" z="user-managed">
                 <menu:item id="i_view__senior_routecreate_id" messageCode="global_generic" url="/senior/route?create" z="user-managed"/>
-                <menu:item id="i_controller__senior_routeindex_id" messageCode="global_generic" url="/senior/route" z="yBQPZ8oCevfTkHOAm4vRg5qtAGk="/>
+                <menu:item id="i_controller__senior_routeindex_id" messageCode="global_generic" url="/senior/route" z="user-managed"/>
                 <menu:item id="i_controller__senior_recordrouteindex_id" messageCode="global_generic" url="/senior/recordroute/index" z="jDJfq0vBNLZNpjV72HPoVB2Gr+s="/>
             </menu:category>
+			<!-- <menu:category id="c_mediaupload" z="P7O7JTmz/UsTnoVC+LJZ5Qsmc9o=">
+				<menu:item id="i_mediaupload_new" messageCode="global_menu_new" url="/mediauploads?form" z="KDCGmO3CtT1dhTpINlD78FP4e5M="/>
+				<menu:item id="i_mediaupload_list" messageCode="global_menu_list" url="/mediauploads?page=1&amp;size=${empty param.size ? 10 : param.size}" z="qR8hVEysnNu2b3HJbgW85xLnYHY="/>
+			</menu:category> -->
         </sec:authorize>
         <sec:authorize access="hasAnyRole('ROLE_TRAINEE')">
             <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
@@ -56,14 +60,6 @@
         <menu:category id="c_password" z="user-managed">
             <menu:item id="i_controller__user_lostpasswordindex_id" messageCode="global_generic" url="/user/lostpassword/index" z="jM81kvAPpGLapAC2y7HgR79GH2c="/>
             <menu:item id="i_controller__user_changepasswordindex_id" messageCode="global_generic" url="/user/changepassword/index" z="IBJAn2DuFJ0zhzP0YzmQxJlSJSc="/>
-        </menu:category>
-        <!-- <menu:category id="c_mediaupload" z="P7O7JTmz/UsTnoVC+LJZ5Qsmc9o=">
-            <menu:item id="i_mediaupload_new" messageCode="global_menu_new" url="/mediauploads?form" z="KDCGmO3CtT1dhTpINlD78FP4e5M="/>
-            <menu:item id="i_mediaupload_list" messageCode="global_menu_list" url="/mediauploads?page=1&amp;size=${empty param.size ? 10 : param.size}" z="qR8hVEysnNu2b3HJbgW85xLnYHY="/>
-        </menu:category>-->
-        <menu:category id="c_mediaupload" z="P7O7JTmz/UsTnoVC+LJZ5Qsmc9o=">
-            <menu:item id="i_mediaupload_new" messageCode="global_menu_new" url="/mediauploads?form" z="KDCGmO3CtT1dhTpINlD78FP4e5M="/>
-            <menu:item id="i_mediaupload_list" messageCode="global_menu_list" url="/mediauploads?page=1&amp;size=${empty param.size ? 10 : param.size}" z="qR8hVEysnNu2b3HJbgW85xLnYHY="/>
-        </menu:category>
+        </menu:category> 
     </menu:menu>
 </div>

@@ -48,11 +48,11 @@ public class Taskdb {
 
 	@NotNull
 	private String description;
-	
+
 	private String person;
-	
+
 	private String personfunction;
-	
+
 	private String building;
 
 	private String roomno;
