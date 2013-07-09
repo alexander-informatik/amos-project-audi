@@ -34,11 +34,11 @@
 
     <br/>
     
-    <hr/>
-    <blockquote class="pull-right">
+    <!--<hr/>
+	<blockquote class="pull-right">
       <p><spring:message code="welcome_quote" /></p>
       <small><spring:message code="welcome_quote_author" /></small>
-    </blockquote>
+    </blockquote> -->
   </div>
 
 </div>
