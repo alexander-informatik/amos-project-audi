@@ -16,149 +16,106 @@ version="2.0">
 
 <spring:url value="/resources/js-lib/jquery-1.4.min.js" var="url_jquery" />
 <spring:url value="/resources/js-lib/json.min.js" var="url_json" />
-<spring:url value="/resources/img/mapicon.png" var="mapiconURL" />
+<spring:url value="/resources/js-lib/a.tools.gps.js" var="url_a_tools_gps" />
+<spring:url value="/resources/img/" var="url_imgfolder" />
+<spring:url value="/resources/img/mapicon.png" var="url_mapicon" />
 
 
 <script type="text/javascript" src="${url_jquery}"><div/></script>
 <script type="text/javascript" src="${url_json}"><div/></script>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"><div /></script>
-<script src="//www.google.com/jsapi?key=AIzaSyCZfHRnq7tigC-COeQRmoa9Cxr0vbrK6xw"><div /></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true"><div /></script>
+<script type="text/javascript" src="${url_a_tools_gps}"><div/></script>
+
 <script type="text/javascript">
-
-var map;
-var marker;
-var markersArray = new Array();
-var markerpositions=new Array();
-var drawPath = new google.maps.Polyline(
-			{
-			    strokeColor: '#FF0000',
-			    strokeOpacity: 1.0,
-		   	    strokeWeight: 2
-		 	 });
-var latlng_default = new google.maps.LatLng(48.79326, 11.41279);
-
-
-	function initializeMap() 
+	var amap;
+	function init()
 	{
+		aconfig.imgFolder = '${url_imgfolder}mapicon';
+		aconfig.url.json.gpscoordinate.getall = '/proj1/senior/route/${route.id}?gpscoordinates';
+		aconfig.url.json.gpscoordinate.send = '/proj1/senior/route/${route.id}';
+		aconfig.url.json.gpscoordinate.update = '/proj1/senior/route/?updategpscoordinate';
+		aconfig.url.json.gpscoordinate._delete = '/proj1/senior/route/';
+		
+		aconfig.editor.routeMarkers.isDraggable = true;
+		aconfig.editor.routeMarkers.isAddOnMouseClick = true;
 
-		var myOptions = 
+		aconfig._new.createNewMarkerFromGpsCoordinate.apply.push(function(marker)
 		{
-			zoom: 12,
-			center: latlng_default,
-			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			mapTypeControlOptions: 
+			marker.setCallbackRightClick(function(m,e)
 			{
-	        		mapTypeIds: [google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE],
-	        		style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
-	      		}
-		};
-	
-	
-		map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-		map.setCenter(latlng_default);
-	
-
-
-
-		google.maps.event.addListener(map,"click",function(clickpos)
-		{
-			sendgps(clickpos.latLng.lat().toString(), clickpos.latLng.lng().toString());
-		});
-
-		showallgps();
-
-	}
-
-
-
-
-
-	function showgps(id, latitude, longitude, orderedposition)
-	{
-		var latLng = new google.maps.LatLng(latitude, longitude);
-		var image = '${mapiconURL}';
-		var newMarker = 
-			new google.maps.Marker(
-			{
-				position: latLng,
-				map: map,
-				icon: image,
-				title: orderedposition.toString()
+				var c = m.getGpsCoordinate();
+				$("#id").val(c.id);
+				$("#latitude").val(m.getLatLng().lat());
+				$("#longitude").val(m.getLatLng().lng());
 			});
-			newMarker.setDraggable(true);
-			newMarker.setPosition(latLng);
-			markersArray.push(newMarker);
+		});
+
+		amap = new aMap();
+		amap.initializeMap();
+
+		
+	}
+
+	
+	google.maps.event.addDomListener(window, 'load', init);
 
 
-			google.maps.event.addListener(newMarker, "dragend", function(event)
+
+	
+
+
+
+
+	$(document).ready(function()
+	{
+			
+		var submitID; 
+		$('.submitbuttons').click(function() 
+		{ 
+		    submitID = $(this)[0].id;
+		});
+
+		$("#gpsform").submit(function(e) 
+		{
+			var gps = $("#gpsform").serializeObject();
+
+			
+			var fchanged = function(data)
 			{
-      				var position = newMarker.getPosition();
-				updategps(id,position.lat().toString(),position.lng().toString());
-			});
+				console.log("result data");
+				console.log(data);
 
-			markerpositions[markerpositions.length] = latLng;
-	}
-
-	
-	function showallgps()
-	{
-		for(var i = 0;	i &lt; markersArray.length;i++	)
-		{
-    			markersArray[i].setMap(null);	
-		}
-		markersArray = new Array();
-		markerpositions=new Array();
-
-		// load gps coordinates
-	
-		$.getJSON('./${route.id}?gpscoordinates', function(data)
-		{
-			var elem = document.getElementById("gpspos");
-			$('#gpspos').empty();
-
-			$.each(data, function(i, item)
+				$("#id").val(data.id);
+				$("#latitude").val(data.latitude);
+				$("#longitude").val(data.longitude);
+			} 
+			var fdeleted = function(data)
 			{
-				showgps(item.id, item.latitude,item.longitude,item.orderedposition);
-			});
+				$("#id").val("");
+				$("#latitude").val("");
+				$("#longitude").val("");
+			} 
 
-		
-			drawPath.setPath(markerpositions);
-			drawPath.setMap(map);
+
+			if(0 == submitID.localeCompare("update"))
+			{
+				result = amap.updategps(gps.id,gps.latitude,gps.longitude,fchanged);
+			}
+			if(0 == submitID.localeCompare("new"))
+			{
+				result = amap.sendgps(gps.latitude,gps.longitude,fchanged);
+			}
+			if(0 == submitID.localeCompare("delete"))
+			{
+				result = amap.deletegps(gps.id,fdeleted);
+			}
+
+
+			return false;			
 		});
 
-		
-	
-	}
-
-
-	function sendgps(latitude, longitude)
-	{
-		var thing = { longitude: longitude , latitude: latitude }
-		
-		$.postJSON('./${route.id}', thing, function(data) 
-		{
-			showallgps();
-		});
-		
-	}
-
-	function updategps(id, latitude, longitude)
-	{
-		var thing = { id: id, longitude: longitude , latitude: latitude }
-		
-		$.postJSON('./?updategpscoordinate', thing, function(data) 
-		{
-			showallgps();
-		});
-		
-	}
-
-
-
-
-google.maps.event.addDomListener(window, 'load', initializeMap);
-
-
+			
+	});
 
 </script>
 
@@ -188,7 +145,7 @@ google.maps.event.addDomListener(window, 'load', initializeMap);
 </div>
 
 <div id="directionsPanel"  style="width:300px;" >
-Google Maps
+<div/>
 </div>
 
 
@@ -198,9 +155,40 @@ Google Maps
 </div>
 
 
+<table border="0">
+  <tr>
+<td>
 <div id="map_canvas" style="width:400px;height:600px">
 <div/>
 </div>
+</td>
+<td>
+
+
+<div id="gpsform_response" >
+<div/>
+</div>
+<form id="gpsform" method="post">	
+<p>id
+<input id="id" name="id" type="text" readonly="true"/>
+</p>
+<p>longitude
+<input id="longitude" name="longitude" type="text"/>
+</p>
+<p>latitude	
+<input id="latitude" name="latitude" type="text" />
+</p>
+<p>	
+<input id="update" type="submit" value="Update" class="submitbuttons" />
+<input id="new" type="submit" value="Add New Waypoint" class="submitbuttons" />
+<input id="delete" type="submit" value="Delete" class="submitbuttons" />
+</p>
+					
+</form>
+
+</td>
+</tr>
+</table>
 
 
 

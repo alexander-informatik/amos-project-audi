@@ -8,7 +8,7 @@ xmlns:c="http://java.sun.com/jsp/jstl/core"
 xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 xmlns:form="http://www.springframework.org/tags/form"
 
-version="2.0">
+version="2.0" style="height:100%">
 
 <jsp:directive.page contentType="text/html;charset=UTF-8"/>
 <jsp:output omit-xml-declaration="yes"/>
@@ -16,355 +16,128 @@ version="2.0">
 
 <spring:url value="/resources/js-lib/jquery-1.4.min.js" var="url_jquery" />
 <spring:url value="/resources/js-lib/json.min.js" var="url_json" />
+<spring:url value="/resources/js-lib/a.tools.gps.js" var="url_a_tools_gps" />
+<spring:url value="/resources/img/" var="url_imgfolder" />
 <spring:url value="/resources/img/mapicon.png" var="url_mapicon" />
-<spring:url value="/resources/img/mapicon_currentlocation.png" var="url_mapicon_currentlocation" />
-<spring:url value="/resources/img/mapicon_start.png" var="url_mapicon_start" />
-<spring:url value="/resources/img/mapicon_finish.png" var="url_mapicon_finish" />
+
 
 <script type="text/javascript" src="${url_jquery}"><div/></script>
 <script type="text/javascript" src="${url_json}"><div/></script>
-
-
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=true"><div /></script>
-
+<script type="text/javascript" src="${url_a_tools_gps}"><div/></script>
 
 <script type="text/javascript">
- 
-	function aGpsPosition()
-	{
-	}
+ 	var amap;
+	var infowindow;
 
-	function aGpsPosition(geolocationposition)
-	{
-		this.timestamp = geolocationposition.timestamp;
-
-		this.latitude = geolocationposition.coords.latitude;
-		this.longitude = geolocationposition.coords.longitude;
-		this.altitude = geolocationposition.coords.altitude;
-		this.accuracy = geolocationposition.coords.accuracy;
-		this.altitudeAccuracy = geolocationposition.coords.altitudeAccuracy;
-		this.heading = geolocationposition.coords.heading;
-		this.speed = geolocationposition.coords.speed;
-	}
-
-	aGpsPosition.prototype.toLatLng = function()
-	{
-		return new google.maps.LatLng(this.latitude, this.longitude);
-	}
-
-	aGpsPosition.prototype.getDistance = function(other)
-	{
-		var olat;
-		var olong;
-
-		if(other instanceof google.maps.LatLng)
-		{
-			olat = other.lat();
-			olong = other.lng();
-		}
-		else
-		if(other instanceof aGpsPosition)
-		{
-			olat = other.latitude;
-			olong = other.longitude;
-		}
-		else
-		{
-			alert("Error: Other coordinate is not of compatible type!");
-			return;
-		}
-
-		return getDistanceFromGps( this.longitude, this.latitude, olong, olat );
-	}
-
-	function aMap()
-	{
-		var myclass = this;
-
-		this.test = "it works";
-		this.latlng_default = new google.maps.LatLng(48.79326, 11.41279);
-		this.map;
-		this.marker_currentLocation;
-		this.idxNextWaypoint = 0;
-		this.WaypointDetectionDistance = 50;
-	
-		this.directionsDisplay = new google.maps.DirectionsRenderer();
-		this.directionsService = new google.maps.DirectionsService();
-		
-		this.route_markersArray = new Array();
-		this.drawPath = new google.maps.Polyline(
-		{
-		    strokeColor: '#FF0000',
-		    strokeOpacity: 1.0,
-	   	    strokeWeight: 2
-	 	 });
-	
-	
-		this.drawPath_currentLocation_to_nextWaypoint = new google.maps.Polyline(
-		{
-		   strokeColor: '#00FF00',
-		   strokeOpacity: 1.0,
-		   strokeWeight: 2
-		});
-	
-		this.gpsoptions = 
-		{
-			enableHighAccuracy: true,
-			timeout: 5000,
-			maximumAge: 20000
-		};
-	
-		this.watchId = window.navigator.geolocation.watchPosition
-		(
-			function(pos) { myclass.device_newgps_received(new aGpsPosition(pos)); },
-			this.device_gpserror, 
-			this.gpsoptions
-		);
-	}
-
-	aMap.prototype.initializeMap = function() 
-	{
-		
-		var myOptions = 
-		{
-			zoom: 18,
-			center: this.latlng_default,
-			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			mapTypeControlOptions: 
-			{
-	        		mapTypeIds: [google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.TERRAIN, google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE],
-	        		style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
-	      		}
-		};
-		
-		this.map = new google.maps.Map(window.document.getElementById("map_canvas"), myOptions);
-
-		this.map.setCenter(this.latlng_default);
-	
-		//directionsDisplay.setMap(map);
-		//directionsDisplay.setPanel(document.getElementById("directionsPanel"));
-		//calcRoute();
-
-
-		this.showallgps();
-
-	}
-
-	aMap.prototype.createNewMarker = function(icontype, latlng, title)
-	{
-		var image;
-		if(0 == icontype.localeCompare("start"))
-		{
-			image = '${url_mapicon_start}';
-		}
-		else
-		if(0 == icontype.localeCompare("finish"))
-		{
-			image = '${url_mapicon_finish}';
-		}
-		else
-		if(0 == icontype.localeCompare("currentlocation"))
-		{
-			image = '${url_mapicon_currentlocation}';
-		}
-		else
-		{
-			image = '${url_mapicon}';
-		}
-
-		var m = 
-			new google.maps.Marker(
-			{
-				position: latlng,
-				map: this.map,
-				icon: image,
-				title: title
-			});
-
-		return m;
-	}
-
-
-
-
-	aMap.prototype.createNewMarkerFromGpsCoordinate = function(gpscoordinate, icontype)
-	{
-		var latlng = new google.maps.LatLng(gpscoordinate.latitude, gpscoordinate.longitude);
-		var newMarker = this.createNewMarker(icontype,latlng,gpscoordinate.orderedposition.toString());
-
-			//newMarker.setDraggable(true);
-			newMarker.setPosition(latlng);
-			//this.route_markersArray.push(newMarker);
-
-
-			//google.maps.event.addListener(newMarker, "dragend", function(event)
-			//{
-      			//	var position = newMarker.getPosition();
-			//	updategps(gpscoordinate.id,position.lat().toString(),position.lng().toString());
-			//});
-
-			return newMarker;
-	}
-
-	
-	aMap.prototype.showallgps = function()
-	{	
-		var myclass = this;
-		this.removeMarkersFromMap(this.route_markersArray);
-		// load gps coordinates	
-		$.getJSON('/proj1/senior/route/${task.map.id}?gpscoordinates', function(data)
-		{
-			console.log("len: " + data.length);
-			$.each(data, function(i, item)
-			{
-				var icontype = "default";
-				if(0 == i)
-				{
-					icontype = "start";
-				}
-				if(data.length-1 == i)
-				{
-					icontype = "finish";
-				}
-				var m = myclass.createNewMarkerFromGpsCoordinate(item,icontype);
-				myclass.route_markersArray.push(m);
-			});
-
-			
-			myclass.drawPath1(myclass.route_markersArray);
-		});
-	
-	}
-
-	aMap.prototype.drawPath1 = function(markersArray)
-	{
-		var path = [];
-    		for(var key in markersArray)
-		{
-        		path.push(markersArray[key].getPosition());
-    		}
-		this.drawPath.setPath(path);
-		this.drawPath.setMap(this.map);
-	}
-
-	aMap.prototype.removeMarkersFromMap = function(markersArray)
-	{
-		for(var i = 0;	i &lt; markersArray.length;i++	)
-		{
-    			markersArray[i].setMap(null);	
-		}
-		markersArray = new Array();
-	}
-
-
-
-	aMap.prototype.calcRoute = function() 
-	{
-
-		var start = "${gpsstart}";
-		var ende = "${gpsend}";
-		var reglang = "en";
-
-
-		var request = 
-		{
-			origin:start, 
-        		destination:ende,
-        		travelMode: google.maps.DirectionsTravelMode.WALKING,
-			region:reglang
-		};
-
-
-    		this.directionsService.route(request, function(response, status) 
-		{
-			if (status == google.maps.DirectionsStatus.OK)
-			{
-				directionsDisplay.setDirections(response);
-			}
-		});
-
-	}  
-
-
-	aMap.prototype.device_newgps_received = function(pos)
-	{
-		var latlng = pos.toLatLng();//new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
-				
-		this.map.setCenter(latlng);
-		
-		if(!this.marker_currentLocation)
-		{
-			this.marker_currentLocation = this.createNewMarker("currentlocation",latlng,"Your location!");
-		}
-		else
-		{
-			this.marker_currentLocation.setPosition(googlegps);
-		}
-		var nextWaypoint =  this.route_markersArray[this.idxNextWaypoint].getPosition();
-		var d = latlng.getDistance( nextWaypoint );
-		
-		if(d &lt; this.WaypointDetectionDistance)
-		{
-			this.idxNextWaypoint++;
-		}
-		if(this.idxNextWaypoint &lt; this.route_markersArray.length)
-		{
-			positions=new Array();
-			positions[0] = latlng;
-			positions[1] = this.route_markersArray[this.idxNextWaypoint].getPosition();
-			this.drawPath_currentLocation_to_nextWaypoint.setPath(positions);
-			this.drawPath_currentLocation_to_nextWaypoint.setMap(this.map);
-		}
-		else
-		{
-			this.drawPath_currentLocation_to_nextWaypoint.setMap(null);	
-		}
-	}
-
-	aMap.prototype.device_gpserror = function(err)
-	{
-	}
-
-	//Geolocation.prototype.mytest = function()
-	function t()
-	{
-		alert("position test");
-	}
-
-	google.maps.LatLng.prototype.getDistance = function(otherLatLng)
-	{
-		return getDistanceFromGps( this.lng(), this.lat(), otherLatLng.lng(), otherLatLng.lat() );
-	}
-
-	function getDistanceFromGps(lon1, lat1, lon2, lat2)
-	{
-		var R = 6371; // Radius of the earth in km
-		var dLat = (lat2-lat1).toRad();
-		var dLon = (lon2-lon1).toRad(); 
-		var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-		       	Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
-		      	Math.sin(dLon/2) * Math.sin(dLon/2); 
-		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-		var d = R * c * 1000; // Distance in m
-  		return d;
-	}
-
-/** Converts numeric degrees to radians */
-	if (typeof(Number.prototype.toRad) === "undefined") 
-	{
-  		Number.prototype.toRad = function() 
-		{
-    			return this * Math.PI / 180;
-  		}
-	}
-
-
-
-
-	var amap = new aMap();
 	function init()
 	{
+		aconfig.imgFolder = '${url_imgfolder}mapicon';
+		aconfig.url.json.gpscoordinate.getall = '/proj1/senior/route/${task.map.id}?gpscoordinates';
+		aconfig.url.json.gpscoordinate.send = '/proj1/senior/route/${route.id}';
+		aconfig.url.json.gpscoordinate.update = '/proj1/senior/route/?updategpscoordinate';
+
+		aconfig.geolocation.isOn = true;
+
+		amap = new aMap();
 		amap.initializeMap();
+
+
+		
+  var contentString = 
+'<div>
+<p>Taskname: ${task.taskname}</p>
+<p>Name of Startpoint: ${task.map.startpointName}</p>
+<p>Name of Endpoint: ${task.map.endpointName}</p>
+<p><input type="button" value="Show Map" onClick="amap.initializeMap();"></input></p>
+</div>
+
+<div id="directionsPanel"  style="width:300px;" >
+<div/>
+</div>
+
+
+<div id="text">
+<div id="error" >
+</div>
+</div>';
+
+
+  infowindow = new google.maps.InfoWindow({
+      content: contentString,
+      maxWidth: 200
+  });
+
+infowindow.open(amap.map);
+
+	
+
+google.maps.event.addListener(amap.map, 'click', function() {
+    infowindow.open(amap.map, amap.marker_currentLocation.getMarker());
+  });
+
+
+
+
+aMap.prototype.setDeviceToGpsByWaypointAnimateFully = function(time)
+	{
+		var myclass = this;
+		var id=0;
+		var f;
+		f = function()
+		{
+			if(id &lt; myclass.route_markersArray.length)
+			{
+				myclass.setDeviceToGpsByWaypointAnimate(id,time,f);
+				id++;
+			}
+		}
+		f();
+	}
+
+
+aMap.prototype.setDeviceToGpsByWaypointAnimate = function(id, time, callback)
+	{
+		var myclass = this;
+		if(time == undefined)
+		{
+			time = 30;
+		}
+		if(id &lt; this.route_markersArray.length)
+		{
+			var currentPosition = amap.marker_currentLocation.getMarker().getPosition();
+			var nextWaypoint =  this.route_markersArray[id].getPosition();
+
+			var timerid;
+    			var count = 0;
+    			timerid = window.setInterval(function() 
+				{
+      					count = (count + 1) % 100;
+					if(count == 0)
+					{
+						clearInterval(timerid);
+						if(callback != undefined)
+							callback();
+						return;
+					}
+					//console.log("count: "+count);
+					var pos = google.maps.geometry.spherical.interpolate(currentPosition, nextWaypoint, count/100.0);
+  					//console.log("a");
+					myclass.device_newgps_received(new aGpsPosition(pos));
+					//console.log("b");
+					
+				}, time);
+
+		}
+		else
+		{
+			console.log("setDeviceToGpsByWaypoint: id must be between 0 and " + this.route_markersArray.length-1);
+		}
+		
+	}
+
+
+
 	}
 
 	
@@ -373,22 +146,24 @@ version="2.0">
 </script>
 
 
+<style type="text/css">
+      html, body, #map_canvas {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+   </style>
 
-
-
-
-
-
-
+<!--
 <div>
 <p>Taskname: ${task.taskname}</p>
 <p>Name of Startpoint: ${task.map.startpointName}</p>
 <p>Name of Endpoint: ${task.map.endpointName}</p>
-<p><input type="button" value="Show Map" onClick="a.initializeMap();"></input></p>
+<p><input type="button" value="Show Map" onClick="amap.initializeMap();"></input></p>
 </div>
 
 <div id="directionsPanel"  style="width:300px;" >
-Google Maps
+<div/>
 </div>
 
 
@@ -397,10 +172,12 @@ Google Maps
 </div>
 </div>
 
+-->
 
-<div id="map_canvas" style="width:400px;height:600px">
+<div id="map_canvas" >
 <div/>
 </div>
+
 
 
 
