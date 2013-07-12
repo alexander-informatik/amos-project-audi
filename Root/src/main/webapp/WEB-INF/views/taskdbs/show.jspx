@@ -15,5 +15,6 @@
         <field:display field="completionPassword" id="s_de_osramos_ss13_proj1_model_Taskdb_completionPassword" object="${taskdb}" z="LUyVEgmfjY5uG35qUwiOTLfvu9o="/>
         <field:display field="taskDone" id="s_de_osramos_ss13_proj1_model_Taskdb_taskDone" object="${taskdb}" z="x3rWH54aZcI+/gXNxK3dg0mZ+qg="/>
         <field:display field="map" id="s_de_osramos_ss13_proj1_model_Taskdb_map" object="${taskdb}" z="zCE1zMPWN5+Heh8f2bc5lRPdvSg="/>
+        <field:display field="questionForcompletionPassword" id="s_de_osramos_ss13_proj1_model_Taskdb_questionForcompletionPassword" object="${taskdb}" z="BoECDUvMW5cbMYiSPsY4JImtkr0="/>
     </page:show>
 </div>

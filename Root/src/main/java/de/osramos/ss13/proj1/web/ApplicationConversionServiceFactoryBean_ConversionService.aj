@@ -32,6 +32,7 @@ import org.springframework.format.FormatterRegistry;
 
 import de.osramos.ss13.proj1.model.Route;
 import de.osramos.ss13.proj1.model.Taskdb;
+import de.osramos.ss13.proj1.model.UserRole;
 
 public aspect ApplicationConversionServiceFactoryBean_ConversionService {
 
@@ -61,27 +62,36 @@ public aspect ApplicationConversionServiceFactoryBean_ConversionService {
 	        };
 	    }    
 
-	    public Converter<Taskdb, String> ApplicationConversionServiceFactoryBean.getTaskdbToStringConverter() {
-	        return new org.springframework.core.convert.converter.Converter<de.osramos.ss13.proj1.model.Taskdb, java.lang.String>() {
-	            public String convert(Taskdb taskdb) {
-	                return new StringBuilder().append(taskdb.getTaskname()).append(' ').append(taskdb.getDescription()).append(' ').append(taskdb.getPerson()).append(' ').append(taskdb.getPersonfunction()).toString();
+	    public Converter<UserRole, String> ApplicationConversionServiceFactoryBean.getUserRoleToStringConverter() {
+	        return new org.springframework.core.convert.converter.Converter<de.osramos.ss13.proj1.model.UserRole, java.lang.String>() {
+	            public String convert(UserRole role) {
+	                return new StringBuilder().append(role.getRoleName()).toString();
 	            }
 	        };
 	    }
 	    
-	    public Converter<Long, Taskdb> ApplicationConversionServiceFactoryBean.getIdToTaskdbConverter() {
-	        return new org.springframework.core.convert.converter.Converter<java.lang.Long, de.osramos.ss13.proj1.model.Taskdb>() {
-	            public de.osramos.ss13.proj1.model.Taskdb convert(java.lang.Long id) {
-	                return Taskdb.findTaskdb(id);
+	    public Converter<Long, UserRole> ApplicationConversionServiceFactoryBean.getIdToUserRoleConverter() {
+	        return new org.springframework.core.convert.converter.Converter<java.lang.Long, de.osramos.ss13.proj1.model.UserRole>() {
+	            public de.osramos.ss13.proj1.model.UserRole convert(java.lang.Long id) {
+	                return UserRole.findUserRole(id);
 	            }
 	        };
 	    }
 	    
-	    public Converter<String, Taskdb> ApplicationConversionServiceFactoryBean.getStringToTaskdbConverter() {
-	        return new org.springframework.core.convert.converter.Converter<java.lang.String, de.osramos.ss13.proj1.model.Taskdb>() {
-	            public de.osramos.ss13.proj1.model.Taskdb convert(String id) {
-	                return getObject().convert(getObject().convert(id, Long.class), Taskdb.class);
+	    public Converter<String, UserRole> ApplicationConversionServiceFactoryBean.getStringToUserRoleConverter() {
+	        return new org.springframework.core.convert.converter.Converter<java.lang.String, de.osramos.ss13.proj1.model.UserRole>() {
+	            public de.osramos.ss13.proj1.model.UserRole convert(String id) {
+	                return getObject().convert(getObject().convert(id, Long.class), UserRole.class);
 	            }
 	        };
 	    }
 }
+
+
+
+//registry.addConverter(getRouteToStringConverter());
+//registry.addConverter(getIdToRouteConverter());
+//registry.addConverter(getStringToRouteConverter());
+//		registry.addConverter(getTaskdbToStringConverter());
+//		registry.addConverter(getIdToTaskdbConverter());
+//		registry.addConverter(getStringToTaskdbConverter());

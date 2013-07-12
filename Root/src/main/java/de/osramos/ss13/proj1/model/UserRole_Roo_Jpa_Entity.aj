@@ -30,48 +30,40 @@ package de.osramos.ss13.proj1.model;
  */
 
 import de.osramos.ss13.proj1.model.UserRole;
-import de.osramos.ss13.proj1.model.Userdb;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Version;
 
-privileged aspect Userdb_Roo_JavaBean {
+privileged aspect UserRole_Roo_Jpa_Entity {
     
-    public String Userdb.getFirstname() {
-        return this.firstname;
+    declare @type: UserRole: @Entity;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long UserRole.id;
+    
+    @Version
+    @Column(name = "version")
+    private Integer UserRole.version;
+    
+    public Long UserRole.getId() {
+        return this.id;
     }
     
-    public void Userdb.setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void UserRole.setId(Long id) {
+        this.id = id;
     }
     
-    public String Userdb.getLastname() {
-        return this.lastname;
+    public Integer UserRole.getVersion() {
+        return this.version;
     }
     
-    public void Userdb.setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-    
-    public String Userdb.getUsername() {
-        return this.username;
-    }
-    
-    public void Userdb.setUsername(String username) {
-        this.username = username;
-    }
-    
-    public String Userdb.getPassword() {
-        return this.password;
-    }
-    
-    public void Userdb.setPassword(String password) {
-        this.password = password;
-    }
-    
-    public UserRole Userdb.getUserrole() {
-        return this.userrole;
-    }
-    
-    public void Userdb.setUserrole(UserRole userrole) {
-        this.userrole = userrole;
+    public void UserRole.setVersion(Integer version) {
+        this.version = version;
     }
     
 }

@@ -5,8 +5,8 @@
     <page:show id="ps_de_osramos_ss13_proj1_model_Userdb" object="${userdb}" path="/userdbs" z="4urMcJbqbMIFfhZsJEgtCcj0fPA=">
         <field:display field="firstname" id="s_de_osramos_ss13_proj1_model_Userdb_firstname" object="${userdb}" z="JlGjGrrAVCWwbwneQBc80AAjOUM="/>
         <field:display field="lastname" id="s_de_osramos_ss13_proj1_model_Userdb_lastname" object="${userdb}" z="lrclo/xULlbrzHdqRTf2OklgEu8="/>
-        <field:display field="userrole" id="s_de_osramos_ss13_proj1_model_Userdb_userrole" object="${userdb}" z="Sqaun/qHKjQZ6S1VaEtg4HECOQs="/>
         <field:display field="username" id="s_de_osramos_ss13_proj1_model_Userdb_username" object="${userdb}" z="+U26MN9YuV7s3Pn0OqYpoJHfyJY="/>
         <field:display field="password" id="s_de_osramos_ss13_proj1_model_Userdb_password" object="${userdb}" z="m+XxqBcPRv9g9I1WrezG0IAPBZ0="/>
+        <field:display field="userrole" id="s_de_osramos_ss13_proj1_model_Userdb_userrole" object="${userdb}" z="Sqaun/qHKjQZ6S1VaEtg4HECOQs="/>
     </page:show>
 </div>

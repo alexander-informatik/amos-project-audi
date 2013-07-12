@@ -18,6 +18,9 @@
 </thead>
 <tbody>
 
+<spring:url value="/trainee/markascompleted/task" var="url_markTaskAsCompleted" />
+
+
 <c:forEach var="task" items="${tasklist}">
 <tr>
     <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_taskname" >${task.taskname}</div></td>
@@ -29,6 +32,10 @@
 
 	<td class="utilbox"><a title="Show Taskdb" alt="Show Taskdb" href="/proj1/trainee/task/${task.id}">
 	<img title="Show Taskdb" src="/proj1/resources/images/resultset_next.png" class="btn btn-info" alt="Show Taskdb" /></a>
+	</td>
+
+	<td class="utilbox"><a title="Mark As Completed" alt="Mark As Completed" href="${url_markTaskAsCompleted}/${task.id}">
+	<img title="Mark As Completed" src="/proj1/resources/images/resultset_next.png" class="btn btn-info" alt="Mark As Completed" /></a>
 	</td>
 
 </tr>

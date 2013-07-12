@@ -30,6 +30,7 @@ import java.util.List;
 
 import de.osramos.ss13.proj1.model.Route;
 import de.osramos.ss13.proj1.model.Taskdb;
+import de.osramos.ss13.proj1.model.UserRole;
 import de.osramos.ss13.proj1.model.Userdb;
 
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -47,8 +48,10 @@ public class TaskdbController {
 		String authorizedUsername = SecurityContextHolder.getContext()
 				.getAuthentication().getName();
 		uiModel.addAttribute("taskdb", taskdb);
-		uiModel.addAttribute("userdbt", Userdb.findUserdbsByUserroleEquals(
-				"trainee").getResultList());
+		UserRole roleTrainee = UserRole
+				.findUserRolesByRoleNameEquals("trainee").getSingleResult();
+		uiModel.addAttribute("userdbt", Userdb.findUserdbsByUserrole(
+				roleTrainee).getResultList());
 		// 		uiModel.addAttribute("userdbs", Userdb.findUserdbsByUserroleEquals(
 		// 				"senior").getResultList());
 		uiModel.addAttribute("userdbs", Userdb.findUserdbsByUsernameEquals(

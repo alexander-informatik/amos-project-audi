@@ -71,16 +71,16 @@ public class AuthenticationByUserdb
 			Userdb user = Userdb.findUserdbsByUsernameAndPasswordEquals(
 					username, password).getSingleResult();
 
-			if (user.getUserrole().equals("admin")) {
+			if (user.getUserrole().getRoleName().equals("admin")) {
 				authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
 			}
-			if (user.getUserrole().equals("senior")) {
+			if (user.getUserrole().getRoleName().equals("senior")) {
 				authorities.add(new GrantedAuthorityImpl("ROLE_SENIOR"));
 			}
-			if (user.getUserrole().equals("trainee")) {
+			if (user.getUserrole().getRoleName().equals("trainee")) {
 				authorities.add(new GrantedAuthorityImpl("ROLE_TRAINEE"));
 			}
-			if (user.getUserrole().equals("all")) {
+			if (user.getUserrole().getRoleName().equals("developer")) {
 				authorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
 				authorities.add(new GrantedAuthorityImpl("ROLE_SENIOR"));
 				authorities.add(new GrantedAuthorityImpl("ROLE_TRAINEE"));

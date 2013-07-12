@@ -15,5 +15,6 @@
         <field:input field="completionPassword" id="c_de_osramos_ss13_proj1_model_Taskdb_completionPassword" z="mWv8E4nP9sH/dNH+YE1z9oYf/Pw="/>
         <field:checkbox field="taskDone" id="c_de_osramos_ss13_proj1_model_Taskdb_taskDone" z="mcaLrcZ3kfS8euaLrpox20tnpoM="/>
         <field:select field="map" id="c_de_osramos_ss13_proj1_model_Taskdb_map" itemValue="id" items="${routes}" path="/senior/route" z="user-managed"/>
+        <field:input field="questionForcompletionPassword" id="c_de_osramos_ss13_proj1_model_Taskdb_questionForcompletionPassword" z="nDfWdFD7C/q+3Q01FHdw1k2f9PY="/>
     </form:update>
 </div>

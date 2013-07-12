@@ -29,6 +29,7 @@ package de.osramos.ss13.proj1.model;
  * #L%
  */
 
+import de.osramos.ss13.proj1.model.UserRole;
 import de.osramos.ss13.proj1.model.Userdb;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -53,8 +54,16 @@ privileged aspect Userdb_Roo_Finder {
         return q;
     }
     
-    public static TypedQuery<Userdb> Userdb.findUserdbsByUserroleEquals(String userrole) {
-        if (userrole == null || userrole.length() == 0) throw new IllegalArgumentException("The userrole argument is required");
+    public static TypedQuery<Userdb> Userdb.findUserdbsByUserrole(UserRole userrole) {
+        if (userrole == null) throw new IllegalArgumentException("The userrole argument is required");
+        EntityManager em = Userdb.entityManager();
+        TypedQuery<Userdb> q = em.createQuery("SELECT o FROM Userdb AS o WHERE o.userrole = :userrole", Userdb.class);
+        q.setParameter("userrole", userrole);
+        return q;
+    }
+    
+    public static TypedQuery<Userdb> Userdb.findUserdbsByUserroleEquals(UserRole userrole) {
+        if (userrole == null) throw new IllegalArgumentException("The userrole argument is required");
         EntityManager em = Userdb.entityManager();
         TypedQuery<Userdb> q = em.createQuery("SELECT o FROM Userdb AS o WHERE o.userrole = :userrole", Userdb.class);
         q.setParameter("userrole", userrole);

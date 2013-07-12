@@ -29,6 +29,7 @@ package de.osramos.ss13.proj1.web;
  * #L%
  */
 
+import de.osramos.ss13.proj1.model.UserRole;
 import de.osramos.ss13.proj1.model.Userdb;
 import de.osramos.ss13.proj1.web.UserdbController;
 import java.io.UnsupportedEncodingException;
@@ -112,6 +113,7 @@ privileged aspect UserdbController_Roo_Controller {
     
     void UserdbController.populateEditForm(Model uiModel, Userdb userdb) {
         uiModel.addAttribute("userdb", userdb);
+        uiModel.addAttribute("userroles", UserRole.findAllUserRoles());
     }
     
     String UserdbController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

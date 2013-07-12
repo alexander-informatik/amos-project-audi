@@ -19,6 +19,7 @@ version="2.0">
 
 
 <c:if test="${sent != true}">
+${task.questionForcompletionPassword}
 <form:form method="post">
     <table>
     <tr>

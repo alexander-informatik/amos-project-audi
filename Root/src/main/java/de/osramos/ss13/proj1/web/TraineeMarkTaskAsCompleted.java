@@ -54,9 +54,9 @@ public class TraineeMarkTaskAsCompleted {
 		String authorizedUsername = SecurityContextHolder.getContext()
 				.getAuthentication().getName();
 
-		if (current.getCompletionPassword() != null) {
+		Taskdb task = Taskdb.findTaskdb(current.getTaskid());
 
-			Taskdb task = Taskdb.findTaskdb(current.getTaskid());
+		if (current.getCompletionPassword() != null) {
 
 			if (task.getTrainee().getUsername().equals(authorizedUsername)
 					&& current.getCompletionPassword().trim().equals(
@@ -69,18 +69,24 @@ public class TraineeMarkTaskAsCompleted {
 		}
 
 		uiModel.addAttribute("sent", true);
+		uiModel.addAttribute("task", task);
 
 		return "trainee/markascompleted/task/index";
 	}
 
 	@RequestMapping(produces = "text/html", value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView index(@PathVariable Long id) {
+	public String index(@PathVariable Long id, Model uiModel) {
 
 		TaskCompletionPasswordForm form = new TaskCompletionPasswordForm();
 		form.setTaskid(id);
 
-		return new ModelAndView("trainee/markascompleted/task/index",
-				"command", form);
+		Taskdb task = Taskdb.findTaskdb(id);
+
+		//return new ModelAndView("trainee/markascompleted/task/index",
+		//	"command", form);
+		uiModel.addAttribute("command", form);
+		uiModel.addAttribute("task", task);
+		return "trainee/markascompleted/task/index";
 	}
 
 }

@@ -116,6 +116,14 @@ privileged aspect Taskdb_Roo_JavaBean {
         this.timeslot = timeslot;
     }
     
+    public String Taskdb.getQuestionForcompletionPassword() {
+        return this.questionForcompletionPassword;
+    }
+    
+    public void Taskdb.setQuestionForcompletionPassword(String questionForcompletionPassword) {
+        this.questionForcompletionPassword = questionForcompletionPassword;
+    }
+    
     public String Taskdb.getCompletionPassword() {
         return this.completionPassword;
     }

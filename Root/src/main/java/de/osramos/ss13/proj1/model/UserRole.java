@@ -26,53 +26,14 @@ package de.osramos.ss13.proj1.model;
  * #L%
  */
 
-import java.util.Date;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(finders = {"findTaskdbsByTrainee", "findTaskdbsById",
-		"findTaskdbsByPersonEquals", "findTaskdbsBySenior"})
-public class Taskdb {
+@RooJpaActiveRecord(finders = {"findUserRolesByRoleNameEquals"})
+public class UserRole {
 
-	@NotNull
-	private String taskname;
-
-	@NotNull
-	private String description;
-
-	private String person;
-
-	private String personfunction;
-
-	private String building;
-
-	private String roomno;
-
-	@ManyToOne
-	private Userdb trainee;
-
-	@ManyToOne
-	private Userdb senior;
-
-	@ManyToOne
-	private Route map;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(style = "M-")
-	private Date timeslot;
-
-	private String questionForcompletionPassword;
-
-	private String completionPassword;
-
-	private Boolean taskDone;
+	private String roleName;
 }

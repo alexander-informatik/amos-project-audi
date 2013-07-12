@@ -65,6 +65,7 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
         setMap(obj, index);
         setPerson(obj, index);
         setPersonfunction(obj, index);
+        setQuestionForcompletionPassword(obj, index);
         setRoomno(obj, index);
         setTaskDone(obj, index);
         setTaskname(obj, index);
@@ -100,6 +101,11 @@ privileged aspect TaskdbDataOnDemand_Roo_DataOnDemand {
     public void TaskdbDataOnDemand.setPersonfunction(Taskdb obj, int index) {
         String personfunction = "personfunction_" + index;
         obj.setPersonfunction(personfunction);
+    }
+    
+    public void TaskdbDataOnDemand.setQuestionForcompletionPassword(Taskdb obj, int index) {
+        String questionForcompletionPassword = "questionForcompletionPassword_" + index;
+        obj.setQuestionForcompletionPassword(questionForcompletionPassword);
     }
     
     public void TaskdbDataOnDemand.setRoomno(Taskdb obj, int index) {

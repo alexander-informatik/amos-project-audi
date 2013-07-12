@@ -29,6 +29,7 @@ package de.osramos.ss13.proj1.model;
  * #L%
  */
 
+import de.osramos.ss13.proj1.model.UserRole;
 import de.osramos.ss13.proj1.model.Userdb;
 import de.osramos.ss13.proj1.model.UserdbDataOnDemand;
 import java.security.SecureRandom;
@@ -79,7 +80,7 @@ privileged aspect UserdbDataOnDemand_Roo_DataOnDemand {
     }
     
     public void UserdbDataOnDemand.setUserrole(Userdb obj, int index) {
-        String userrole = "userrole_" + index;
+        UserRole userrole = null;
         obj.setUserrole(userrole);
     }
     

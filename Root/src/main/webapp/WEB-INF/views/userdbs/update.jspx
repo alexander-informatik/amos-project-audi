@@ -5,8 +5,8 @@
     <form:update id="fu_de_osramos_ss13_proj1_model_Userdb" modelAttribute="userdb" path="/userdbs" versionField="Version" z="P29zZmazDMT5Cz+gPpfruqqrG28=">
         <field:input field="firstname" id="c_de_osramos_ss13_proj1_model_Userdb_firstname" required="true" z="wNJGl6Lr5Qh36byDNfQfKtcN6qo="/>
         <field:input field="lastname" id="c_de_osramos_ss13_proj1_model_Userdb_lastname" required="true" z="5eLSvNCw7kqCEakOmuKHVVtUDNw="/>
-        <field:input field="userrole" id="c_de_osramos_ss13_proj1_model_Userdb_userrole" required="true" z="0QZJjUeAHU0TsvmG4Rfi2NYibOA="/>
         <field:input field="username" id="c_de_osramos_ss13_proj1_model_Userdb_username" required="true" z="oLts8BXYQWCtbUf8YlbwrDYFLdo="/>
         <field:input field="password" id="c_de_osramos_ss13_proj1_model_Userdb_password" required="true" z="/uEDkFqhS1WNfLYrIQqvtM/umF4="/>
+        <field:select field="userrole" id="c_de_osramos_ss13_proj1_model_Userdb_userrole" itemValue="id" items="${userroles}" path="/userroles" z="aw8yej1pta9qUcTQqkOY6xUidWo="/>
     </form:update>
 </div>

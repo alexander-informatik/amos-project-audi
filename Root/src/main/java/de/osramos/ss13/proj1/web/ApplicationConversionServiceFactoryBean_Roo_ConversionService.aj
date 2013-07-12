@@ -67,7 +67,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Userdb, String> ApplicationConversionServiceFactoryBean.getUserdbToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<de.osramos.ss13.proj1.model.Userdb, java.lang.String>() {
             public String convert(Userdb userdb) {
-                return new StringBuilder().append(userdb.getFirstname()).append(' ').append(userdb.getLastname()).append(' ').append(userdb.getUserrole()).append(' ').append(userdb.getUsername()).toString();
+                return new StringBuilder().append(userdb.getFirstname()).append(' ').append(userdb.getLastname()).append(' ').append(userdb.getUsername()).append(' ').append(userdb.getPassword()).toString();
             }
         };
     }
