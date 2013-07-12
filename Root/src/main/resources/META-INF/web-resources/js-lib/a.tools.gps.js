@@ -7,6 +7,7 @@
 	aConfig.prototype.url.json.gpscoordinate.update;
 	aConfig.prototype.url.json.gpscoordinate._delete;
 	aConfig.prototype.imgFolder;
+	aConfig.prototype.latlng_default;
 	aConfig.prototype.editor = {};
 	aConfig.prototype.editor.routeMarkers = {};
 	aConfig.prototype.editor.routeMarkers.isDraggable;
@@ -332,7 +333,7 @@
 		var myclass = this;
 		this.test = "it works";
 
-		this.latlng_default = new google.maps.LatLng(48.79326, 11.41279);
+		this.latlng_default = aconfig.latlng_default;
 		this.map;
 		this.marker_currentLocation;
 		this.idxNextWaypoint = 0;
@@ -435,7 +436,6 @@
 
 
 		this.showallgps();
-
 	}
 
 	function getIcon(icontype)
@@ -528,6 +528,7 @@
 				if(0 == i)
 				{
 					icontype = "start";
+					//this.map.setCenter(new google.maps.LatLng(item.latitude, item.longitude));
 				}
 				if(data.length-1 == i)
 				{

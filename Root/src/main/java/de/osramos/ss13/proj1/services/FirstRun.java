@@ -29,6 +29,7 @@ package de.osramos.ss13.proj1.services;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 
+import de.osramos.ss13.proj1.model.Gpscoordinate;
 import de.osramos.ss13.proj1.model.Route;
 import de.osramos.ss13.proj1.model.Taskdb;
 import de.osramos.ss13.proj1.model.UserRole;
@@ -55,6 +56,9 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 
 		// create example tasks
 		createTasks();
+
+		// only for demo day
+		createDemoDayData();
 
 	}
 
@@ -437,5 +441,168 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		r.setStartpointName("Building X");
 		r.setEndpointName("Building Z");
 		r.persist();
+	}
+
+	private void createDemoDayData() {
+		Userdb user = null;
+		Taskdb t = null;
+		Route r = null;
+		Gpscoordinate gps = null;
+
+		Userdb userAlex = null;
+		Userdb userAlexSenior = null;
+		Route routeH6 = null;
+		Route routeMensa = null;
+		Route routeTower = null;
+		UserRole roleAdmin = UserRole.findUserRolesByRoleNameEquals("admin")
+				.getSingleResult();
+		UserRole roleSenior = UserRole.findUserRolesByRoleNameEquals("senior")
+				.getSingleResult();
+		UserRole roleTrainee = UserRole
+				.findUserRolesByRoleNameEquals("trainee").getSingleResult();
+
+		try {
+			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("alex").getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = null;
+					user = new Userdb();
+					user.setFirstname("Alexander");
+					user.setLastname("Schmidt");
+					user.setUsername("alex");
+					user.setUserrole(roleTrainee);
+					user.setPassword("alex");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+		userAlex = user;
+
+		try {
+			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("cipadmin")
+					.getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = null;
+					user = new Userdb();
+					user.setFirstname("cip");
+					user.setLastname("admin");
+					user.setUsername("cip");
+					user.setUserrole(roleSenior);
+					user.setPassword("cip");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+		userAlexSenior = user;
+
+		r = new Route();
+		r.setStartpointName("Lecture Hall 6");
+		r.setEndpointName("Lecture Hall 6");
+		r.persist();
+		gps = new Gpscoordinate();
+		gps.setLatitude("49.573168");
+		gps.setLongitude("11.028511");
+		gps.setOrderedposition(0);
+		gps.setRoute(r);
+		gps.persist();
+
+		gps = new Gpscoordinate();
+		gps.setLatitude("49.573152");
+		gps.setLongitude("11.028981");
+		gps.setOrderedposition(1);
+		gps.setRoute(r);
+		gps.persist();
+		routeH6 = r;
+
+		r = new Route();
+		r.setStartpointName("Mensa South");
+		r.setEndpointName("Mensa South");
+		r.persist();
+		gps = new Gpscoordinate();
+		gps.setLatitude("49.574363");
+		gps.setLongitude("11.029381");
+		gps.setOrderedposition(0);
+		gps.setRoute(r);
+		gps.persist();
+
+		gps = new Gpscoordinate();
+		gps.setLatitude("49.575103");
+		gps.setLongitude("11.030055");
+		gps.setOrderedposition(1);
+		gps.setRoute(r);
+		gps.persist();
+		routeMensa = r;
+
+		r = new Route();
+		r.setStartpointName("Computer Science Tower");
+		r.setEndpointName("Computer Science Tower");
+		r.persist();
+		gps = new Gpscoordinate();
+		gps.setLatitude("49.573168");
+		gps.setLongitude("11.028511");
+		gps.setOrderedposition(0);
+		gps.setRoute(r);
+		gps.persist();
+
+		gps = new Gpscoordinate();
+		gps.setLatitude("49.573152");
+		gps.setLongitude("11.028981");
+		gps.setOrderedposition(1);
+		gps.setRoute(r);
+		gps.persist();
+		routeTower = r;
+
+		t = new Taskdb();
+		t
+				.setDescription("Attend the welcome ceremony on your first day (Wednesday17th July) in lecture hall H6.");
+		t.setPerson("Prof.Dr. Dirk Riehle");
+		t
+				.setBuilding("Electrical Engineering Building, Cauerstraße 7/9, 91058 Erlangen");
+		t.setPersonfunction("Lecturer");
+		t.setRoomno("Lecture hall H6");
+		t.setTaskname("My First Day 1 of 3");
+		t.setTrainee(userAlex);
+		t.setSenior(userAlexSenior);
+		t.setQuestionForcompletionPassword("number of seats?");
+		t.setCompletionPassword("42");
+		t.setMap(routeH6);
+		t.persist();
+
+		t = new Taskdb();
+		t.setDescription("Enjoy lunch in the south canteen.");
+		t.setBuilding("Mensa South at the Red Square, 91058 Erlangen");
+		t.setTaskname("My First Day 2 of 3");
+		t.setTrainee(userAlex);
+		t.setSenior(userAlexSenior);
+		t.setQuestionForcompletionPassword("main dish?");
+		t.setCompletionPassword("fish");
+		t.setMap(routeMensa);
+		t.persist();
+
+		t = new Taskdb();
+		t
+				.setDescription("To bring the day to a successful end, visit the computer science CIP admin in his room and register for a login.");
+		t.setPerson("Mr. Cip-Admin");
+		t
+				.setBuilding("Computer Science Tower, Martensstraße 3, 91058 Erlangen");
+		t.setPersonfunction("cipadmin");
+		t.setRoomno("cip 1");
+		t.setTaskname("My First Day 3 of 3");
+		t.setTrainee(userAlex);
+		t.setSenior(userAlexSenior);
+		t.setQuestionForcompletionPassword("number of personal computers");
+		t.setCompletionPassword("42");
+		t.setMap(routeTower);
+		t.persist();
+
 	}
 }

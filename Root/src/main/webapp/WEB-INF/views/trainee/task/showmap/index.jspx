@@ -33,6 +33,7 @@ version="2.0" style="height:100%">
 	function init()
 	{
 		aconfig.imgFolder = '${url_imgfolder}mapicon';
+		aconfig.latlng_default = new google.maps.LatLng(48.79326, 11.41279);
 		aconfig.url.json.gpscoordinate.getall = '/proj1/senior/route/${task.map.id}?gpscoordinates';
 		aconfig.url.json.gpscoordinate.send = '/proj1/senior/route/${route.id}';
 		aconfig.url.json.gpscoordinate.update = '/proj1/senior/route/?updategpscoordinate';
