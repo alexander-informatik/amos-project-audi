@@ -18,7 +18,7 @@
     </c:if>
     <spring:message arguments="${labelPlural}" code="entity_list_all" var="title_msg" htmlEscape="false" />
     
-      <legend>${title_msg}</legend>
+      <!-- <legend>${title_msg}</legend> -->
       <c:choose>
         <c:when test="${not empty items}">
           <jsp:doBody />

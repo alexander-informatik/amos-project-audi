@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0" xmlns:spring="http://www.springframework.org/tags">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+    <spring:message code="view_taskdbs_list" htmlEscape="false" var="ftitle"/>
+    <Legend>${fn:escapeXml(ftitle)}</Legend>
     <page:list id="pl_de_osramos_ss13_proj1_model_Taskdb" items="${taskdbs}" z="lVUIhuu8XNVAaUOm+9N/wM7vQCk=">
         <table:table data="${taskdbs}" id="l_de_osramos_ss13_proj1_model_Taskdb" path="/taskdbs" z="7qMCoZwC04mIbhA1NYfo24ReNF4=">
             <table:column id="c_de_osramos_ss13_proj1_model_Taskdb_taskname" property="taskname" z="Ep9jJe511gNc4XCjei3DQO/BH4s="/>

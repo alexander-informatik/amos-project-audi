@@ -6,17 +6,19 @@ xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"
 xmlns:form="http://www.springframework.org/tags/form"
 xmlns:c="http://java.sun.com/jsp/jstl/core"
 xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
 version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
   <jsp:output omit-xml-declaration="yes"/>
   <spring:message code="label__senior_route_create" htmlEscape="false" var="title"/>
-  <util:panel id="title" title="${title}">
-    <spring:message code="application_name" htmlEscape="false" var="app_name"/>
+  
+    <!-- <spring:message code="application_name" htmlEscape="false" var="app_name"/>
     <h3>
       <spring:message arguments="${app_name}" code="welcome_titlepane"/>
-    </h3>
+    </h3> -->
 
-
+<spring:message code="view_senior_route_create" htmlEscape="false" var="ftitle"/>
+<Legend>${fn:escapeXml(ftitle)}</Legend>
 <form:form modelAttribute="route" method="post">
     <table>
     <tr>
@@ -36,5 +38,5 @@ version="2.0">
 </form:form> 
 
 
-  </util:panel>
+  
 </div>
