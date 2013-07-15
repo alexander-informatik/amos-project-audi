@@ -58,6 +58,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		createTasks();
 
 		// only for demo day
+		//createDemoDayData1();
 		createDemoDayData();
 
 	}
@@ -443,7 +444,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		r.persist();
 	}
 
-	private void createDemoDayData() {
+	private void createDemoDayData1() {
 		Userdb user = null;
 		Taskdb t = null;
 		Route r = null;
@@ -604,5 +605,182 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setMap(routeTower);
 		t.persist();
 
+	}
+
+	private void createDemoDayData() {
+		Userdb user = null;
+		Taskdb t = null;
+		Route r = null;
+		Gpscoordinate gps = null;
+
+		Userdb userAlex = null;
+		Userdb userAlexSenior = null;
+		Route routeAudimax = null;
+		Route routeMensa = null;
+		Route routeTower = null;
+		UserRole roleAdmin = UserRole.findUserRolesByRoleNameEquals("admin")
+				.getSingleResult();
+		UserRole roleSenior = UserRole.findUserRolesByRoleNameEquals("senior")
+				.getSingleResult();
+		UserRole roleTrainee = UserRole
+				.findUserRolesByRoleNameEquals("trainee").getSingleResult();
+
+		try {
+			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("alex").getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = null;
+					user = new Userdb();
+					user.setFirstname("Alexander");
+					user.setLastname("Schmidt");
+					user.setUsername("alex");
+					user.setUserrole(roleTrainee);
+					user.setPassword("alex");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+		userAlex = user;
+
+		try {
+			user = null;
+			user = Userdb.findUserdbsByUsernameEquals("cip").getSingleResult();
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (null == user) {
+					user = null;
+					user = new Userdb();
+					user.setFirstname("Rolf");
+					user.setLastname("Weber");
+					user.setUsername("cip");
+					user.setUserrole(roleSenior);
+					user.setPassword("cip");
+					user.persist();
+				}
+			} catch (Exception e) {
+			}
+		}
+		userAlexSenior = user;
+
+		r = new Route();
+		r.setStartpointName("Hugenottenplatz");
+		r.setEndpointName("Auditorium Maximum (Audimax)");
+		r.persist();
+		addGps("49.596573,11.004223", r, 0);
+		addGps("49.598266,11.015354", r, 1);
+		addGps("49.598527,11.01551", r, 2);
+		addGps("49.600294,11.014818", r, 3);
+		addGps("49.600377,11.01507", r, 4);
+		addGps("49.600262,11.015799", r, 5);
+		addGps("49.600503,11.015864", r, 6);
+		addGps("49.60066,11.015638", r, 7); // finish
+		routeAudimax = r;
+
+		r = new Route();
+		r.setStartpointName("Auditorium Maximum (Audimax)");
+		r.setEndpointName("Canteen at Langemarckplatz");
+		r.persist();
+		addGps("49.600239,11.015927", r, 0);
+		addGps("49.600357,11.015112", r, 1);
+		addGps("49.598549,11.015616", r, 2);
+		addGps("49.598327,11.016056", r, 3);
+		addGps("49.598069,11.015766", r, 4);
+		addGps("49.596887,11.015841", r, 5);
+		addGps("49.596602,11.013309", r, 6);
+		addGps("49.595823,11.013524", r, 7);
+		addGps("49.595615,11.012236", r, 8);
+		addGps("49.594259,11.011185", r, 9);
+		addGps("49.594099,11.010745", r, 10);
+		addGps("49.59347, 11.01028", r, 11); // finish
+		routeMensa = r;
+
+		r = new Route();
+		r.setStartpointName("Canteen at Langemarckplatz");
+		r.setEndpointName("Computer Science Tower Room 00.157-113");
+		r.persist();
+		addGps("49.592888,11.010194", r, 0);
+		addGps("49.590382,11.011486", r, 1);
+		addGps("49.589698,11.012237", r, 2);
+		addGps("49.58915,11.012463", r, 3);
+		addGps("49.584366,11.01308", r, 4);
+		addGps("49.581897,11.012779", r, 5);
+		addGps("49.581704,11.01735", r, 6);
+		addGps("49.577816,11.01626", r, 7);
+		addGps("49.577802,11.016786", r, 8);
+		addGps("49.577788,11.018019", r, 9);
+		addGps("49.576953,11.018395", r, 10);
+		addGps("49.57632,11.019157", r, 11);
+		addGps("49.57609,11.019983", r, 12);
+		addGps("49.576146,11.02082", r, 13);
+		addGps("49.573461,11.024103", r, 14);
+		addGps("49.572974,11.02495", r, 15);
+		addGps("49.573843,11.026538", r, 16);
+		addGps("49.573674,11.02685", r, 17);
+		addGps("49.573851,11.027068", r, 18);
+		routeTower = r;
+
+		t = new Taskdb();
+		t
+				.setDescription("Attend the welcome ceremony on your first day (Wednesday17th July) in the Audimax.");
+		t.setPerson("Prorektorin Prof. Haberer");
+		t
+				.setBuilding("Auditorium Maximum (Audimax), Bismarckstraße 1, 92054 Erlangen");
+		t.setPersonfunction("Lecturer");
+		t.setRoomno("");
+		t.setTaskname("My First Day 1 of 3");
+		t.setTrainee(userAlex);
+		t.setSenior(userAlexSenior);
+		t.setQuestionForcompletionPassword("number of seats?");
+		t.setCompletionPassword("42");
+		t.setMap(routeAudimax);
+		t.persist();
+
+		t = new Taskdb();
+		t.setDescription("Enjoy lunch in the south canteen.");
+		t.setBuilding("Mensa South at the Red Square, 91058 Erlangen");
+		t.setTaskname("My First Day 2 of 3");
+		t.setTrainee(userAlex);
+		t.setSenior(userAlexSenior);
+		t.setQuestionForcompletionPassword("main dish?");
+		t.setCompletionPassword("fish");
+		t.setMap(routeMensa);
+		t.persist();
+
+		t = new Taskdb();
+		t
+				.setDescription("To bring the day to a successful end, visit the computer science CIP admin in his room and register for a login.");
+		t.setPerson("Rolf Weber");
+		t
+				.setBuilding("Computer Science Tower, Martensstraße 3, 91058 Erlangen");
+		t.setPersonfunction("CIP Pool Admin");
+		t.setRoomno("Room 00.157-113");
+		t.setTaskname("My First Day 3 of 3");
+		t.setTrainee(userAlex);
+		t.setSenior(userAlexSenior);
+		t.setQuestionForcompletionPassword("number of personal computers");
+		t.setCompletionPassword("42");
+		t.setMap(routeTower);
+		t.persist();
+
+	}
+
+	private void addGps(String LatLong, Route r, int order) {
+		String ll[] = LatLong.split(",");
+
+		if (ll.length == 2) {
+			Gpscoordinate gps = new Gpscoordinate();
+			gps.setLatitude(ll[0]);
+			gps.setLongitude(ll[1]);
+			gps.setOrderedposition(order);
+			gps.setRoute(r);
+			gps.persist();
+		} else {
+			System.out.println("addGps(): cannot parse: " + LatLong);
+		}
 	}
 }
