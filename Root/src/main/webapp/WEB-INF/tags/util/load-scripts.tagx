@@ -9,7 +9,7 @@
   <spring:url value="/resources/spring/Spring.js" var="spring_url" />
   <spring:url value="/resources/spring/Spring-Dojo.js" var="spring_dojo_url" />
  <!-- <spring:url value="/resources/images/favicon.ico" var="favicon" /> -->
-  <link rel="stylesheet" type="text/css" href="${tundra_url}" />
+  <!-- <link rel="stylesheet" type="text/css" href="${tundra_url}" /> -->
  <!-- <link rel="SHORTCUT ICON" href="${favicon}" /> -->
 
   <!-- JQuery url -->

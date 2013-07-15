@@ -6165,3 +6165,15 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+
+.dijitValidationContainer {
+  display: none;
+}
+
+.dijitTitlePaneTitle {
+  display: none;
+}
+
+.dijitTooltipContents{
+  display: none;
+}
