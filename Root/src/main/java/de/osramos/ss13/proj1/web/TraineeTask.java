@@ -63,6 +63,8 @@ public class TraineeTask {
 			uiModel.addAttribute("personfunction", task.getPersonfunction());
 			uiModel.addAttribute("building", task.getBuilding());
 			uiModel.addAttribute("roomno", task.getRoomno());
+			uiModel.addAttribute("question", task
+					.getQuestionForcompletionPassword());
 		} else {
 			uiModel.addAttribute("taskname",
 					"This task is not assigned to you!");

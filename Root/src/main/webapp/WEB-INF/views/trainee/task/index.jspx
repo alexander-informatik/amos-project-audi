@@ -10,6 +10,7 @@
         <p>Person Function: ${personfunction}</p>
         <p>Building: ${building}</p>
         <p>Roomno: ${roomno}</p>
+		<p>Question: ${question}</p>
 
 	<p>
 	<spring:url value="/trainee/task/showmap/${taskid}" var="showmap"/>
