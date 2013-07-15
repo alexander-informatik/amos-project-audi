@@ -741,8 +741,8 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.persist();
 
 		t = new Taskdb();
-		t.setDescription("Enjoy lunch in the south canteen.");
-		t.setBuilding("Mensa South at the Red Square, 91058 Erlangen");
+		t.setDescription("Enjoy lunch in the Canteen at Langemarckplatz.");
+		t.setBuilding("Canteen at Langemarckplatz, 91054 Erlangen");
 		t.setTaskname("My First Day 2 of 3");
 		t.setTrainee(userAlex);
 		t.setSenior(userAlexSenior);
