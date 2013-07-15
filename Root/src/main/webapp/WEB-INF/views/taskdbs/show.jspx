@@ -9,12 +9,12 @@
         <field:display field="personfunction" id="s_de_osramos_ss13_proj1_model_Taskdb_personfunction" object="${taskdb}" z="dtmdD5KFbnGpNa5u+FW0Zm3FDU4="/>
         <field:display field="building" id="s_de_osramos_ss13_proj1_model_Taskdb_building" object="${taskdb}" z="YcIs9VyO6QQSqp90va1/4dYw2p0="/>
         <field:display field="roomno" id="s_de_osramos_ss13_proj1_model_Taskdb_roomno" object="${taskdb}" z="0xjwMfjkd2BDhanqPuYrFbfXMIs="/>
-        <field:display field="trainee" id="s_de_osramos_ss13_proj1_model_Taskdb_trainee" object="${taskdb}" z="FuTO0RYiviZjZsX8aKVQ+YEciHA="/>
         <field:display field="senior" id="s_de_osramos_ss13_proj1_model_Taskdb_senior" object="${taskdb}" z="jG+x5WbLM+/szTNPlvwM5oOIkpw="/>
         <field:display date="true" dateTimePattern="${taskdb_timeslot_date_format}" field="timeslot" id="s_de_osramos_ss13_proj1_model_Taskdb_timeslot" object="${taskdb}" z="1HbuimjIMYZ3ntP+7h+GYUQH3AQ="/>
-        <field:display field="completionPassword" id="s_de_osramos_ss13_proj1_model_Taskdb_completionPassword" object="${taskdb}" z="LUyVEgmfjY5uG35qUwiOTLfvu9o="/>
-        <field:display field="taskDone" id="s_de_osramos_ss13_proj1_model_Taskdb_taskDone" object="${taskdb}" z="x3rWH54aZcI+/gXNxK3dg0mZ+qg="/>
-        <field:display field="map" id="s_de_osramos_ss13_proj1_model_Taskdb_map" object="${taskdb}" z="zCE1zMPWN5+Heh8f2bc5lRPdvSg="/>
-        <field:display field="questionForcompletionPassword" id="s_de_osramos_ss13_proj1_model_Taskdb_questionForcompletionPassword" object="${taskdb}" z="BoECDUvMW5cbMYiSPsY4JImtkr0="/>
+		<field:display field="trainee" id="s_de_osramos_ss13_proj1_model_Taskdb_trainee" object="${taskdb}" z="FuTO0RYiviZjZsX8aKVQ+YEciHA="/>
+		<field:display field="questionForcompletionPassword" id="s_de_osramos_ss13_proj1_model_Taskdb_questionForcompletionPassword" object="${taskdb}" z="BoECDUvMW5cbMYiSPsY4JImtkr0="/>
+		<field:display field="completionPassword" id="s_de_osramos_ss13_proj1_model_Taskdb_completionPassword" object="${taskdb}" z="LUyVEgmfjY5uG35qUwiOTLfvu9o="/>
+		<field:display field="taskDone" id="s_de_osramos_ss13_proj1_model_Taskdb_taskDone" object="${taskdb}" z="x3rWH54aZcI+/gXNxK3dg0mZ+qg="/>
+		<field:display field="map" id="s_de_osramos_ss13_proj1_model_Taskdb_map" object="${taskdb}" z="zCE1zMPWN5+Heh8f2bc5lRPdvSg="/>
     </page:show>
 </div>

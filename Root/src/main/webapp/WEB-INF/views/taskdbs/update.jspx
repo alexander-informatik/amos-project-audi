@@ -9,12 +9,13 @@
         <field:input field="personfunction" id="c_de_osramos_ss13_proj1_model_Taskdb_personfunction" z="sETpuKlr8Ce2+fkuoglEWvOij48="/>
         <field:input field="building" id="c_de_osramos_ss13_proj1_model_Taskdb_building" z="F6Scu2G02Zb1MXzLqGu7gDh7Z40="/>
         <field:input field="roomno" id="c_de_osramos_ss13_proj1_model_Taskdb_roomno" z="6k+XS3tn/Wvmx3gto4WPDyzacr0="/>
-        <field:select field="trainee" id="c_de_osramos_ss13_proj1_model_Taskdb_trainee" itemValue="id" items="${userdbt}" path="/userdbs" z="user-managed"/>
         <field:select field="senior" id="c_de_osramos_ss13_proj1_model_Taskdb_senior" itemValue="id" items="${userdbs}" path="/userdbs" render="false" z="user-managed"/>
         <field:datetime dateTimePattern="${taskdb_timeslot_date_format}" field="timeslot" id="c_de_osramos_ss13_proj1_model_Taskdb_timeslot" z="o9a87v3TTfuU+h2FR28/HqM3WKw="/>
-        <field:input field="completionPassword" id="c_de_osramos_ss13_proj1_model_Taskdb_completionPassword" z="mWv8E4nP9sH/dNH+YE1z9oYf/Pw="/>
-        <field:checkbox field="taskDone" id="c_de_osramos_ss13_proj1_model_Taskdb_taskDone" z="mcaLrcZ3kfS8euaLrpox20tnpoM="/>
         <field:select field="map" id="c_de_osramos_ss13_proj1_model_Taskdb_map" itemValue="id" items="${routes}" path="/senior/route" z="user-managed"/>
-        <field:input field="questionForcompletionPassword" id="c_de_osramos_ss13_proj1_model_Taskdb_questionForcompletionPassword" z="nDfWdFD7C/q+3Q01FHdw1k2f9PY="/>
+		<field:select field="trainee" id="c_de_osramos_ss13_proj1_model_Taskdb_trainee" itemValue="id" items="${userdbt}" path="/userdbs" z="user-managed"/>
+		<field:input field="questionForcompletionPassword" id="c_de_osramos_ss13_proj1_model_Taskdb_questionForcompletionPassword" z="nDfWdFD7C/q+3Q01FHdw1k2f9PY="/>
+		<field:input field="completionPassword" id="c_de_osramos_ss13_proj1_model_Taskdb_completionPassword" z="mWv8E4nP9sH/dNH+YE1z9oYf/Pw="/>
+		<field:checkbox field="taskDone" id="c_de_osramos_ss13_proj1_model_Taskdb_taskDone" z="mcaLrcZ3kfS8euaLrpox20tnpoM="/>
+		<field:select field="map" id="c_de_osramos_ss13_proj1_model_Taskdb_map" itemValue="id" items="${routes}" path="/senior/route" z="user-managed"/>
     </form:update>
 </div>
