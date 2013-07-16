@@ -1,5 +1,4 @@
 package de.osramos.ss13.proj1.model;
-
 /*
  * #%L
  * proj1
@@ -15,7 +14,7 @@ package de.osramos.ss13.proj1.model;
  * published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
  * -
- * This program is distributed in the hope that it will be useful, 
+ * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Affero General Public License for more details.
@@ -25,7 +24,6 @@ package de.osramos.ss13.proj1.model;
  * <http://www.gnu.org/licenses/>.
  * #L%
  */
-
 import java.util.Date;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -40,7 +38,8 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord(finders = {"findTaskdbsByTrainee", "findTaskdbsById",
-		"findTaskdbsByPersonEquals", "findTaskdbsBySenior"})
+		"findTaskdbsByPersonEquals", "findTaskdbsBySenior",
+		"findTaskdbsByTaskDoneNot"})
 public class Taskdb {
 
 	@NotNull

@@ -4,6 +4,9 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_de_osramos_ss13_proj1_model_Taskdb" items="${tasklist}" >
 <spring:message code="view_senior_tasklist" htmlEscape="false" var="ftitle"/>
+<spring:url value="/senior" var="url_senior" />
+<spring:url value="/resources" var="url_resources" />
+
 <Legend>${fn:escapeXml(ftitle)}</Legend>
 <table class="table table-striped table-hover table-bordered">
 <thead>
@@ -28,8 +31,8 @@
     <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_building">${task.building}</div></td>
     <td><div id="c_de_osramos_ss13_proj1_model_Taskdb_roomno" >${task.roomno}</div></td>
 
-	<td class="utilbox"><a title="Show Taskdb" alt="Show Taskdb" href="/proj1/senior/task/${task.id}">
-	<img title="Show Taskdb" src="/proj1/resources/images/resultset_next.png" class="btn btn-info" alt="Show Taskdb" /></a>
+	<td class="utilbox"><a title="Show Task" alt="Show Task" href="${url_senior}/task/${task.id}">
+	<img title="Show Task" src="${url_resources}/images/resultset_next.png" class="btn btn-info" alt="Show Task" /></a>
 	</td>
 
 </tr>

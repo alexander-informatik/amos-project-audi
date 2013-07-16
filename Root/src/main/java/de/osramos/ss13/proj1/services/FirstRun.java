@@ -738,6 +738,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setQuestionForcompletionPassword("number of seats?");
 		t.setCompletionPassword("42");
 		t.setMap(routeAudimax);
+		t.setTaskDone(false);
 		t.persist();
 
 		t = new Taskdb();
@@ -749,6 +750,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setQuestionForcompletionPassword("main dish?");
 		t.setCompletionPassword("fish");
 		t.setMap(routeMensa);
+		t.setTaskDone(false);
 		t.persist();
 
 		t = new Taskdb();
@@ -765,6 +767,7 @@ public class FirstRun implements ApplicationListener<ContextRefreshedEvent> {
 		t.setQuestionForcompletionPassword("number of personal computers");
 		t.setCompletionPassword("42");
 		t.setMap(routeTower);
+		t.setTaskDone(false);
 		t.persist();
 
 	}

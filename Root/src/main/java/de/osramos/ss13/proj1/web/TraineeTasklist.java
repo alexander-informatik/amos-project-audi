@@ -77,7 +77,8 @@ public class TraineeTasklist {
 							: nrOfPages));
 		} else {
 			uiModel.addAttribute("tasklist", Taskdb
-					.findTaskdbsByTraineeUsername(authorizedUsername));
+					.findTaskdbsByTraineeUsernameAndTaskDone(
+							authorizedUsername, false));
 		}
 		return "trainee/tasklist/index";
 	}
