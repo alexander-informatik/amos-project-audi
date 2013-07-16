@@ -38,14 +38,10 @@
                 <menu:item id="i_controller__senior_routeindex_id" messageCode="global_generic" url="/senior/route" z="user-managed"/>
                 <!-- <menu:item id="i_controller__senior_recordrouteindex_id" messageCode="global_generic" url="/senior/recordroute/index" z="jDJfq0vBNLZNpjV72HPoVB2Gr+s="/> -->
             </menu:category>
-            <!-- <menu:category id="c_mediaupload" z="P7O7JTmz/UsTnoVC+LJZ5Qsmc9o=">
+			<menu:category id="c_mediaupload" z="P7O7JTmz/UsTnoVC+LJZ5Qsmc9o=">
 				<menu:item id="i_mediaupload_new" messageCode="global_menu_new" url="/mediauploads?form" z="KDCGmO3CtT1dhTpINlD78FP4e5M="/>
 				<menu:item id="i_mediaupload_list" messageCode="global_menu_list" url="/mediauploads?page=1&amp;size=${empty param.size ? 10 : param.size}" z="qR8hVEysnNu2b3HJbgW85xLnYHY="/>
-			</menu:category> -->
-			<!-- <menu:category id="c_mediaupload" z="P7O7JTmz/UsTnoVC+LJZ5Qsmc9o=">
-				<menu:item id="i_mediaupload_new" messageCode="global_menu_new" url="/mediauploads?form" z="KDCGmO3CtT1dhTpINlD78FP4e5M="/>
-				<menu:item id="i_mediaupload_list" messageCode="global_menu_list" url="/mediauploads?page=1&amp;size=${empty param.size ? 10 : param.size}" z="qR8hVEysnNu2b3HJbgW85xLnYHY="/>
-			</menu:category> -->
+			</menu:category>
         </sec:authorize>
         <sec:authorize access="hasAnyRole('ROLE_TRAINEE')">
             <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
