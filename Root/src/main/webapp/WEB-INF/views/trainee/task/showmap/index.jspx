@@ -19,7 +19,7 @@ version="2.0" style="height:100%">
 <spring:url value="/resources/js-lib/a.tools.gps.js" var="url_a_tools_gps" />
 <spring:url value="/resources/img/" var="url_imgfolder" />
 <spring:url value="/resources/img/mapicon.png" var="url_mapicon" />
-
+<spring:url value="/senior/route" var="url_senior_route" />
 
 <script type="text/javascript" src="${url_jquery}"><div/></script>
 <script type="text/javascript" src="${url_json}"><div/></script>
@@ -33,10 +33,11 @@ version="2.0" style="height:100%">
 	function init()
 	{
 		aconfig.imgFolder = '${url_imgfolder}mapicon';
-		aconfig.latlng_default = new google.maps.LatLng(48.79326, 11.41279);
-		aconfig.url.json.gpscoordinate.getall = '/proj1/senior/route/${task.map.id}?gpscoordinates';
-		aconfig.url.json.gpscoordinate.send = '/proj1/senior/route/${route.id}';
-		aconfig.url.json.gpscoordinate.update = '/proj1/senior/route/?updategpscoordinate';
+		//aconfig.latlng_default = new google.maps.LatLng(48.79326, 11.41279);
+		aconfig.latlng_default = new google.maps.LatLng(49.573168, 11.028511);
+		aconfig.url.json.gpscoordinate.getall = '${url_senior_route}/${task.map.id}?gpscoordinates';
+		aconfig.url.json.gpscoordinate.send = '${url_senior_route}/${route.id}';
+		aconfig.url.json.gpscoordinate.update = '${url_senior_route}/?updategpscoordinate';
 
 		aconfig.geolocation.isOn = true;
 

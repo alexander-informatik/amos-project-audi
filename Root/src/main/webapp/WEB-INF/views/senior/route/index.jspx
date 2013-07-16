@@ -18,10 +18,11 @@ version="2.0">
   <jsp:output omit-xml-declaration="yes"/>
 
 <spring:message code="label_senior_route_index" htmlEscape="false" var="title"/>
-<spring:url value="/senior/route?create" var="url_create" />
 
+<spring:url value="/resources" var="url_resources" />
 <spring:url value="/resources/js-lib/jquery-1.4.min.js" var="url1" />
 <spring:url value="/resources/js-lib/json.min.js" var="url2" />
+<spring:url value="/senior/route" var="url_senior_route" />
 
 <script type="text/javascript" src="${url1}"><div/></script>
 <script type="text/javascript" src="${url2}"><div/></script>
@@ -51,8 +52,8 @@ version="2.0">
     <td><div id="label_de_osramos_ss13_proj1_model_route_startpointname" >${route.startpointName}</div></td>
     <td><div id="label_de_osramos_ss13_proj1_model_route_endpointname" >${route.endpointName}</div></td>
 
-	<td class="utilbox"><a title="Edit Route" alt="Edit Route" href="/proj1/senior/route/${route.id}?update">
-	<img title="Edit Route" src="/proj1/resources/images/resultset_next.png" class="btn btn-info" alt="Edit Route" /></a>
+	<td class="utilbox"><a title="Edit Route" alt="Edit Route" href="${url_senior_route}/${route.id}?update">
+	<img title="Edit Route" src="${url_resources}/images/resultset_next.png" class="btn btn-info" alt="Edit Route" /></a>
 	</td>
 
 </tr>
